@@ -1,0 +1,16 @@
+#contenedor {
+    bottom: 50%;
+    right: 50%;
+    position: absolute;
+}
+
+#login {
+    background-color:beige;
+    left: 40%;
+    padding: 10px;
+    position: relative;
+    top: 20%;
+    height: 250px;
+    width: 300px;
+    text-align: center;
+}

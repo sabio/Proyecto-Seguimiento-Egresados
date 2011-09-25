@@ -1,0 +1,33 @@
+.principal{ 		
+        border: 3px coral solid;
+        text-align:center;
+        margin:0 auto 0 auto; 
+        width:900px;
+        height:700px;
+}
+.header{
+        border:3px #30F solid;
+        width:900px;
+        height:100px;	
+}
+.header .menu{ 
+        border: 3px #000 solid;
+        text-transform:uppercase;
+        width:800px;
+        height:60px;	
+}
+.contenidoPrincipal{
+        border:3px #0F0 solid;
+        height:500px;
+}
+.contenido{
+        border:3px #36C solid;
+        float:right;
+}
+.menuLateral{
+        border:3px #F0F solid;
+        float:left;
+}
+.footer{
+        border:3px #F0C solid;
+}
