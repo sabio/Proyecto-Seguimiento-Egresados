@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SQLExecutor {
     Connection con;
     //Statement s;
-    //PreparedStatement stmt;
+    PreparedStatement stmt;
+    ResultSet res;
     HashMap<Integer,Object> mapa;
 
     public SQLExecutor(){
@@ -24,13 +27,13 @@ public class SQLExecutor {
         mapa.put(new Integer(orden), valor);
     }
 
-    public ResultSet executeQuery(String query) throws SQLException{
-        PreparedStatement stmt=null;
+    public ResultSet executeQuery(String query) throws SQLException{        
         stmt = con.prepareStatement(query);
         if(mapa!=null){
             agregaLosParametros(stmt);
         }
-        return stmt.executeQuery();
+        res = stmt.executeQuery();
+        return res;
     }
     
     private void agregaLosParametros(PreparedStatement stmt) throws SQLException {
@@ -59,6 +62,21 @@ public class SQLExecutor {
     
     public void commit(){
         
+    }
+
+    public void cerrarConexion() {
+        try {
+            res.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Ocurrio un error al intentar cerrar la conexion");
+            Logger.getLogger(SQLExecutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void limpiaParameros() {
+        this.mapa=null;
     }
 
     

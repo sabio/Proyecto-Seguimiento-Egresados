@@ -24,7 +24,7 @@ public class FiltroAutenticado implements javax.servlet.Filter{
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpSession sesion = ((HttpServletRequest)request).getSession(false);
-        if(peticionDesdePantallaDeLogin((HttpServletRequest)request)==false && (sesion==null || sesion.getAttribute("idUsuario")==null)  ){//Si no esta logueado
+        if(peticionDesdePantallaDeLogin((HttpServletRequest)request)==false && (sesion==null || sesion.getAttribute("usuario")==null)  ){//Si no esta logueado
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
             out.println("<HTML>");

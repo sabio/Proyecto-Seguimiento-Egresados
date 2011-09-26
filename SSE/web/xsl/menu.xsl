@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <xsl:output method="html"/>
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>SSE</title>
+                <link rel="stylesheet" type="text/css">
+                    <xsl:attribute name="href"><xsl:value-of select="MenuXML/path"/>/css/menu.css</xsl:attribute>
+                </link>
+                <link rel="stylesheet" type="text/css">
+                    <xsl:attribute name="href"><xsl:value-of select="MenuXML/path"/>/css/page.css</xsl:attribute>
+                </link>
+            </head>
+            <body>
+                <div class="principal">
+                    <div class="header">
+                            HEader
+                        <div class="menu">
+                            <ul id="menu">
+                                <xsl:for-each select="MenuXML/Nivel1">
+                                    <li>
+                                        <a>
+                                            <xsl:value-of select="menu"/>
+                                        </a>
+
+                                        <ul>
+                                        <xsl:for-each select="Nivel2">
+                                            <li>
+                                                <a>
+                                                    <xsl:value-of select="menu"/>
+                                                </a>   
+                                                <ul>
+                                                <xsl:for-each select="Nivel3">
+                                                    <li>
+                                                        <a>
+                                                            <xsl:value-of select="menu"/>
+                                                        </a>                                        
+                                                    </li>
+                                                </xsl:for-each>
+                                                </ul>
+                                            </li>
+                                        </xsl:for-each>
+                                        </ul>
+                                    </li>
+                                </xsl:for-each>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contenidoPrincipal">
+                            <div class="contenido">
+                            ContenidoContenidoContenidoContenidoContenidoContenidoContenidoContenidoContenido
+                            <br />
+                            ContenidoContenidoContenidoContenidoContenidoContenido
+                            <br />
+                            <br />
+                            Esto es un esquema preliminar de como va a quedar organizado todo
+                         </div>
+                         <div class="menuLateral">
+                            menu<br />lateral
+                         </div>
+
+                    </div>
+                    <div class="footer">
+                            footer
+                    </div>
+                </div>
+            </body>
+        </html>
+    </xsl:template>
+
+</xsl:stylesheet>

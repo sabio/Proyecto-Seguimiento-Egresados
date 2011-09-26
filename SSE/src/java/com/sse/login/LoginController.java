@@ -1,5 +1,7 @@
 package com.sse.login;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -25,12 +27,18 @@ public class LoginController extends AbstractController{
             else{//Si si es correcto el usuario y password
                 //Creamos la sesion
                 HttpSession sesion = request.getSession(true);
-                sesion.setAttribute("idUsuario", idUsuario);
+                sesion.setAttribute("usuario", service.generaObjetoUsuario(idUsuario));
                 ServletContext context = getServletContext();
-                RequestDispatcher dispatcher = context.getRequestDispatcher("/principal.run");
+                RequestDispatcher dispatcher = context.getRequestDispatcher("/inicio");
                 dispatcher.forward(request,response);
             }
+            try {
+                service.finalize();
+            } catch (Throwable ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
         return mv;
     }
 
