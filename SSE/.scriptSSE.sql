@@ -25,19 +25,22 @@ CREATE TABLE `dicusuario` (
 	constraint `FK_dicusuario01` foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade
 ) ENGINE = InnoDB;
 
-create table tblpermisosperfil(
-	idperfil int not null,
-	idpermiso int not null,
-	constraint FK_tblpermisosperfil01 foreign key (idperfil) references dicperfil(idperfil) on delete cascade,
-	constraint FK_tblpermisosperfil02 foreign key (idpermiso) references dicpermiso(idpermiso) on delete cascade
-	
-);
 
 create table dicpermiso(
 	idpermiso int not null auto_increment primary key,
 	permiso varchar(30) not null,	
 	activo varchar(1) not null default 'S'
 ) ENGINE = InnoDB;
+
+create table tblpermisosperfil(
+	idperfil int not null,
+	idpermiso int not null,
+	constraint FK_tblpermisosperfil01 foreign key (idperfil) references dicperfil(idperfil) on delete cascade,
+	constraint FK_tblpermisosperfil02 foreign key (idpermiso) references dicpermiso(idpermiso) on delete cascade
+	
+) ENGINE = InnoDB;
+
+
 
 create table dicmenu(
 	idmenu int not null auto_increment primary key,
@@ -65,15 +68,7 @@ create table tblmenupermiso(
 INSERT INTO dicperfil VALUES (1, 'Administrador', 'S');
 INSERT INTO dicusuario VALUES (1, 'armando', md5('hola'), 'Armando Jesus', 'Gomez', 'Parra', 'S', 1, 'armandojpr@yahoo.com');
 
-insert into tblpermisosperfil
-(idperfil,idpermiso)
-values
-(1,1);
 
-insert into tblpermisosperfil
-(idperfil,idpermiso)
-values
-(1,2);
 
 insert into dicmenu
 (idmenu,menu,orden,nivel)
@@ -120,5 +115,13 @@ insert into tblmenupermiso
 values
 (2,2);
 
+insert into tblpermisosperfil
+(idperfil,idpermiso)
+values
+(1,1);
 
+insert into tblpermisosperfil
+(idperfil,idpermiso)
+values
+(1,2);
 

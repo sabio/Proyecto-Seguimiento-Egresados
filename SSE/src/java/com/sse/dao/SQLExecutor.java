@@ -18,7 +18,7 @@ public class SQLExecutor {
     HashMap<Integer,Object> mapa;
 
     public SQLExecutor(){
-        con = Conexion.getConnection();
+        con = new Conexion().getConnection();
     }
     
     public void addParametro(int orden,Object valor){
