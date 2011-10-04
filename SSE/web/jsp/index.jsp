@@ -10,30 +10,6 @@
     </head>
 
     <body>
-	<div class="principal">
-            <div class="header">
-                    HEader
-                <div class="menu">
-                    Menu
-                </div>
-            </div>
-            <div class="contenidoPrincipal">
-                    <div class="contenido">
-                    ContenidoContenidoContenidoContenidoContenidoContenidoContenidoContenidoContenido
-                    <br />
-                    ContenidoContenidoContenidoContenidoContenidoContenido
-                    <br />
-                    <br />
-                    Esto es un esquema preliminar de como va a quedar organizado todo
-                 </div>
-                 <div class="menuLateral">
-                    menu<br />lateral
-                 </div>
-
-            </div>
-            <div class="footer">
-                    footer
-            </div>
-        </div>
+	Pagina principal. Bienvenido
     </body>
 </html>

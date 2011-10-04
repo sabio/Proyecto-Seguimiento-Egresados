@@ -49,17 +49,9 @@
                         </div>
                     </div>
                     <div class="contenidoPrincipal">
-                            <div class="contenido">
-                            ContenidoContenidoContenidoContenidoContenidoContenidoContenidoContenidoContenido
-                            <br />
-                            ContenidoContenidoContenidoContenidoContenidoContenido
-                            <br />
-                            <br />
-                            Esto es un esquema preliminar de como va a quedar organizado todo
-                         </div>
-                         <div class="menuLateral">
-                            menu<br />lateral
-                         </div>
+                         <div class="contenido">
+                         <iframe width="100%" height="100%" src="jsp/index.jsp"></iframe>
+                         </div>                        
 
                     </div>
                     <div class="footer">

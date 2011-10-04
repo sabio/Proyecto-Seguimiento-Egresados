@@ -19,10 +19,13 @@
 .contenidoPrincipal{
         border:3px #0F0 solid;
         height:500px;
+        width:900px;
 }
 .contenido{
         border:3px #36C solid;
         float:right;
+        height:500px;
+        width:900px;        
 }
 .menuLateral{
         border:3px #F0F solid;
