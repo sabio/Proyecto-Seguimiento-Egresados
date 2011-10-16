@@ -17,6 +17,7 @@
                     <div class="header">
                             HEader
                         <div class="menu">
+                            Aqui va el menú
                             <ul id="menu">
                                 <xsl:for-each select="MenuXML/Nivel1">
                                     <li>
@@ -48,12 +49,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="contenidoPrincipal">
-                         <div class="contenido">
+                    
+                    <div class="contenido">
                          <iframe width="100%" height="100%" src="jsp/index.jsp"></iframe>
-                         </div>                        
+                    </div>                        
 
-                    </div>
+                    
                     <div class="footer">
                             footer
                     </div>

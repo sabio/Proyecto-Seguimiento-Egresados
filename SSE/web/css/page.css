@@ -2,12 +2,12 @@
         border: 3px coral solid;
         text-align:center;
         margin:0 auto 0 auto; 
-        width:900px;
-        height:700px;
+        width:1000px;
+        height:900px;
 }
 .header{
         border:3px #30F solid;
-        width:900px;
+        width:1000px;
         height:100px;	
 }
 .header .menu{ 
@@ -16,16 +16,12 @@
         width:800px;
         height:60px;	
 }
-.contenidoPrincipal{
-        border:3px #0F0 solid;
-        height:500px;
-        width:900px;
-}
+
 .contenido{
         border:3px #36C solid;
-        float:right;
-        height:500px;
-        width:900px;        
+        
+        width:1000px;
+        height:700px;
 }
 .menuLateral{
         border:3px #F0F solid;
@@ -33,4 +29,5 @@
 }
 .footer{
         border:3px #F0C solid;
+        height:70px;
 }
