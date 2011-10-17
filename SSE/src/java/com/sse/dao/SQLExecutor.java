@@ -36,6 +36,14 @@ public class SQLExecutor {
         return res;
     }
     
+    public void executeUpdate(String query) throws SQLException{  
+        stmt = con.prepareStatement(query);
+        if(mapa!=null){
+            agregaLosParametros(stmt);
+        }
+        stmt.executeUpdate();
+    }
+    
     private void agregaLosParametros(PreparedStatement stmt) throws SQLException {
         Iterator it = mapa.entrySet().iterator();
         while (it.hasNext()) {

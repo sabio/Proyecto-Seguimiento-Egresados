@@ -61,6 +61,18 @@ create table tblmenupermiso(
 ) ENGINE = InnoDB;
 
 
+--16 octubre 2011
+create table dicpregunta(
+	idpregunta int not null  auto_increment primary key,
+	pregunta varchar(50) not null,
+	activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N')
+) ENGINE = InnoDB;
+
+
+--FIN DE 16 octubre 2011
+
+
+
 
 
 

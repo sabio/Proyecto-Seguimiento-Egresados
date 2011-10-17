@@ -14,6 +14,12 @@
                 <entry key="login.run">
                         <ref bean="login"/>
                 </entry>
+                <entry key="listadoPreguntas.run">
+                        <ref bean="listadoPreguntas"/>
+                </entry>
+                <entry key="edicionPregunta.run">
+                        <ref bean="edicionPregunta"/>
+                </entry>
             </map>
         </property>
     </bean>
@@ -22,7 +28,12 @@
     <bean id="login" class="com.sse.login.LoginController">
             <property name="successView" value="jsp/login/login.jsp"/>	            		
     </bean>
-    
+    <bean id="listadoPreguntas" class="com.sse.preguntas.catalogo.PreguntasListadoController">
+            <property name="successView" value="jsp/preguntas/catalogo/preguntasListado.jsp"/>	            		
+    </bean>
+    <bean id="edicionPregunta" class="com.sse.preguntas.catalogo.edicionPreguntaController">
+            <property name="successView" value="jsp/preguntas/catalogo/edicionPregunta.jsp"/>	            		
+    </bean>
     
     
 </beans>
