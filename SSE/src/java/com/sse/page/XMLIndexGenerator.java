@@ -68,27 +68,30 @@ public class XMLIndexGenerator extends HttpServlet {
         handler.startElement("", "path", "path", new AttributesImpl());
         handler.characters(path.toCharArray(), 0, path.length());
         handler.endElement("", "path", "path");
-        
        
         execute = new SQLExecutor();
-        String query =  "select m.idmenu,m.menu,m.nivel,m.orden,m.url from dicmenu m "+
+        String query =  "select distinct m.idmenu,m.menu,m.nivel,m.orden,m.url from dicmenu m "+
                         "inner join tblmenupermiso mp on (m.idmenu=mp.idmenu) "+
                         "where mp.idpermiso in ("+((Usuario)request.getSession(false).getAttribute("usuario")).getPermisosAsignadosString(",") +") "+
                         "order by m.orden,m.nivel";
-        
+        System.out.println(query);
         ResultSet res = execute.executeQuery(query);
-        int nivel,nivelAnterior=0;
+        int nivel=0,nivelAnterior=0;
         String menu, url;
         while(res.next()){
             nivel = res.getInt("nivel");
             menu = res.getString("menu");
             url = res.getString("url");
+            url = url == null ? "":url;
             
             if(nivel>nivelAnterior){
                 handler.startElement("", "Nivel"+nivel, "Nivel"+nivel, new AttributesImpl());
                 handler.startElement("", "menu", "menu", new AttributesImpl());
                 handler.characters(menu.toCharArray(), 0, menu.length());
                 handler.endElement("", "menu", "menu");
+                handler.startElement("", "url", "url", new AttributesImpl());
+                handler.characters(url.toCharArray(), 0, url.length());
+                handler.endElement("", "url", "url");
                 nivelAnterior = nivel;
                 
             }else if(nivel==nivelAnterior){
@@ -98,7 +101,9 @@ public class XMLIndexGenerator extends HttpServlet {
                 handler.startElement("", "menu", "menu", new AttributesImpl());
                 handler.characters(menu.toCharArray(), 0, menu.length());
                 handler.endElement("", "menu", "menu");
-                
+                handler.startElement("", "url", "url", new AttributesImpl());
+                handler.characters(url.toCharArray(), 0, url.length());
+                handler.endElement("", "url", "url");
             }else if(nivel<nivelAnterior){                
                 for(int i=nivelAnterior; i>=nivel; i--){
                     handler.endElement("", "Nivel"+i, "Nivel"+i);
@@ -107,59 +112,18 @@ public class XMLIndexGenerator extends HttpServlet {
                 handler.startElement("", "menu", "menu", new AttributesImpl());
                 handler.characters(menu.toCharArray(), 0, menu.length());
                 handler.endElement("", "menu", "menu");
+                handler.startElement("", "url", "url", new AttributesImpl());
+                handler.characters(url.toCharArray(), 0, url.length());
+                handler.endElement("", "url", "url");
                 nivelAnterior = nivel;
             }
         }
-        
-        handler.endElement("", "Nivel1", "Nivel1");
-        
-        /*
-        handler.startElement("", "Nivel1", "Nivel1", new AttributesImpl());
-        handler.startElement("", "Nombre", "Nombre", new AttributesImpl());
-        handler.characters("Inicio".toCharArray(), 0, "Inicio".length());
-        handler.endElement("", "Nombre", "Nombre");
-        handler.endElement("", "Nivel1", "Nivel1");
-        
-        handler.startElement("", "Nivel1", "Nivel1", new AttributesImpl());
-        handler.startElement("", "Nombre", "Nombre", new AttributesImpl());
-        handler.characters("Nosotros".toCharArray(), 0, "Nosotros".length());
-        handler.endElement("", "Nombre", "Nombre");
-        handler.endElement("", "Nivel1", "Nivel1");
+        for(; nivel>=1; nivel--){
+            handler.endElement("", "Nivel"+nivel, "Nivel"+nivel);
+        }   
+        //handler.endElement("", "Nivel1", "Nivel1");
         
         
-        
-        
-        handler.startElement("", "Nivel1", "Nivel1", new AttributesImpl());
-        handler.startElement("", "Nombre", "Nombre", new AttributesImpl());
-        handler.characters("Productos".toCharArray(), 0, "Productos".length());
-        handler.endElement("", "Nombre", "Nombre");
-        
-        handler.startElement("", "Nivel2", "Nivel2", new AttributesImpl());
-        handler.startElement("", "Nombre", "Nombre", new AttributesImpl());
-        handler.characters("Cremas".toCharArray(), 0, "Cremas".length());
-        handler.endElement("", "Nombre", "Nombre");
-        handler.endElement("", "Nivel2", "Nivel2");
-        //--
-        handler.startElement("", "Nivel2", "Nivel2", new AttributesImpl());
-        handler.startElement("", "Nombre", "Nombre", new AttributesImpl());
-        handler.characters("Shampoo".toCharArray(), 0, "Shampoo".length());
-        handler.endElement("", "Nombre", "Nombre");
-        handler.endElement("", "Nivel2", "Nivel2");
-        
-        
-        handler.endElement("", "Nivel1", "Nivel1");
-        */
-       
-        /*
-        addElement("Padre", "Michael J.", "49");
-        addElement("Madre", "Margaret A.", "46");
-        
-        handler.startElement("", "Ninos", "Ninos", new AttributesImpl());
-        addElement("Nino", "Chloe C.", "12");
-        addElement("Nino", "Adrian K.", "10");
-        handler.endElement("", "Ninos", "Ninos");
-        */
-    
         handler.endElement("", "MenuXML", "MenuXML");
         handler.endDocument();
         execute.cerrarConexion();

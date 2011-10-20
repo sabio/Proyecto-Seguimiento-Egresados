@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-    <xsl:output method="html"/>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:output method="xml" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" indent="yes" /> 
     <xsl:template match="/">
         <html>
             <head>
@@ -22,21 +22,48 @@
                                 <xsl:for-each select="MenuXML/Nivel1">
                                     <li>
                                         <a>
+                                            <xsl:choose>
+                                                <xsl:when test="url!=''">
+                                                    <xsl:attribute name="style">cursor:hand; cursor:pointer;</xsl:attribute>
+                                                    <xsl:attribute name="onclick">
+                                                            javascript:                                                                    
+                                                            frames['idIframe'].window.location='<xsl:value-of select="url"/>';
+                                                    </xsl:attribute>
+                                                </xsl:when>                                                       
+                                            </xsl:choose>
                                             <xsl:value-of select="menu"/>
-                                        </a>
+                                        </a>  
 
                                         <ul>
                                         <xsl:for-each select="Nivel2">
                                             <li>
                                                 <a>
+                                                    <xsl:choose>
+                                                        <xsl:when test="url!=''">
+                                                            <xsl:attribute name="style">cursor:hand; cursor:pointer;</xsl:attribute>
+                                                            <xsl:attribute name="onclick">
+                                                                    javascript:                                                                    
+                                                                    frames['idIframe'].window.location='<xsl:value-of select="url"/>';
+                                                            </xsl:attribute>
+                                                        </xsl:when>                                                       
+                                                    </xsl:choose>
                                                     <xsl:value-of select="menu"/>
                                                 </a>   
                                                 <ul>
                                                 <xsl:for-each select="Nivel3">
-                                                    <li>
+                                                    <li>                                                        
                                                         <a>
+                                                            <xsl:choose>
+                                                                <xsl:when test="url!=''">
+                                                                    <xsl:attribute name="style">cursor:hand; cursor:pointer;</xsl:attribute>
+                                                                    <xsl:attribute name="onclick">
+                                                                            javascript:                                                                    
+                                                                            frames['idIframe'].window.location='<xsl:value-of select="url"/>';
+                                                                    </xsl:attribute>
+                                                                </xsl:when>                                                       
+                                                            </xsl:choose>
                                                             <xsl:value-of select="menu"/>
-                                                        </a>                                        
+                                                        </a>                                          
                                                     </li>
                                                 </xsl:for-each>
                                                 </ul>
@@ -51,7 +78,7 @@
                     </div>
                     
                     <div class="contenido">
-                         <iframe width="100%" height="100%" src="jsp/index.jsp"></iframe>
+                         <iframe width="100%" height="100%" name="idIframe" id="idIframe" src="jsp/index.jsp"></iframe>
                     </div>                        
 
                     
