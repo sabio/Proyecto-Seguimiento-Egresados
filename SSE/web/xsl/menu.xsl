@@ -9,7 +9,7 @@
                     <xsl:attribute name="href"><xsl:value-of select="MenuXML/path"/>/css/menu.css</xsl:attribute>
                 </link>
                 <link rel="stylesheet" type="text/css">
-                    <xsl:attribute name="href"><xsl:value-of select="MenuXML/path"/>/css/page.css</xsl:attribute>
+                    <xsl:attribute name="href"><xsl:value-of select="MenuXML/path"/>/css/paginaPrincipal.css</xsl:attribute>
                 </link>
             </head>
             <body>

@@ -21,7 +21,7 @@
     <body>
         <form>
             <input type="hidden" name="hdnIdPregunta" id="hdnIdPregunta" value="${pregunta.idPregunta}" />
-            <table>
+            <table align="center">
                 <thead>
                     <tr>
                         <th>

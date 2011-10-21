@@ -1,0 +1,37 @@
+.principal{ 		        
+        text-align:center;
+        margin:0 auto 0 auto; 
+        width:900px;
+        /*border: 3px coral solid;*/
+}
+.header{        
+        width:900px;         
+        
+}
+
+.header #titulo{
+        color:blue; 
+        font-weight: bold;
+}
+
+.header #titulo:hover{
+        color:red;
+}
+
+.contenido{
+        font-size:13px;
+}
+
+.listadoCatalogo{
+        width:500px;
+        border: 3px coral solid;
+}
+#tablaCatalogo {
+        width:100%;
+}
+
+body{
+        background-color:#F9F9FF;
+}
+
+
