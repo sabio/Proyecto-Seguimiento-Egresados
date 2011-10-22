@@ -1,3 +1,14 @@
+body{
+	z-index:-1;
+	position:absolute;
+	float:left;
+	background-image:url(../imagenes/Fondo_Degradado_2.jpg);
+	background-repeat:repeat-x;
+	width:100%;
+	height:100%;
+	
+}
+
 .principal{ 		
         border: 3px coral solid;
         text-align:center;
