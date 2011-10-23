@@ -31,7 +31,7 @@ public class edicionPreguntaService {
             pregunta = new Pregunta();
             pregunta.setIdPregunta(req.getParameter("hdnIdPregunta").equals("") ? null : new Integer(req.getParameter("hdnIdPregunta")));
             pregunta.setPregunta(req.getParameter("txtPregunta"));
-            pregunta.setActivo(req.getParameter("activo"));
+            pregunta.setActivo(req.getParameter("slcActivo"));
         }
         else{
             if(idPregunta!=null){

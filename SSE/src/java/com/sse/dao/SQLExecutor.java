@@ -51,7 +51,9 @@ public class SQLExecutor {
             //System.out.println(pairs.getKey() + " = " + pairs.getValue());
             int orden = (Integer)pairs.getKey();
             Object param = pairs.getValue();
-            if(param instanceof Integer)
+            if(param==null)
+                stmt.setObject(orden, param);
+            else if(param instanceof Integer)
                 stmt.setInt(orden, (Integer)param);
             else if(param instanceof String)
                 stmt.setString(orden, (String)param);
@@ -60,6 +62,7 @@ public class SQLExecutor {
             else if(param instanceof Float)
                 stmt.setFloat(orden, (Float)param);
             else{
+                System.err.print("Mapa = "+mapa);
                 throw new SQLException("Tipo de parametro no configurado");
             }
             

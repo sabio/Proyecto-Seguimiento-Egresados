@@ -1,3 +1,25 @@
+body{
+        background-color:#F9F9FF;
+}
+
+
+
+
+a {
+font-weight: bold;
+color:blue;
+}
+
+a:link {text-decoration: none}
+a:visited {text-decoration: none}
+a:active {text-decoration: none}
+a:hover {text-decoration:blink; color:darkred}
+
+
+
+
+
+
 .principal{ 		        
         text-align:center;
         margin:0 auto 0 auto; 
@@ -19,7 +41,7 @@
 }
 
 .contenido{
-        font-size:13px;
+        font-size:12px;
 }
 
 .listadoCatalogo{
@@ -30,8 +52,37 @@
         width:100%;
 }
 
-body{
-        background-color:#F9F9FF;
+
+
+
+
+
+.textbox {
+        BORDER-RIGHT: #e4e4e4 1px solid;
+        BORDER-TOP: #8a8a8a 1px solid;
+        FONT-SIZE: 12px;
+        BORDER-LEFT: #a0a0a0 1px solid;
+        COLOR: #676767;
+        BORDER-BOTTOM: #f4f4f4 1px solid;
+        FONT-FAMILY: Tahoma, Arial, Helvetica, sans-serif;
+        TEXT-DECORATION: none;
+        border : 1px solid #999999;
+        background-color: #fff;
+        margin-top: 4px;
 }
 
+.boton{    
+        COLOR: #ffffff;
+        FONT-WEIGHT: bold;
+        FONT-SIZE: 12px;
+        FONT-FAMILY: Tahoma, Arial, Helvetica, sans-serif;
+        TEXT-DECORATION: none;
+        height:20px;
+        width:70px;    
+        margin:4px;
+        background-position: center;
+        border:none;
+        cursor:default;
+        background-color:#8080FF;
+}
 

@@ -15,52 +15,94 @@
             </script>
             
         </c:if>
+            
+        <style type="text/css" title="currentStyle">                
+                @import "css/datatable/demo_table.css";
+                @import "css/pagina.css";
+                @import "css/alertas/jquery.alerts.css";
+        </style>
+        <script type="text/javascript" language="javascript" src="js/libreria.js"></script>
+        <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" language="javascript" src="js/jquery.alerts.js"></script>
+
+        <script type="text/javascript">
+            function hacerSubmit(){
+                var pregunta = document.getElementById("txtPregunta");
+                var activo = document.getElementById("slcActivo");                                
+                if(Trim(pregunta.value)==''){
+                    jAlert('Ingrese una pregunta valida', 'Error');                    
+                    return false;
+                }
+                
+                if(activo.value=="-1"){
+                    jAlert('Seleccione un estado', 'Error');                    
+                    return false;
+                }
+                
+                return true;
+            }
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edicion Pregunta</title>
     </head>
     <body>
-        <form>
-            <input type="hidden" name="hdnIdPregunta" id="hdnIdPregunta" value="${pregunta.idPregunta}" />
-            <table align="center">
-                <thead>
-                    <tr>
-                        <th>
-                            Campo
-                        </th>
-                        <th>
-                            Valor
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Pregunta
-                        </td>
-                        <td>
-                            <input type="text" name="txtPregunta" id="txtPregunta" value="${pregunta.pregunta}" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Activo
-                        </td>
-                        <td>
-                            <select id="activo" name="activo"> 
-                                <option value="-1">Seleccione...</option>
-                                <option value="S" <c:if test="${pregunta.activo eq 'S'}">selected</c:if>>Si</option>
-                                <option value="N" <c:if test="${pregunta.activo eq 'N'}">selected</c:if>>No</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center">
-                            <input type="submit" id="guardar" name="guardar" value="Aceptar" />
-                        </td>
-                    </tr>
-                </tbody>
+         <div class="principal">
+            <div class="header">
+                <hr />
+                    <span id="titulo"> 
+                        Edicion pregunta
+                    </span>
+                <hr />
+            </div>
+            <div class="contenido">
+                <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
+                    <input type="hidden" name="hdnIdPregunta" id="hdnIdPregunta" value="${pregunta.idPregunta}" />
+                    <table align="center">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Campo
+                                </th>
+                                <th>
+                                    Valor
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Pregunta
+                                </td>
+                                <td align="left">
+                                    <input type="text" name="txtPregunta" id="txtPregunta" value="${pregunta.pregunta}" class="textbox" size="40" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Activo
+                                </td>
+                                <td align="left">
+                                    <select id="slcActivo" name="slcActivo"  class="textbox"> 
+                                        <option value="-1">Seleccione...</option>
+                                        <option value="S" <c:if test="${pregunta.activo eq 'S'}">selected</c:if>>Si</option>
+                                        <option value="N" <c:if test="${pregunta.activo eq 'N'}">selected</c:if>>No</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <input type="submit" id="guardar" name="guardar" class="boton" value="Aceptar" />
+                                    <input type="button" id="cancelar" name="cancelar" class="boton" value="Cancelar" onclick="window.back()" />
+                                </td>
+                            </tr>
+                        </tbody>
 
-            </table>
-        </form>    
+                    </table>
+                </form> 
+            </div>
+        </div>    
+        
+           
     </body>
 </html>

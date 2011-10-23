@@ -13,11 +13,11 @@
         <style type="text/css" title="currentStyle">                
                 @import "css/datatable/demo_table.css";
                 @import "css/pagina.css";
-                @import "css/datatable/jquery-ui-1.8.4.custom.css";
-
+                @import "css/alertas/jquery.alerts.css";
         </style>
         <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" language="javascript" src="js/jquery.alerts.js"></script>
         <script type="text/javascript" charset="utf-8">
             var oTable;
             var asInitVals = new Array();
@@ -26,9 +26,11 @@
 
             oTable = jQuery('#tablaCatalogo').dataTable( {       
                 "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
-                "sDom": '<"top" lf>rt<"bottom" p<"clear">',/*,"sDom": '<"top"i>rt<"bottom"flp<"clear">' */
-                "sPaginationType": "full_numbers"         
-                /*"iDisplayLength": 2*/
+                "sDom": '<"top" lf>rt<"bottom" p<"clear">',
+                "sPaginationType": "full_numbers",
+                "oLanguage": {
+                    "sUrl": "others/DT_ES.txt"
+                }
 
             
             } );
@@ -60,6 +62,18 @@
             }
             } );
             } );
+            
+            
+            function eliminar(id){
+                jConfirm('Desea eliminar la preguna?', 'Confirmacion', function(r) {
+                    if(r){
+                        document.getElementById("hdnElimina").value=id;
+                        document.getElementById("formaListado").submit();
+                    }
+                });
+
+                
+            }
         </script>
         <title>Preguntas</title>
     </head>
@@ -73,10 +87,15 @@
                 <hr />
             </div>
             <div class="contenido">
-                    
-                <a href="edicionPregunta.run">Agregar Pregunta</a>
-                <br />
-                <br />
+                <form name="formaListado" id="formaListado" >
+                    <input type="hidden" name="hdnElimina" id="hdnElimina" />
+                    <br />
+                        <a style="float:right" class="linker" href="edicionPregunta.run">
+                            <img style="border: 0" src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" />
+                            Agregar Pregunta
+                        </a>
+                    <br />
+                    <br />
                 
                     <table id="tablaCatalogo" class="display">
                         <thead>
@@ -91,19 +110,31 @@
                             <c:forEach  items="${listadoPreguntas}" var="pregunta">
                                 <tr>
                                     <td>
-                                        ${pregunta.pregunta}
+                                        <a href="edicionPregunta.run?idPregunta=${pregunta.idPregunta}">
+                                            ${pregunta.pregunta}
+                                        </a>
+
                                     </td>
                                     <td>
-                                        ${pregunta.activo}
+                                        <c:choose>
+                                            <c:when test="${pregunta.activo eq 'S'}">
+                                                Si
+                                            </c:when>
+                                            <c:otherwise>
+                                                No
+                                            </c:otherwise>
+                                        </c:choose>                                        
                                     </td>
                                     <td>
-                                        eliminame
+                                        <span src="/imagenes/iconos/eliminar.gif" onclick="eliminar(${pregunta.idPregunta})">
+                                            <img src="${pageContext.request.contextPath}/imagenes/iconos/eliminar.gif" />
+                                        </span>
                                     </td>    
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                
+                </form>
             </div>
         </div>        
     </body>

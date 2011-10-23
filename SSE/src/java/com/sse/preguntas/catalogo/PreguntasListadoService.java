@@ -17,9 +17,7 @@ public class PreguntasListadoService {
     
     public ArrayList<Pregunta> getListadoPreguntas(HttpServletRequest req) throws SQLException{
         ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
-        /*execute.addParametro(1, login);
-        execute.addParametro(2, password);
-        */
+        execute.limpiaParameros();
         ResultSet res = execute.executeQuery("select * from dicpregunta");
         
         Pregunta pregunta;
@@ -34,6 +32,12 @@ public class PreguntasListadoService {
     @Override
     protected void finalize() throws Throwable {
         execute.cerrarConexion();
+    }
+
+    void eliminarPregunta(Integer idPreguntaAEliminar) throws SQLException{
+        execute.addParametro(1, idPreguntaAEliminar);
+        execute.executeUpdate("delete from dicpregunta where idpregunta=?");
+        execute.commit();
     }
     
 }
