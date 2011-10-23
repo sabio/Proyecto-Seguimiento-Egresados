@@ -2,33 +2,34 @@ create database sse;
 
 use sse;
 
-CREATE TABLE `dicperfil` (
-	`idperfil` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-	`perfil` VARCHAR( 30 ) NOT NULL ,
-	`activo` VARCHAR( 1 ) NOT NULL DEFAULT 'S'
+CREATE TABLE dicperfil (
+	idperfil INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	perfil VARCHAR( 30 ) NOT NULL ,
+	activo VARCHAR( 1 ) NOT NULL DEFAULT 'S'
 ) ENGINE = InnoDB;
 
 
-CREATE TABLE `dicusuario` (
-	`idusuario` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-	`usuario` VARCHAR( 20 ) NOT NULL ,
-	`password` VARCHAR( 50 ) NOT NULL ,
-	`nombre` VARCHAR( 30 ) NOT NULL ,	
-	`apaterno` VARCHAR( 30 ) NOT NULL ,
-	`amaterno` VARCHAR( 30 ) NOT NULL ,
-	`activo` VARCHAR( 1 ) NOT NULL DEFAULT 'S',
-	`idperfil` INT NOT NULL ,
-	`email` VARCHAR( 50 ) NOT NULL ,
+CREATE TABLE dicusuario (
+	idusuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	usuario VARCHAR( 20 ) NOT NULL ,
+	password VARCHAR( 50 ) NOT NULL ,
+	nombre VARCHAR( 30 ) NOT NULL ,	
+	apaterno VARCHAR( 30 ) NOT NULL ,
+	amaterno VARCHAR( 30 ) NOT NULL ,
+	activo VARCHAR( 1 ) NOT NULL DEFAULT 'S',
+	idperfil INT NOT NULL ,
+	email VARCHAR( 50 ) NOT NULL ,
 	UNIQUE (
-		`usuario`
+		usuario
 	),
-	constraint `FK_dicusuario01` foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade
+	constraint FK_dicusuario01 foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade
 ) ENGINE = InnoDB;
 
 
 create table dicpermiso(
 	idpermiso int not null auto_increment primary key,
 	permiso varchar(30) not null,	
+	description varchar(50) not null,
 	activo varchar(1) not null default 'S'
 ) ENGINE = InnoDB;
 
@@ -50,7 +51,7 @@ create table dicmenu(
 	activo varchar(1) not null default 'S',
 	idmenupadre int,
 	url varchar(40),
-	constraint `FK_dicmenu01` foreign key (idmenupadre) references dicmenu(idmenu) on delete restrict 
+	constraint FK_dicmenu01 foreign key (idmenupadre) references dicmenu(idmenu) on delete restrict 
 ) ENGINE = InnoDB;
 
 create table tblmenupermiso(
@@ -61,7 +62,6 @@ create table tblmenupermiso(
 ) ENGINE = InnoDB;
 
 
---16 octubre 2011
 create table dicpregunta(
 	idpregunta int not null  auto_increment primary key,
 	pregunta varchar(50) not null,
@@ -69,19 +69,20 @@ create table dicpregunta(
 ) ENGINE = InnoDB;
 
 
---FIN DE 16 octubre 2011
 
 
 
 
 
 
+/* Insertando algo de informacion */
 
+/* Insertando el perfil administrador y un usuario llamado Armando */
 INSERT INTO dicperfil VALUES (1, 'Administrador', 'S');
 INSERT INTO dicusuario VALUES (1, 'armando', md5('hola'), 'Armando Jesus', 'Gomez', 'Parra', 'S', 1, 'armandojpr@yahoo.com');
 
 
-
+/* insertando los menus */
 insert into dicmenu
 (idmenu,menu,orden,nivel)
 values
@@ -98,20 +99,24 @@ values
 (3,'Cuestionarios',1,2,1);
 
 insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre)
+(idmenu,menu,orden,nivel,idmenupadre,url)
 values
-(4,'Preguntas',2,2,1);
+(4,'Preguntas',2,2,1,'listadoPreguntas.run');
+
+
+/* insertando los permisos */
+insert into dicpermiso
+(idpermiso,permiso,description)
+values
+(1,'Listado de cuestionarios','Permiso para poder visualizar el listado de cuestionarios');
 
 insert into dicpermiso
-(idpermiso,permiso)
+(idpermiso,permiso,description)
 values
-(1,'Ver la configuracion de cuestionarios');
+(2,'Listado de preguntas','Permiso para poder visualizar el listado de preguntas');
 
-insert into dicpermiso
-(idpermiso,permiso)
-values
-(2,'Ver la configuracion de preguntas');
 
+/* Insertando las relaciones entre los menus y los permisos */
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
@@ -127,6 +132,17 @@ insert into tblmenupermiso
 values
 (2,2);
 
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(1,2);
+
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(1,4);
+
+/* insertando los permisos que tiene el perfil de administrados*/
 insert into tblpermisosperfil
 (idperfil,idpermiso)
 values
