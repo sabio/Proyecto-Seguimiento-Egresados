@@ -4,6 +4,7 @@
  */
 package com.sse.page;
 
+import com.sse.beans.generales.Menu;
 import com.sse.beans.generales.Usuario;
 import com.sse.dao.SQLExecutor;
 import java.io.BufferedWriter;
@@ -12,6 +13,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,20 +71,14 @@ public class XMLIndexGenerator extends HttpServlet {
         handler.startElement("", "path", "path", new AttributesImpl());
         handler.characters(path.toCharArray(), 0, path.length());
         handler.endElement("", "path", "path");
-       
-        execute = new SQLExecutor();
-        String query =  "select distinct m.idmenu,m.menu,m.nivel,m.orden,m.url from dicmenu m "+
-                        "inner join tblmenupermiso mp on (m.idmenu=mp.idmenu) "+
-                        "where mp.idpermiso in ("+((Usuario)request.getSession(false).getAttribute("usuario")).getPermisosAsignadosString(",") +") "+
-                        "order by m.orden,m.nivel";
-        System.out.println(query);
-        ResultSet res = execute.executeQuery(query);
+    
+        ArrayList<Menu> MenusOrdenados = this.getMenusOrdenados(request);
         int nivel=0,nivelAnterior=0;
         String menu, url;
-        while(res.next()){
-            nivel = res.getInt("nivel");
-            menu = res.getString("menu");
-            url = res.getString("url");
+        for(Menu menuObject : MenusOrdenados){
+            nivel = menuObject.getNivel();
+            menu = menuObject.getMenu();
+            url = menuObject.getUrl();
             url = url == null ? "":url;
             
             if(nivel>nivelAnterior){
@@ -175,4 +172,58 @@ public class XMLIndexGenerator extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private ArrayList<Menu> getMenusOrdenados(HttpServletRequest request) throws SQLException {
+        ArrayList<Menu> menusOrdenados=new ArrayList<Menu>();
+        ArrayList<Menu> menusNivel1=new ArrayList<Menu>();
+        ArrayList<Menu> menusNivel2=new ArrayList<Menu>();
+        ArrayList<Menu> menusNivel3=new ArrayList<Menu>();
+        Menu menu;
+        
+        execute = new SQLExecutor();
+        String query =  "select distinct m.idmenu,m.idmenupadre,m.menu,m.nivel,m.orden,m.url from dicmenu m "+
+                        "inner join tblmenupermiso mp on (m.idmenu=mp.idmenu) "+
+                        "where mp.idpermiso in ("+((Usuario)request.getSession(false).getAttribute("usuario")).getPermisosAsignadosString(",") +") "+
+                        "order by m.nivel,m.orden";
+        System.out.println(query);
+        ResultSet res = execute.executeQuery(query);
+        
+        while(res.next()){
+
+            menu = new Menu(res.getInt("idmenu"),res.getInt("idmenupadre"),res.getString("menu"),res.getInt("nivel"),res.getInt("orden"),res.getString("url"));
+            switch(menu.getNivel()){
+                case 1: menusNivel1.add(menu); break;
+                case 2: menusNivel2.add(menu); break;
+                case 3: menusNivel3.add(menu); break;
+            }
+        }        
+        
+        //Agregamos el menu de Inicio que siempre debe ir
+        menusOrdenados.add(new Menu(0,null,"Inicio",1,1,"jsp/index.jsp"));
+        
+        
+        for(Menu menuNivel1 : menusNivel1 ){
+            menusOrdenados.add(menuNivel1);            
+            for(Menu menuNivel2 : menusNivel2 ){
+                if(menuNivel2.getIdMenuPadre()==menuNivel1.getIdMenu()){
+                    menusOrdenados.add(menuNivel2);
+                    for(Menu menuNivel3 : menusNivel3 ){
+                        if(menuNivel3.getIdMenuPadre()==menuNivel2.getIdMenu()){
+                            menusOrdenados.add(menuNivel3);
+                        }
+                    }                    
+                }
+            }
+            
+            
+        }
+        /*
+        System.out.println(menusNivel1);
+        System.out.println(menusNivel2);
+        System.out.println(menusNivel3);
+        
+        System.out.println(menusOrdenados);         
+        */
+        return menusOrdenados;
+    }
 }

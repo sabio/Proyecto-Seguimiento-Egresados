@@ -93,7 +93,7 @@
                             <tr>
                                 <td colspan="2" align="center">
                                     <input type="submit" id="guardar" name="guardar" class="boton" value="Aceptar" />
-                                    <input type="button" id="cancelar" name="cancelar" class="boton" value="Cancelar" onclick="window.back()" />
+                                    <input type="button" id="cancelar" name="cancelar" class="boton" value="Cancelar" onclick="history.go(-1)" />
                                 </td>
                             </tr>
                         </tbody>
