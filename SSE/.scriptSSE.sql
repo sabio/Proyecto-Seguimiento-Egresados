@@ -15,15 +15,42 @@ CREATE TABLE dicusuario (
 	password VARCHAR( 50 ) NOT NULL ,
 	nombre VARCHAR( 30 ) NOT NULL ,	
 	apaterno VARCHAR( 30 ) NOT NULL ,
-	amaterno VARCHAR( 30 ) NOT NULL ,
-	activo VARCHAR( 1 ) NOT NULL DEFAULT 'S',
-	idperfil INT NOT NULL ,
+	amaterno VARCHAR( 30 ),
+	activo VARCHAR( 1 ) NOT NULL DEFAULT 'S',	
 	email VARCHAR( 50 ) NOT NULL ,
 	UNIQUE (
 		usuario
 	),
-	constraint FK_dicusuario01 foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade
+	
 ) ENGINE = InnoDB;
+
+create table dicadministrativo(
+	idusuario INT NOT NULL,
+	idperfil INT NOT NULL ,	
+	constraint FK_dicadministrativo01 foreign key (idusuario) references dicusuario(idusuario)  on delete cascade on update cascade,
+	constraint FK_dicadministrativo02 foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade	
+) ENGINE = InnoDB;
+
+create table dicalumno(
+	idusuario INT NOT NULL,		
+	porcentajecreditos float,	
+	constraint FK_dicalumno01 foreign key (idusuario) references dicusuario(idusuario)  on delete cascade on update cascade
+) ENGINE = InnoDB;
+
+
+create table dicgruposalumno(
+	idgrupoalumno int not null AUTO_INCREMENT PRIMARY KEY ,
+	grupoalumno varchar(30) not null,
+	unique(grupoalumno)
+) ENGINE = InnoDB;
+
+
+create table tblgruposalumno(
+	idusuario INT NOT NULL,
+	idgrupoalumno int not null,
+	constraint FK_tblgruposalumno01 foreign key (idusuario) references dicusuario(idusuario)  on delete cascade on update cascade,
+	constraint FK_tblgruposalumno02 foreign key (idgrupoalumno) references dicgruposalumno(idgrupoalumno)  on delete cascade on update cascade	
+)  ENGINE = InnoDB;
 
 
 create table dicpermiso(
@@ -75,12 +102,40 @@ create table dicpregunta(
 
 
 
+
+
+
+/*
+CREATE TABLE dicusuario (
+	idusuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	usuario VARCHAR( 20 ) NOT NULL ,
+	password VARCHAR( 50 ) NOT NULL ,
+	nombre VARCHAR( 30 ) NOT NULL ,	
+	apaterno VARCHAR( 30 ) NOT NULL ,
+	amaterno VARCHAR( 30 ) NOT NULL ,
+	activo VARCHAR( 1 ) NOT NULL DEFAULT 'S',	
+	email VARCHAR( 50 ) NOT NULL ,
+	UNIQUE (
+		usuario
+	),
+	
+) ENGINE = InnoDB;
+
+create table dicadministrativo(
+	idusuario INT NOT NULL,
+	idperfil INT NOT NULL ,	
+	constraint FK_dicadministrativo01 foreign key (idusuario) references dicusuario(idusuario)  on delete cascade on update cascade,
+	constraint FK_dicadministrativo02 foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade	
+) ENGINE = InnoDB;
+
+*/
+
 /* Insertando algo de informacion */
 
 /* Insertando el perfil administrador y un usuario llamado Armando */
 INSERT INTO dicperfil VALUES (1, 'Administrador', 'S');
-INSERT INTO dicusuario VALUES (1, 'armando', md5('hola'), 'Armando Jesus', 'Gomez', 'Parra', 'S', 1, 'armandojpr@yahoo.com');
-
+INSERT INTO dicusuario VALUES (1, 'armando', md5('hola'), 'Armando Jesus', 'Gomez', 'Parra', 'S', 'armandojpr@yahoo.com');
+insert into dicadministrativo values (1,1);
 
 /* insertando los menus */
 insert into dicmenu
