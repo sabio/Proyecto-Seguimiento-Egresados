@@ -31,7 +31,7 @@ public class LoginService {
 
     Usuario generaObjetoUsuario(Integer idUsuario) throws SQLException {
         Usuario usuario = new Usuario();
-        String query = "select idpermiso,idperfil from tblpermisosperfil where idperfil=(select idperfil from dicusuario where idusuario=?)";
+        String query = "select idpermiso,idperfil from tblpermisosperfil where idperfil=(select idperfil from dicadministrativo where idusuario=?)";
         ResultSet res;
         ArrayList<Integer> permisosAsignados = new ArrayList<Integer>();        
         

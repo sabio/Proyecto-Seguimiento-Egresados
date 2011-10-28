@@ -20,7 +20,7 @@ CREATE TABLE dicusuario (
 	email VARCHAR( 50 ) NOT NULL ,
 	UNIQUE (
 		usuario
-	),
+	)
 	
 ) ENGINE = InnoDB;
 
