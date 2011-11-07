@@ -33,6 +33,17 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.run</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>invalidate</servlet-name>
+        <jsp-file>/jsp/login/invalidate.jsp</jsp-file>       
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>invalidate</servlet-name>
+        <url-pattern>/invalidate</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

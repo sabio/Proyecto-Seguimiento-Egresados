@@ -47,7 +47,6 @@ public class FiltroAutenticado implements javax.servlet.Filter{
 
     private boolean peticionDesdePantallaDeLogin(HttpServletRequest request) {
          String reqUrl = request.getRequestURL().toString();
-         
          if(reqUrl.contains("login.run"))
              return true;         
          return false;

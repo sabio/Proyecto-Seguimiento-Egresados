@@ -15,9 +15,17 @@
             <body>
                 <div class="principal">
                     <div class="header">
-                            HEader
-                        <div class="menu">
-                            Aqui va el menú
+                       <div>
+                            <xsl:attribute name="class">titulo</xsl:attribute>                            
+                            Sistema de Seguimiento a Egresados
+                       </div> 
+                       <img>
+                           <xsl:attribute name="src"><xsl:value-of select="MenuXML/path"/>/imagenes/logo.png</xsl:attribute>
+                           <xsl:attribute name="class">imagencucea</xsl:attribute>
+                           
+                       </img>  
+                       <br /><br /><br />
+                        <div class="menu">                           
                             <ul id="menu">
                                 <xsl:for-each select="MenuXML/Nivel1">
                                     <li>
@@ -74,6 +82,17 @@
                                 </xsl:for-each>
 
                             </ul>
+                            
+                            <div class="divCuenta">
+                                Bienvenido | 
+                                
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="MenuXML/path"/>/invalidate
+                                    </xsl:attribute>
+                                    Salir
+                                </a>
+                            </div>    
                         </div>
                     </div>
                     

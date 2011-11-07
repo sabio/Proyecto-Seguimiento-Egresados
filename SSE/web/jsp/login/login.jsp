@@ -11,7 +11,7 @@
         <div id="contenedor">
             <div id="login">
                     <h2>Sistema de Seguimiento a Egresados</h2>
-                    <form name="loginform" id="loginform" method="post">
+                    <form name="loginform" id="loginform" method="post" target="login.run">
                             <table align="center">
                                 <tr>
                                     <td align="right">
