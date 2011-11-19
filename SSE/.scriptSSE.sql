@@ -95,6 +95,11 @@ create table dicpregunta(
 	activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N')
 ) ENGINE = InnoDB;
 
+create table dicindicador(
+    idindicador int not null  auto_increment primary key,
+    indicador   varchar(50) not null,
+    activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N')    
+) ENGINE= InnoDB;
 
 
 
@@ -105,30 +110,6 @@ create table dicpregunta(
 
 
 
-/*
-CREATE TABLE dicusuario (
-	idusuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-	usuario VARCHAR( 20 ) NOT NULL ,
-	password VARCHAR( 50 ) NOT NULL ,
-	nombre VARCHAR( 30 ) NOT NULL ,	
-	apaterno VARCHAR( 30 ) NOT NULL ,
-	amaterno VARCHAR( 30 ) NOT NULL ,
-	activo VARCHAR( 1 ) NOT NULL DEFAULT 'S',	
-	email VARCHAR( 50 ) NOT NULL ,
-	UNIQUE (
-		usuario
-	),
-	
-) ENGINE = InnoDB;
-
-create table dicadministrativo(
-	idusuario INT NOT NULL,
-	idperfil INT NOT NULL ,	
-	constraint FK_dicadministrativo01 foreign key (idusuario) references dicusuario(idusuario)  on delete cascade on update cascade,
-	constraint FK_dicadministrativo02 foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade	
-) ENGINE = InnoDB;
-
-*/
 
 /* Insertando algo de informacion */
 
@@ -158,6 +139,11 @@ insert into dicmenu
 values
 (4,'Preguntas',2,2,1,'listadoPreguntas.run');
 
+insert into dicmenu
+(idmenu,menu,orden,nivel,idmenupadre,url)
+values
+(5,'Indicadores',3,2,1,'listadoIndicadores.run');
+
 
 /* insertando los permisos */
 insert into dicpermiso
@@ -169,6 +155,11 @@ insert into dicpermiso
 (idpermiso,permiso,description)
 values
 (2,'Listado de preguntas','Permiso para poder visualizar el listado de preguntas');
+
+insert into dicpermiso
+(idpermiso,permiso,description)
+values
+(3,'Listado de indicadores','Permiso para poder visualizar el listado de indicadores');
 
 
 /* Insertando las relaciones entre los menus y los permisos */
@@ -197,6 +188,16 @@ insert into tblmenupermiso
 values
 (1,4);
 
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(3,1);
+
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(3,5);
+
 /* insertando los permisos que tiene el perfil de administrados*/
 insert into tblpermisosperfil
 (idperfil,idpermiso)
@@ -207,4 +208,9 @@ insert into tblpermisosperfil
 (idperfil,idpermiso)
 values
 (1,2);
+
+insert into tblpermisosperfil
+(idperfil,idpermiso)
+values
+(1,3);
 
