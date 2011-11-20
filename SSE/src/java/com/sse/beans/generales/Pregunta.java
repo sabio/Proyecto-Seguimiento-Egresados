@@ -45,6 +45,4 @@ public class Pregunta {
     public void setPregunta(String pregunta) {
         this.pregunta = pregunta;
     }
-    
-    
 }

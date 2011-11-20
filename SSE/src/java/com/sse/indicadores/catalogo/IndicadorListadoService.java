@@ -1,5 +1,6 @@
 package com.sse.indicadores.catalogo;
 
+import com.sse.beans.generales.Indicador;
 import com.sse.beans.generales.Pregunta;
 import com.sse.dao.SQLExecutor;
 import java.sql.ResultSet;
@@ -15,18 +16,18 @@ public class IndicadorListadoService {
         execute = new SQLExecutor();
     }
     
-    public ArrayList<Pregunta> getListadoPreguntas(HttpServletRequest req) throws SQLException{
-        ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
+    public ArrayList<Indicador> getListadoIndicadores(HttpServletRequest req) throws SQLException{
+        ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
         execute.limpiaParameros();
         ResultSet res = execute.executeQuery("select * from dicindicador");
         
-        Pregunta pregunta;
+        Indicador indicador;
         while(res.next()){
-            pregunta = new Pregunta(res.getInt(1),res.getString(2),res.getString(3));
-            preguntas.add(pregunta);
+            indicador = new Indicador(res.getInt(1),res.getString(2),res.getString(3));
+            indicadores.add(indicador);
         }
                 
-        return preguntas;
+        return indicadores;
     }
     
     @Override
@@ -34,8 +35,8 @@ public class IndicadorListadoService {
         execute.cerrarConexion();
     }
 
-    void eliminarPregunta(Integer idPreguntaAEliminar) throws SQLException{
-        execute.addParametro(1, idPreguntaAEliminar);
+    void eliminarIndicador(Integer idIndicadorAEliminar) throws SQLException{
+        execute.addParametro(1, idIndicadorAEliminar);
         execute.executeUpdate("delete from dicindicador where idindicador=?");
         execute.commit();
     }

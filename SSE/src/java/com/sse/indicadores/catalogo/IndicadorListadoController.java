@@ -19,9 +19,9 @@ public class IndicadorListadoController  extends AbstractController{
         ModelAndView mv = new ModelAndView(this.successView);
         IndicadorListadoService service = new IndicadorListadoService();
         if(req.getParameter("hdnElimina")!=null && !req.getParameter("hdnElimina").equals(""))
-            service.eliminarPregunta(new Integer(req.getParameter("hdnElimina")));
+            service.eliminarIndicador(new Integer(req.getParameter("hdnElimina")));
         
-        mv.addObject("listadoIndicadores", service.getListadoPreguntas(req));
+        mv.addObject("listadoIndicadores", service.getListadoIndicadores(req));
         
         try {
             service.finalize();

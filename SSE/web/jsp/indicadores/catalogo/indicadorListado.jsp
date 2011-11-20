@@ -103,7 +103,7 @@
                             <c:forEach  items="${listadoIndicadores}" var="indicador">
                                 <tr>
                                     <td>
-                                        <a href="edicionPregunta.run?idPregunta=${indicador.idIndicador}">
+                                        <a href="edicionIndicador.run?idIndicador=${indicador.idIndicador}">
                                             ${indicador.indicador}
                                         </a>
 

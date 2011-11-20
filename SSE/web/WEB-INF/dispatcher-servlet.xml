@@ -23,6 +23,9 @@
                 <entry key="listadoIndicadores.run">
                         <ref bean="listadoIndicadores"/>
                 </entry>
+                <entry key="edicionIndicador.run">
+                        <ref bean="edicionIndicador"/>
+                </entry>
             </map>
         </property>
     </bean>
@@ -34,13 +37,13 @@
     <bean id="listadoPreguntas" class="com.sse.preguntas.catalogo.PreguntasListadoController">
             <property name="successView" value="jsp/preguntas/catalogo/preguntasListado.jsp"/>	            		
     </bean>
-    <bean id="edicionPregunta" class="com.sse.preguntas.catalogo.edicionPreguntaController">
+    <bean id="edicionPregunta" class="com.sse.preguntas.catalogo.EdicionPreguntaController">
             <property name="successView" value="jsp/preguntas/catalogo/edicionPregunta.jsp"/>	            		
     </bean>
     <bean id="listadoIndicadores" class="com.sse.indicadores.catalogo.IndicadorListadoController">
             <property name="successView" value="jsp/indicadores/catalogo/indicadorListado.jsp"/>	            		
     </bean>
-    <bean id="edicionIndicador" class="com.sse.indicadores.catalogo.edicionIndicadorController">
+    <bean id="edicionIndicador" class="com.sse.indicadores.catalogo.EdicionIndicadorController">
             <property name="successView" value="jsp/indicadores/catalogo/edicionIndicador.jsp"/>
     </bean>
     
