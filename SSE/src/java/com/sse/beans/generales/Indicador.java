@@ -18,6 +18,12 @@ public class Indicador {
         this.Indicador = Indicador;
         this.activo = activo;
     }
+    
+    public Indicador(Integer idIndicador, String Indicador) {
+        this.idIndicador = idIndicador;
+        this.Indicador = Indicador;
+        this.activo = "S";
+    }
 
     public Indicador() {
     }

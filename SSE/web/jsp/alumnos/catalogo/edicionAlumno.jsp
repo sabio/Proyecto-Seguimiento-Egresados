@@ -1,6 +1,6 @@
 <%-- 
-    Document   : edicionIndicador
-    Created on : Oct 16, 2011, 6:07:31 PM
+    Document   : edicionAlumno
+    Created on : Nov 21, 2011, 12:13:42 PM
     Author     : armando
 --%>
 
@@ -11,7 +11,7 @@
     <head>
         <c:if test="${guardadoExitoso}">
             <script type="text/javascript">
-                window.location = 'listadoIndicadores.run';
+                window.location = 'listadoAlumnos.run';
             </script>
             
         </c:if>
@@ -48,13 +48,13 @@
             <div class="header">
                 <hr />
                     <span id="titulo"> 
-                        Edicion indicador
+                        Edicion Usuario
                     </span>
                 <hr />
             </div>
             <div class="contenido">
                 <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
-                    <input type="hidden" name="hdnIdIndicador" id="hdnIdIndicador" value="${indicador.idIndicador}" />
+                    <input type="hidden" name="hdnIdUsuario" id="hdnIdUsuario" value="${alumno.usuario.idUsuario}" />
                     <table align="center">
                         <thead>
                             <tr>
@@ -66,13 +66,29 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody>                            
                             <tr>
                                 <td>
-                                    Indicador
+                                    Nombre
                                 </td>
                                 <td align="left">
-                                    <input type="text" name="txtIndicador" id="txtIndicador" value="${indicador.indicador}" class="textbox" size="40" />
+                                    <input type="text" name="txtNombre" id="txtNombre" value="${alumno.usuario.nombre}" class="textbox" size="40" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Apellido Paterno
+                                </td>
+                                <td align="left">
+                                    <input type="text" name="txtPaterno" id="txtPaterno" value="${alumno.usuario.apaterno}" class="textbox" size="40" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Apellido Materno
+                                </td>
+                                <td align="left">
+                                    <input type="text" name="txtMaterno" id="txtMaterno" value="${alumno.usuario.amaterno}" class="textbox" size="40" />
                                 </td>
                             </tr>
                             <tr>
@@ -82,8 +98,8 @@
                                 <td align="left">
                                     <select id="slcActivo" name="slcActivo"  class="textbox"> 
                                         <option value="-1">Seleccione...</option>
-                                        <option value="S" <c:if test="${indicador.activo eq 'S' or indicador.activo eq null}">selected</c:if>>Si</option>
-                                        <option value="N" <c:if test="${indicador.activo eq 'N'}">selected</c:if>>No</option>
+                                        <option value="S" <c:if test="${alumno.usuario.activo eq 'S' or alumno.usuario.activo eq null}">selected</c:if>>Si</option>
+                                        <option value="N" <c:if test="${alumno.usuario.activo eq 'N'}">selected</c:if>>No</option>
                                     </select>
                                 </td>
                             </tr>

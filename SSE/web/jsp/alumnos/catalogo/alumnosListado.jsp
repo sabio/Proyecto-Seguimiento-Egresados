@@ -1,6 +1,6 @@
 <%-- 
-    Document   : indicadorListado
-    Created on : Nov 19, 2011, 10:36:26 AM
+    Document   : alumnosListado
+    Created on : Nov 21, 2011, 12:13:29 PM
     Author     : armando
 --%>
 
@@ -10,22 +10,6 @@
 <html>
     <head>
         <jsp:include page="/jsp/includes/cabecera1.jsp" />   
-        <script type="text/javascript" charset="utf-8">
-            function isIndicadorUsadoEnUnaOMasPreguntas(idIndicador){
-                var respuesta = $.ajax({
-                                      type: "GET",
-                                      url: "${pageContext.request.contextPath}/ajax/consultasAjax1.jsp",
-                                      data: "consulta=1&idIndicador="+idIndicador,
-                                      async:false
-                                  }).responseText;
-                
-                if(parseInt(respuesta)>0)                
-                    return true;
-                else 
-                    return false;
-            }
-            
-        </script>
         
         
         <script type="text/javascript" charset="utf-8">
@@ -75,22 +59,10 @@
             
             
             function eliminar(id){
-                jConfirm('Desea eliminar el indicador?', 'Confirmacion', function(r) {
+                jConfirm('Desea eliminar el alumno?', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
-                        if(isIndicadorUsadoEnUnaOMasPreguntas(id)){
-                            jConfirm('Existe una o mas preguntas asociadas a este indicador. Si lo elimina tambien seran eliminadas las preguntas asociadas. Desea continuar?', 'Confirmacion', function(s) {
-                                if(s){
-                                    document.getElementById("formaListado").submit();
-                                    //alert("submit");
-                                }
-                            });
-                        }
-                        else{                            
-                            document.getElementById("formaListado").submit();
-                            //alert("submit");
-                        }
-                        
+                        document.getElementById("formaListado").submit();
                        
                             
                     }
@@ -99,14 +71,14 @@
                 
             }
         </script>
-        <title>Indicadores</title>
+        <title>Alumnos</title>
     </head>
     <body>
         <div class="principal">
             <div class="header">
                 <hr />
                     <span id="titulo"> 
-                        Catalogo de indicadores
+                        Catalogo de alumnos
                     </span>
                 <hr />
             </div>
@@ -114,9 +86,9 @@
                 <form name="formaListado" id="formaListado" >
                     <input type="hidden" name="hdnElimina" id="hdnElimina" />
                     <br />
-                        <a style="float:right" class="linker" href="edicionIndicador.run">
+                        <a style="float:right" class="linker" href="edicionAlumno.run">
                             <img style="border: 0" src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" />
-                            Agregar Indicador
+                            Agregar alumno
                         </a>
                     <br />
                     <br />
@@ -124,24 +96,24 @@
                     <table id="tablaCatalogo" class="display">
                         <thead>
                             <tr>
-                                <th>Indicador</th>
+                                <th>Alumno</th>
                                 <th>Activo</th>
                                 <th>Eliminar</th>
                             </tr>
 
                         </thead>
                         <tbody>
-                            <c:forEach  items="${listadoIndicadores}" var="indicador">
+                            <c:forEach  items="${listadoAlumnos}" var="alumno">
                                 <tr>
                                     <td>
-                                        <a href="edicionIndicador.run?idIndicador=${indicador.idIndicador}">
-                                            ${indicador.indicador}
+                                        <a href="edicionAlumno.run?idIndicador=${alumno.usuario.idUsuario}">
+                                            ${alumno.usuario.nombre} ${alumno.usuario.apaterno} ${alumno.usuario.amaterno}
                                         </a>
 
                                     </td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${indicador.activo eq 'S'}">
+                                            <c:when test="${alumno.usuario.activo eq 'S'}">
                                                 Si
                                             </c:when>
                                             <c:otherwise>
@@ -150,7 +122,7 @@
                                         </c:choose>                                        
                                     </td>
                                     <td>
-                                        <span src="/imagenes/iconos/eliminar.gif" onclick="eliminar(${indicador.idIndicador})">
+                                        <span src="/imagenes/iconos/eliminar.gif" onclick="eliminar(${alumno.usuario.idUsuario})">
                                             <img src="${pageContext.request.contextPath}/imagenes/iconos/eliminar.gif" />
                                         </span>
                                     </td>    

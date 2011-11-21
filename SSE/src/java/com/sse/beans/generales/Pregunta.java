@@ -11,11 +11,15 @@ package com.sse.beans.generales;
 public class Pregunta {
     private Integer idPregunta;
     private String pregunta;
+    private Integer idTipoPregunta;
+    private Integer idIndicador;
     private String activo;
 
-    public Pregunta(Integer idPregunta, String pregunta, String activo) {
+    public Pregunta(Integer idPregunta, String pregunta, Integer idTipoPregunta, Integer idIndicador, String activo) {
         this.idPregunta = idPregunta;
         this.pregunta = pregunta;
+        this.idTipoPregunta = idTipoPregunta;
+        this.idIndicador = idIndicador;
         this.activo = activo;
     }
     
@@ -45,4 +49,22 @@ public class Pregunta {
     public void setPregunta(String pregunta) {
         this.pregunta = pregunta;
     }
+
+    public Integer getIdIndicador() {
+        return idIndicador;
+    }
+
+    public void setIdIndicador(Integer idIndicador) {
+        this.idIndicador = idIndicador;
+    }
+
+    public Integer getIdTipoPregunta() {
+        return idTipoPregunta;
+    }
+
+    public void setIdTipoPregunta(Integer idTipoPregunta) {
+        this.idTipoPregunta = idTipoPregunta;
+    }
+    
+    
 }

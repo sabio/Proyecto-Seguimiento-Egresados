@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sse.preguntas.catalogo;
+package com.sse.alumnos.catalogo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,21 +13,19 @@ import org.springframework.web.servlet.mvc.AbstractController;
  *
  * @author armando
  */
-public class EdicionPreguntaController extends AbstractController{
+public class EdicionAlumnoController extends AbstractController{
     private String successView;
     
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
         ModelAndView mv = new ModelAndView(this.successView);
-        EdicionPreguntaService service = new EdicionPreguntaService();
+        EdicionAlumnoService service = new EdicionAlumnoService();
         service.establecerDatos(req);
         if(service.getElUsuarioDioParaGuardar()){
             service.guardar();
             mv.addObject("guardadoExitoso", true);
         }else{
-            mv.addObject("pregunta", service.pregunta);
-            mv.addObject("indicadores", service.getIndicadores());
-            mv.addObject("tipoPreguntas", service.getTipoPreguntas());
+            mv.addObject("alumno", service.alumno);
         }
         return mv;
     }
@@ -39,7 +37,5 @@ public class EdicionPreguntaController extends AbstractController{
     public void setSuccessView(String successView) {
         this.successView = successView;
     }
-    
-    
     
 }

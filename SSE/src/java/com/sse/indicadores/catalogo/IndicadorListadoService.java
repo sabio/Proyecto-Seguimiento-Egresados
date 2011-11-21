@@ -1,7 +1,6 @@
 package com.sse.indicadores.catalogo;
 
 import com.sse.beans.generales.Indicador;
-import com.sse.beans.generales.Pregunta;
 import com.sse.dao.SQLExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -18,11 +18,11 @@ public class PreguntasListadoService {
     public ArrayList<Pregunta> getListadoPreguntas(HttpServletRequest req) throws SQLException{
         ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
         execute.limpiaParameros();
-        ResultSet res = execute.executeQuery("select * from dicpregunta");
+        ResultSet res = execute.executeQuery("select idpregunta,pregunta,idtipopregunta,idindicador,activo from dicpregunta");
         
         Pregunta pregunta;
-        while(res.next()){
-            pregunta = new Pregunta(res.getInt(1),res.getString(2),res.getString(3));
+        while(res.next()){            
+            pregunta = new Pregunta(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4),res.getString(5));
             preguntas.add(pregunta);
         }
                 
