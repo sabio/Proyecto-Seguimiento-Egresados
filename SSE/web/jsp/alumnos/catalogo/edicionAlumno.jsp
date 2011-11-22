@@ -19,24 +19,96 @@
         
 
         <script type="text/javascript">
+            function isLoginRepetido(login){
+                 var respuesta = $.ajax({
+                                      type: "GET",
+                                      url: "${pageContext.request.contextPath}/ajax/consultasAjax1.jsp",
+                                      data: "consulta=2&login="+login,
+                                      async:false
+                                  }).responseText;
+                
+                if(parseInt(respuesta)>0)                
+                    return true;
+                else 
+                    return false;
+            }
+            
+            function isEmailRepetido(email){
+                 var respuesta = $.ajax({
+                                      type: "GET",
+                                      url: "${pageContext.request.contextPath}/ajax/consultasAjax1.jsp",
+                                      data: "consulta=3&email="+email,
+                                      async:false
+                                  }).responseText;
+                
+                if(parseInt(respuesta)>0)                
+                    return true;
+                else 
+                    return false;
+            }
+            
             function setPageStatus(){
                 
                 
             }
 
             function hacerSubmit(){
-                var indicador = document.getElementById("txtIndicador");
-                var activo = document.getElementById("slcActivo");                                
-                if(Trim(indicador.value)==''){
-                    jAlert('Ingrese un indicador válido', 'Error');                    
+                var nombre = document.getElementById("txtNombre");
+                var paterno = document.getElementById("txtPaterno");
+                var materno = document.getElementById("txtMaterno");
+                var email = document.getElementById("txtEmail");                
+                var grupo = document.getElementById("slcGrupo");
+                var activo = document.getElementById("slcActivo");
+                var login = document.getElementById("txtLogin");
+                var pwd = document.getElementById("txtPWD");
+                
+                if(Trim(nombre.value)==''){
+                    jAlert('Ingrese un nombre válido', 'Error');                    
+                    return false;
+                }
+                if(Trim(paterno.value)==''){
+                    jAlert('Ingrese un apellido paterno válido', 'Error');                    
+                    return false;
+                }
+                if(Trim(materno.value)==''){
+                    jAlert('Ingrese un apellido materno válido', 'Error');                    
+                    return false;
+                }
+                if(! /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email.value) ){
+                    jAlert('Ingrese un correo electronico válido', 'Error');
                     return false;
                 }
                 
+                if(isEmailRepetido(Trim(email.value))){
+                    jAlert('Ya existe un usuario/alumno registrado con el mismo correo electronico. Ingrese otro', 'Error');
+                    return false;
+                }
+                
+                if(Trim(grupo.value)=='-1'){
+                    jAlert('Seleccione un grupo', 'Error');
+                    return false;
+                }
+                                                
                 if(activo.value=="-1"){
                     jAlert('Seleccione un estado', 'Error');                    
                     return false;
                 }
                 
+                if(Trim(login.value)==''){
+                    jAlert('Ingrese un login/codigo válido', 'Error');                    
+                    return false;
+                }
+                
+                if(isLoginRepetido(Trim(login.value))){
+                    jAlert('Ya existe otro alumno con el mismo login/codigo. Ingrese otro ', 'Error');
+                    return false;
+                }
+                
+                if(Trim(pwd.value)==''){
+                    jAlert('La contrasena no puede quedar vacia', 'Error');                    
+                    return false;
+                }
+                //alert('Submit');
                 return true;
             }
         </script>
@@ -93,6 +165,27 @@
                             </tr>
                             <tr>
                                 <td>
+                                    Correo Electronico
+                                </td>
+                                <td align="left">
+                                    <input type="text" name="txtEmail" id="txtEmail" value="${alumno.usuario.email}" class="textbox" size="40" />
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td>
+                                    Grupo
+                                </td>
+                                <td align="left">
+                                    <select id="slcGrupo" name="slcGrupo"  class="textbox"> 
+                                        <option value="-1">Seleccione...</option>
+                                        <c:forEach var="grupoAlumno" items="${GruposAlumnos}">
+                                            <option value="${grupoAlumno.idGrupoAlumnos}" <c:if test="${alumno.idGrupoAlumnos eq grupoAlumno.idGrupoAlumnos}">selected</c:if>>${grupoAlumno.grupoAlumnos}</option>
+                                        </c:forEach>                                        
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     Activo
                                 </td>
                                 <td align="left">
@@ -103,6 +196,29 @@
                                     </select>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br />
+                                    <b>Datos de acceso</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Login/Codigo
+                                </td>
+                                <td align="left">
+                                    <input type="text" name="txtLogin" id="txtLogin" value="${alumno.usuario.usuario}" class="textbox" size="40" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Contrasena
+                                </td>
+                                <td align="left">
+                                    <input type="text" name="txtPWD" id="txtPWD" value="${alumno.usuario.password}" class="textbox" size="40" />
+                                </td>
+                            </tr>
+                            
                             <tr>
                                 <td colspan="2" align="center">
                                     <input type="submit" id="guardar" name="guardar" class="boton" value="Aceptar" />
@@ -115,7 +231,5 @@
                 </form> 
             </div>
         </div>    
-        
-           
     </body>
 </html>

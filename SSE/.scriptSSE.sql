@@ -31,7 +31,7 @@ create table dicadministrativo(
 	constraint FK_dicadministrativo02 foreign key (idperfil) references dicperfil(idperfil) on delete cascade on update cascade	
 ) ENGINE = InnoDB;
 
-create table dicgruposalumno(
+create table dicgrupoalumnos(
 	idgrupoalumno int not null AUTO_INCREMENT PRIMARY KEY ,
 	grupoalumno varchar(30) not null,
 	unique(grupoalumno)
@@ -43,7 +43,7 @@ create table dicalumno(
 	idgrupoalumno int not null,
 	unique(idusuario),
 	constraint FK_dicalumno01 foreign key (idusuario) references dicusuario(idusuario)  on delete cascade on update cascade,
-	constraint FK_dicalumno02 foreign key (idgrupoalumno) references dicgruposalumno(idgrupoalumno)  on delete cascade on update cascade
+	constraint FK_dicalumno02 foreign key (idgrupoalumno) references dicgrupoalumnos(idgrupoalumno)  on delete cascade on update cascade
 ) ENGINE = InnoDB;
 
 
@@ -54,7 +54,7 @@ create table tblgruposalumno(
 	idusuario INT NOT NULL,
 	idgrupoalumno int not null,
 	constraint FK_tblgruposalumno01 foreign key (idusuario) references dicusuario(idusuario)  on delete cascade on update cascade,
-	constraint FK_tblgruposalumno02 foreign key (idgrupoalumno) references dicgruposalumno(idgrupoalumno)  on delete cascade on update cascade	
+	constraint FK_tblgruposalumno02 foreign key (idgrupoalumno) references dicgrupoalumnos(idgrupoalumno)  on delete cascade on update cascade	
 )  ENGINE = InnoDB;
 
 
@@ -149,8 +149,8 @@ INSERT INTO dicusuario VALUES (3, 'abcd', md5('hola'), 'Laura Fabiola', 'Vallin'
 INSERT INTO dicusuario VALUES (4, 'opesdsd', md5('hola'), 'Marta', 'Reyes', 'Sandoval', 'S', 'ms@gmail.com');
 INSERT INTO dicusuario VALUES (5, 'killer', md5('hola'), 'Jorge Alejandro', 'Corona', 'Perez', 'S', 'xxx@gmail.com');
 
-insert into dicgruposalumno values (1,'Grupo 1');
-insert into dicgruposalumno values (2,'Grupo 2');
+insert into dicgrupoalumnos values (1,'Grupo 1');
+insert into dicgrupoalumnos values (2,'Grupo 2');
 
 
 insert into dicalumno values (2,1);

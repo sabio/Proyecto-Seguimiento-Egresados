@@ -9,22 +9,22 @@ package com.sse.beans.generales;
  * @author armando
  */
 public class Alumno {
-    Integer idGrupoAlumno;
+    Integer idGrupoAlumnos;
     Usuario usuario;
 
-    public Alumno(Integer idGrupoAlumno, Usuario usuario) {
-        this.idGrupoAlumno = idGrupoAlumno;
+    public Alumno(Integer idGrupoAlumnos, Usuario usuario) {
+        this.idGrupoAlumnos = idGrupoAlumnos;
         this.usuario = usuario;
     }
     public Alumno() {
     }
 
-    public Integer getIdGrupoAlumno() {
-        return idGrupoAlumno;
+    public Integer getidGrupoAlumnos() {
+        return idGrupoAlumnos;
     }
 
-    public void setIdGrupoAlumno(Integer idGrupoAlumno) {
-        this.idGrupoAlumno = idGrupoAlumno;
+    public void setidGrupoAlumnos(Integer idGrupoAlumnos) {
+        this.idGrupoAlumnos = idGrupoAlumnos;
     }
 
     public Usuario getUsuario() {
