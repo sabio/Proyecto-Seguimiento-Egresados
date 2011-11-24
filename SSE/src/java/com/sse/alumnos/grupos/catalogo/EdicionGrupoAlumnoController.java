@@ -25,7 +25,7 @@ public class EdicionGrupoAlumnoController extends AbstractController {
             service.guardar();
             mv.addObject("guardadoExitoso", true);
         }else{
-            mv.addObject("alumno", service.alumno);
+            mv.addObject("grupo", service.grupo);
             mv.addObject("GruposAlumnos", service.getGruposAlumnos());
         }
         return mv;

@@ -79,7 +79,7 @@
             <div class="header">
                 <hr />
                     <span id="titulo"> 
-                        Catalogo de alumnos
+                        Catalogo de grupos de alumnos
                     </span>
                 <hr />
             </div>
@@ -106,7 +106,7 @@
                             <c:forEach  items="${listadoGruposAlumnos}" var="grupo">
                                 <tr>
                                     <td>
-                                        <a href="edicionGrupoAlumno.run?idGrupoUsuario=${grupo.idGrupoAlumnos}">
+                                        <a href="edicionGrupoAlumno.run?idGrupoAlumno=${grupo.idGrupoAlumnos}">
                                             ${grupo.grupoAlumnos}
                                         </a>
 

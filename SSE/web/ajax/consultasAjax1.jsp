@@ -35,6 +35,15 @@
             res.next();
             salida = res.getInt(1)+"";                        
             break;
+        case 4:
+            execute = new SQLExecutor();
+            res = execute.executeQuery("select count(1) from dicgrupoalumnos where upper(grupoalumno) like upper('"+request.getParameter("nombre")+"') ");
+            res.next();
+            salida = res.getInt(1)+"";            
+            break;
+            //SELECT date_format( curdate( ) , '%d/%m/%Y' ) FROM dual
+            //http://www.w3schools.com/sql/func_date_format.asp
+            //http://dev.mysql.com/doc/refman/5.0/es/date-calculations.html
     }
     out.print(salida);
 %>
