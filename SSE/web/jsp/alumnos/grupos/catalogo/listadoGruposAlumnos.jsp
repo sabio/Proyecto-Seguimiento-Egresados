@@ -1,8 +1,9 @@
 <%-- 
-    Document   : alumnosListado
-    Created on : Nov 21, 2011, 12:13:29 PM
+    Document   : listadoGruposAlumnos
+    Created on : Nov 23, 2011, 9:15:40 PM
     Author     : armando
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -59,7 +60,7 @@
             
             
             function eliminar(id){
-                jConfirm('Desea eliminar el alumno?', 'Confirmacion', function(r) {
+                jConfirm('Desea eliminar el grupo?', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
                         document.getElementById("formaListado").submit();
@@ -86,9 +87,9 @@
                 <form name="formaListado" id="formaListado" >
                     <input type="hidden" name="hdnElimina" id="hdnElimina" />
                     <br />
-                        <a style="float:right" class="linker" href="edicionAlumno.run">
+                        <a style="float:right" class="linker" href="edicionGrupoAlumno.run">
                             <img style="border: 0" src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" />
-                            Agregar alumno
+                            Agregar grupo
                         </a>
                     <br />
                     <br />
@@ -96,33 +97,22 @@
                     <table id="tablaCatalogo" class="display">
                         <thead>
                             <tr>
-                                <th>Alumno</th>
-                                <th>Activo</th>
+                                <th>Grupo</th>                                
                                 <th>Eliminar</th>
                             </tr>
 
                         </thead>
                         <tbody>
-                            <c:forEach  items="${listadoAlumnos}" var="alumno">
+                            <c:forEach  items="${listadoGruposAlumnos}" var="grupo">
                                 <tr>
                                     <td>
-                                        <a href="edicionAlumno.run?idUsuario=${alumno.usuario.idUsuario}">
-                                            ${alumno.usuario.nombre} ${alumno.usuario.apaterno} ${alumno.usuario.amaterno}
+                                        <a href="edicionGrupoAlumno.run?idGrupoUsuario=${grupo.idGrupoAlumnos}">
+                                            ${grupo.grupoAlumnos}
                                         </a>
 
-                                    </td>
+                                    </td>                                   
                                     <td>
-                                        <c:choose>
-                                            <c:when test="${alumno.usuario.activo eq 'S'}">
-                                                Si
-                                            </c:when>
-                                            <c:otherwise>
-                                                No
-                                            </c:otherwise>
-                                        </c:choose>                                        
-                                    </td>
-                                    <td>
-                                        <span src="/imagenes/iconos/eliminar.gif" onclick="eliminar(${alumno.usuario.idUsuario})">
+                                        <span src="/imagenes/iconos/eliminar.gif" onclick="eliminar(${grupo.idGrupoAlumnos})">
                                             <img src="${pageContext.request.contextPath}/imagenes/iconos/eliminar.gif" />
                                         </span>
                                     </td>    

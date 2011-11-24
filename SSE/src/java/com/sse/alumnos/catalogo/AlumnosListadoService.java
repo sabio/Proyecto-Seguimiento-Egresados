@@ -5,7 +5,6 @@
 package com.sse.alumnos.catalogo;
 
 import com.sse.beans.generales.Alumno;
-import com.sse.beans.generales.Indicador;
 import com.sse.beans.generales.Usuario;
 import com.sse.dao.SQLExecutor;
 import java.sql.ResultSet;

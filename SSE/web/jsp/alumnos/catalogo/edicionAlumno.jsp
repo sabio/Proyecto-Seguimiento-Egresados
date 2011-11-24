@@ -19,11 +19,11 @@
         
 
         <script type="text/javascript">
-            function isLoginRepetido(login){
+            function isLoginRepetido(idUsuario,login){
                  var respuesta = $.ajax({
                                       type: "GET",
                                       url: "${pageContext.request.contextPath}/ajax/consultasAjax1.jsp",
-                                      data: "consulta=2&login="+login,
+                                      data: "consulta=2&idUsuario="+idUsuario+"&login="+login,
                                       async:false
                                   }).responseText;
                 
@@ -33,11 +33,11 @@
                     return false;
             }
             
-            function isEmailRepetido(email){
+            function isEmailRepetido(idUsuario,email){
                  var respuesta = $.ajax({
                                       type: "GET",
                                       url: "${pageContext.request.contextPath}/ajax/consultasAjax1.jsp",
-                                      data: "consulta=3&email="+email,
+                                      data: "consulta=3&idUsuario="+idUsuario+"&email="+email,
                                       async:false
                                   }).responseText;
                 
@@ -53,6 +53,7 @@
             }
 
             function hacerSubmit(){
+                var idUsuario = document.getElementById("hdnIdUsuario").value;
                 var nombre = document.getElementById("txtNombre");
                 var paterno = document.getElementById("txtPaterno");
                 var materno = document.getElementById("txtMaterno");
@@ -61,6 +62,7 @@
                 var activo = document.getElementById("slcActivo");
                 var login = document.getElementById("txtLogin");
                 var pwd = document.getElementById("txtPWD");
+                var pwd2 = document.getElementById("txtPWD2");
                 
                 if(Trim(nombre.value)==''){
                     jAlert('Ingrese un nombre válido', 'Error');                    
@@ -79,7 +81,7 @@
                     return false;
                 }
                 
-                if(isEmailRepetido(Trim(email.value))){
+                if(isEmailRepetido(idUsuario,Trim(email.value))){
                     jAlert('Ya existe un usuario/alumno registrado con el mismo correo electronico. Ingrese otro', 'Error');
                     return false;
                 }
@@ -99,12 +101,18 @@
                     return false;
                 }
                 
-                if(isLoginRepetido(Trim(login.value))){
+                if(isLoginRepetido(idUsuario,Trim(login.value))){
                     jAlert('Ya existe otro alumno con el mismo login/codigo. Ingrese otro ', 'Error');
                     return false;
                 }
                 
-                if(Trim(pwd.value)==''){
+                if(  Trim(pwd.value)!=Trim(pwd2.value)  ){
+                    jAlert('La contrasena no coincide. Favor de corregir', 'Error');                    
+                    return false;
+                }
+                
+                
+                if(idUsuario=='' && Trim(pwd.value)==''){
                     jAlert('La contrasena no puede quedar vacia', 'Error');                    
                     return false;
                 }
@@ -125,7 +133,7 @@
                 <hr />
             </div>
             <div class="contenido">
-                <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
+                <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()" autocomplete="off">
                     <input type="hidden" name="hdnIdUsuario" id="hdnIdUsuario" value="${alumno.usuario.idUsuario}" />
                     <table align="center">
                         <thead>
@@ -215,7 +223,20 @@
                                     Contrasena
                                 </td>
                                 <td align="left">
-                                    <input type="text" name="txtPWD" id="txtPWD" value="${alumno.usuario.password}" class="textbox" size="40" />
+                                    <input type="password"  name="txtPWD" id="txtPWD" value="${alumno.usuario.password}" class="textbox" size="40" />
+                                    <br />
+                                    <c:if test="${alumno.usuario.idUsuario ne null}">Dejar vacio para conservar la contrasena actual</c:if>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Repetir contrasena
+                                </td>
+                                <td align="left">
+                                    <input type="password" name="txtPWD2" id="txtPWD2" value="" class="textbox" size="40" />
+                                    <br />                                    
+                                    
                                 </td>
                             </tr>
                             

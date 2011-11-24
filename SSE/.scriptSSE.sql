@@ -61,7 +61,7 @@ create table tblgruposalumno(
 create table dicpermiso(
 	idpermiso int not null auto_increment primary key,
 	permiso varchar(30) not null,	
-	description varchar(50) not null,
+	description varchar(100) not null,
 	activo varchar(1) not null default 'S'
 ) ENGINE = InnoDB;
 
@@ -196,6 +196,11 @@ insert into dicmenu
 values
 (6,'Alumnos',4,2,1,'listadoAlumnos.run');
 
+insert into dicmenu
+(idmenu,menu,orden,nivel,idmenupadre,url)
+values
+(7,'Grupos de alumnos',5,2,1,'listadoGruposAlumnos.run');
+
 
 /* insertando los permisos */
 insert into dicpermiso
@@ -217,6 +222,11 @@ insert into dicpermiso
 (idpermiso,permiso,description)
 values
 (4,'Listado de alumnos','Permiso para poder visualizar el listado de alumnos');
+
+insert into dicpermiso
+(idpermiso,permiso,description)
+values
+(5,'Listado de grupos de alumnos','Permiso para poder visualizar el listado de grupos de alumnos');
 
 
 /* Insertando las relaciones entre los menus y los permisos */
@@ -265,6 +275,16 @@ insert into tblmenupermiso
 values
 (4,6);
 
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(5,1);
+
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(5,7);
+
 /* insertando los permisos que tiene el perfil de administrados*/
 insert into tblpermisosperfil
 (idperfil,idpermiso)
@@ -285,4 +305,9 @@ insert into tblpermisosperfil
 (idperfil,idpermiso)
 values
 (1,4);
+
+insert into tblpermisosperfil
+(idperfil,idpermiso)
+values
+(1,5);
 

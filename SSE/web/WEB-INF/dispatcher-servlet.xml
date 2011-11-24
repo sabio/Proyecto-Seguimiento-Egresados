@@ -32,6 +32,10 @@
                 <entry key="edicionAlumno.run">
                         <ref bean="edicionAlumno"/>
                 </entry>
+                <entry key="listadoGruposAlumnos.run">
+                        <ref bean="listadoGruposAlumnos"/>
+                </entry>
+                                
             </map>
         </property>
     </bean>
@@ -51,13 +55,16 @@
     </bean>
     <bean id="edicionIndicador" class="com.sse.indicadores.catalogo.EdicionIndicadorController">
             <property name="successView" value="jsp/indicadores/catalogo/edicionIndicador.jsp"/>
-    </bean>
-    
+    </bean>    
     <bean id="listadoAlumnos" class="com.sse.alumnos.catalogo.AlumnosListadoController">
             <property name="successView" value="jsp/alumnos/catalogo/alumnosListado.jsp"/>	            		
     </bean>
     <bean id="edicionAlumno" class="com.sse.alumnos.catalogo.EdicionAlumnoController">
             <property name="successView" value="jsp/alumnos/catalogo/edicionAlumno.jsp"/>
     </bean>
+    <bean id="listadoGruposAlumnos" class="com.sse.alumnos.grupos.catalogo.ListadoGruposAlumnosController">
+            <property name="successView" value="jsp/alumnos/grupos/catalogo/listadoGruposAlumnos.jsp"/>
+    </bean>
+    
     
 </beans>

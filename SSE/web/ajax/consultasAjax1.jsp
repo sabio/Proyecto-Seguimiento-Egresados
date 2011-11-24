@@ -6,6 +6,7 @@
     SQLExecutor execute;
     ResultSet res;
     String salida = "";
+    String query=null;
     
     switch(consulta){
         case 1:
@@ -16,13 +17,21 @@
             break;
         case 2:
             execute = new SQLExecutor();
-            res = execute.executeQuery("select count(1) from dicusuario where UPPER(usuario) like UPPER('"+request.getParameter("login")+"')");
+            if(request.getParameter("idUsuario")!=null && !request.getParameter("idUsuario").equals(""))
+                query = "select count(1) from dicusuario where UPPER(usuario) like UPPER('"+request.getParameter("login")+"') and idusuario != "+request.getParameter("idUsuario");
+            else
+                query = "select count(1) from dicusuario where UPPER(usuario) like UPPER('"+request.getParameter("login")+"')";                            
+            res = execute.executeQuery(query);
             res.next();
             salida = res.getInt(1)+"";                        
             break;
         case 3:
             execute = new SQLExecutor();
-            res = execute.executeQuery("select count(1) from dicusuario where UPPER(email) like UPPER('"+request.getParameter("email")+"')");
+            if(request.getParameter("idUsuario")!=null && !request.getParameter("idUsuario").equals(""))
+                query = "select count(1) from dicusuario where UPPER(email) like UPPER('"+request.getParameter("email")+"') and idusuario != "+request.getParameter("idUsuario");                
+            else    
+                query = "select count(1) from dicusuario where UPPER(email) like UPPER('"+request.getParameter("email")+"')";                            
+            res = execute.executeQuery(query);
             res.next();
             salida = res.getInt(1)+"";                        
             break;
