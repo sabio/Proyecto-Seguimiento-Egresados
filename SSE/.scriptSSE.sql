@@ -201,6 +201,12 @@ insert into dicmenu
 values
 (7,'Grupos de alumnos',5,2,1,'listadoGruposAlumnos.run');
 
+insert into dicmenu
+(idmenu,menu,orden,nivel,idmenupadre,url)
+values
+(8,'Asignacion de Cuestionarios',6,2,1,'asignacionCuestionarios.run');
+
+
 
 /* insertando los permisos */
 insert into dicpermiso
@@ -227,6 +233,11 @@ insert into dicpermiso
 (idpermiso,permiso,description)
 values
 (5,'Listado de grupos de alumnos','Permiso para poder visualizar el listado de grupos de alumnos');
+
+insert into dicpermiso
+(idpermiso,permiso,description)
+values
+(6,'Asignacion de Cuestionarios','Permiso para poder visualizar la asignacion de cuestionarios');
 
 
 /* Insertando las relaciones entre los menus y los permisos */
@@ -285,6 +296,16 @@ insert into tblmenupermiso
 values
 (5,7);
 
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(6,1);
+
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(6,8);
+
 /* insertando los permisos que tiene el perfil de administrados*/
 insert into tblpermisosperfil
 (idperfil,idpermiso)
@@ -310,4 +331,9 @@ insert into tblpermisosperfil
 (idperfil,idpermiso)
 values
 (1,5);
+
+insert into tblpermisosperfil
+(idperfil,idpermiso)
+values
+(1,6);
 
