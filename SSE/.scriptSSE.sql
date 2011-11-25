@@ -78,7 +78,7 @@ create table tblpermisosperfil(
 
 create table dicmenu(
 	idmenu int not null auto_increment primary key,
-	menu varchar(30) not null,
+	menu varchar(70) not null,
 	orden int not null,
 	nivel int not null,
 	activo varchar(1) not null default 'S',

@@ -116,7 +116,7 @@
                 <form name="formaListado" id="formaListado" >
                     <input type="hidden" name="hdnElimina" id="hdnElimina" />
                     <br />
-                        <a style="float:right" class="linker" href="edicionIndicador.run">
+                        <a style="float:right" class="linker" href="asignacionCuestionario.run">
                             <img style="border: 0" src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" />
                             Agregar asignacion
                         </a>

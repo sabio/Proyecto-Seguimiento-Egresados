@@ -41,6 +41,9 @@
                 <entry key="listadoAsignacionCuestionarios.run">
                         <ref bean="listadoAsignacionCuestionarios"/>
                 </entry>
+                <entry key="asignacionCuestionario.run">
+                        <ref bean="asignacionCuestionario"/>
+                </entry>
                                 
             </map>
         </property>
@@ -76,6 +79,9 @@
     </bean>
     <bean id="listadoAsignacionCuestionarios" class="com.sse.cuestionarios.asignacion.ListadoAsignacionCuestionariosController">
             <property name="successView" value="jsp/cuestionarios/listadoAsignacionCuestionarios.jsp"/>
+    </bean>
+    <bean id="asignacionCuestionario" class="com.sse.cuestionarios.asignacion.AsignacionCuestionarioController">
+            <property name="successView" value="jsp/cuestionarios/asignacionCuestionario.jsp"/>
     </bean>
         
 </beans>
