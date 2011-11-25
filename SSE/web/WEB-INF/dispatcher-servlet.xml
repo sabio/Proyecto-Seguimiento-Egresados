@@ -38,8 +38,8 @@
                 <entry key="edicionGrupoAlumno.run">
                         <ref bean="edicionGrupoAlumno"/>
                 </entry>
-                <entry key="asignacionCuestionarios.run">
-                        <ref bean="asignacionCuestionarios"/>
+                <entry key="listadoAsignacionCuestionarios.run">
+                        <ref bean="listadoAsignacionCuestionarios"/>
                 </entry>
                                 
             </map>
@@ -74,8 +74,8 @@
     <bean id="edicionGrupoAlumno" class="com.sse.alumnos.grupos.catalogo.EdicionGrupoAlumnoController">
             <property name="successView" value="jsp/alumnos/grupos/catalogo/edicionGrupoAlumno.jsp"/>
     </bean>
-    <bean id="asignacionCuestionarios" class="com.sse.alumnos.grupos.catalogo.EdicionGrupoAlumnoController">
-            <property name="successView" value="jsp/alumnos/grupos/catalogo/edicionGrupoAlumno.jsp"/>
+    <bean id="listadoAsignacionCuestionarios" class="com.sse.cuestionarios.asignacion.ListadoAsignacionCuestionariosController">
+            <property name="successView" value="jsp/cuestionarios/listadoAsignacionCuestionarios.jsp"/>
     </bean>
         
 </beans>

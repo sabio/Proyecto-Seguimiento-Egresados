@@ -131,6 +131,18 @@ create table tblcuestionariopreguntas(
 );
 
 
+create table tblasignacioncuestionario(
+    idasignacioncuestionario int not null auto_increment primary key,
+    idcuestionario int not null,
+    idgrupoalumno int not null,
+    fechainicio timestamp not null,
+    fechafin timestamp not null,
+    activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N'),
+    constraint FK_tblasignacioncuestionario01 foreign key (idcuestionario) references diccuestionario(idcuestionario) on delete cascade,
+    constraint FK_tblasignacioncuestionario02 foreign key (idgrupoalumno) references dicgrupoalumnos(idgrupoalumno) on delete cascade
+);
+
+
 
 
 
@@ -163,6 +175,14 @@ insert into dicalumno values (5,2);
 /* Insertando los tipos de pregunta */
 insert into dictipopregunta values (1,'Respuesta abierta');
 insert into dictipopregunta values (2,'Opciones del 1 al 5');
+
+/* Insertando un cuestionario de prueba */
+insert into diccuestionario values (1,'Cuestionario 1','S');
+insert into diccuestionario values (2,'Cuestionario 2','S');
+
+
+/* Insertando asignaciones de cuestionario de pruebas */
+insert into tblasignacioncuestionario values (1,1,1,now(), now()+1, 'S');
 
 
 /* insertando los menus */
@@ -204,7 +224,7 @@ values
 insert into dicmenu
 (idmenu,menu,orden,nivel,idmenupadre,url)
 values
-(8,'Asignacion de Cuestionarios',6,2,1,'asignacionCuestionarios.run');
+(8,'Listado de asignacion de Cuestionarios',6,2,1,'listadoAsignacionCuestionarios.run');
 
 
 

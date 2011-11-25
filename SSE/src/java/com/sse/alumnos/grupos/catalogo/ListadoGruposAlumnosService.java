@@ -4,9 +4,7 @@
  */
 package com.sse.alumnos.grupos.catalogo;
 
-import com.sse.beans.generales.Alumno;
 import com.sse.beans.generales.GrupoAlumnos;
-import com.sse.beans.generales.Usuario;
 import com.sse.dao.SQLExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;

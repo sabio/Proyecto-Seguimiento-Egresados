@@ -13,11 +13,14 @@ import org.springframework.web.servlet.mvc.AbstractController;
  *
  * @author armando.gomez
  */
-public class AsignacionCuestionariosController extends AbstractController {
+public class ListadoAsignacionCuestionariosController extends AbstractController {
     private String successView;
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
          ModelAndView mv = new ModelAndView(this.successView);
+         ListadoAsignacionCuestionariosService service = new ListadoAsignacionCuestionariosService();
+         mv.addObject("listadoAsignaciones", service.getListadoAsignaciones());
+         
          
          return mv;
     }
