@@ -24,7 +24,9 @@ public class AsignacionCuestionarioController extends AbstractController {
             service.guardar();
             mv.addObject("guardadoExitoso", true);
         }else{
-            //mv.addObject("indicador", service.indicador);
+            mv.addObject("asignacionCuestionario", service.asignacionCuestionario);
+            mv.addObject("listadoCuestionarios", service.getListadoCuestionarios());
+            mv.addObject("listadoGruposAlumnos", service.getListadoGruposAlumnos());
         }
         return mv;
     }

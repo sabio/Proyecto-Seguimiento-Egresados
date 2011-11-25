@@ -12,7 +12,7 @@
     <head>
         <c:if test="${guardadoExitoso}">
             <script type="text/javascript">
-                window.location = 'listadoIndicadores.run';
+                window.location = 'listadoAsignacionCuestionarios.run';
             </script>
             
         </c:if>
@@ -26,7 +26,7 @@
             }
 
             function hacerSubmit(){
-                var indicador = document.getElementById("txtIndicador");
+                /*var indicador = document.getElementById("txtIndicador");
                 var activo = document.getElementById("slcActivo");                                
                 if(Trim(indicador.value)==''){
                     jAlert('Ingrese un indicador válido', 'Error');                    
@@ -37,12 +37,12 @@
                     jAlert('Seleccione un estado', 'Error');                    
                     return false;
                 }
-                
+                */
                 return true;
             }
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edicion Indicador</title>
+        <title>Edicion Asignación de Cuestionario</title>
     </head>
     <body onload="setPageStatus();">
          <div class="principal">
@@ -55,7 +55,7 @@
             </div>
             <div class="contenido">
                 <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
-                    <input type="hidden" name="hdnIdIndicador" id="hdnIdIndicador" value="${indicador.idIndicador}" />
+                    <input type="hidden" name="idAsignacionCuestionario" id="idAsignacionCuestionario" value="${asignacionCuestionario.idAsignacionCuestionario}" />
                     <table align="center">
                         <thead>
                             <tr>
@@ -70,20 +70,65 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    fecha inicio
+                                    Cuestionario
                                 </td>
                                 <td align="left">
-                                    <input size="30" id="f_date1" /><button id="f_btn1">...</button><br />
+                                    <select id="slcCuestionario" name="slcCuestionario" class="textbox">
+                                        <option value="-1">Seleccione...</option>
+                                        <c:forEach var="cuestionario" items="${listadoCuestionarios}" >
+                                            <option value="${cuestionario.idCuestionario}" <c:if test="${cuestionario.idCuestionario eq asignacionCuestionario.idCuestionario}">selected</c:if>>${cuestionario.cuestionario}</option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Grupo
+                                </td>
+                                <td align="left">
+                                    <select id="slcGrupo" name="slcGrupo" class="textbox">
+                                        <option value="-1">Seleccione...</option>
+                                        <c:forEach var="grupo" items="${listadoGruposAlumnos}" >
+                                            <option value="${grupo.idGrupoAlumnos}" <c:if test="${grupo.idGrupoAlumnos eq asignacionCuestionario.idGrupoAlumnos}">selected</c:if>>${grupo.grupoAlumnos}</option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Fecha inicio
+                                </td>
+                                <td align="left">
+                                    <input value="${asignacionCuestionario.fechaInicio}" size="20" id="txtFechaInicio" name="txtFechaInicio" readonly="true"  /><button id="btnFechaInicio">...</button><br />
 
-    <script type="text/javascript">//<![CDATA[
-      Calendar.setup({
-        inputField : "f_date1",
-        trigger    : "f_btn1",
-        onSelect   : function() { this.hide() },
-        showTime   : 12,
-        dateFormat : "%Y-%m-%d %I:%M %p"
-      });
-    //]]></script>
+                                    <script type="text/javascript">//<![CDATA[
+                                      Calendar.setup({
+                                        inputField : "txtFechaInicio",
+                                        trigger    : "btnFechaInicio",
+                                        onSelect   : function() { this.hide() },
+                                        showTime   : 24,
+                                        dateFormat : "%Y/%m/%d %I:%M %p"
+                                      });
+                                    //]]></script>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Fecha fin
+                                </td>
+                                <td align="left">
+                                    <input value="${asignacionCuestionario.fechaFin}" size="20" id="txtFechaFin" name="txtFechaFin" readonly="true"  /><button id="btnFechaFin">...</button><br />
+
+                                    <script type="text/javascript">//<![CDATA[
+                                      Calendar.setup({
+                                        inputField : "txtFechaFin",
+                                        trigger    : "btnFechaFin",
+                                        onSelect   : function() { this.hide() },
+                                        showTime   : 12,
+                                        dateFormat : "%Y/%m/%d %I:%M %p"
+                                      });
+                                    //]]></script>
 
                                 </td>
                             </tr>
@@ -94,8 +139,8 @@
                                 <td align="left">
                                     <select id="slcActivo" name="slcActivo"  class="textbox"> 
                                         <option value="-1">Seleccione...</option>
-                                        <option value="S" <c:if test="${indicador.activo eq 'S' or indicador.activo eq null}">selected</c:if>>Si</option>
-                                        <option value="N" <c:if test="${indicador.activo eq 'N'}">selected</c:if>>No</option>
+                                        <option value="S" <c:if test="${asignacionCuestionario.activo eq 'S' or asignacionCuestionario.activo eq null}">selected</c:if>>Si</option>
+                                        <option value="N" <c:if test="${asignacionCuestionario.activo eq 'N'}">selected</c:if>>No</option>
                                     </select>
                                 </td>
                             </tr>

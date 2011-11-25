@@ -77,9 +77,11 @@
             
             
             function eliminar(id){
-                jConfirm('Desea eliminar el indicador?', 'Confirmacion', function(r) {
+                jConfirm('¿Desea eliminar la asignación?', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
+                        document.getElementById("formaListado").submit();
+                        /*
                         if(isIndicadorUsadoEnUnaOMasPreguntas(id)){
                             jConfirm('Existe una o mas preguntas asociadas a este indicador. Si lo elimina tambien seran eliminadas las preguntas asociadas. Desea continuar?', 'Confirmacion', function(s) {
                                 if(s){
@@ -92,7 +94,7 @@
                             document.getElementById("formaListado").submit();
                             //alert("submit");
                         }
-                        
+                        */
                        
                             
                     }
@@ -128,8 +130,8 @@
                             <tr>
                                 <th>Cuestionario</th>
                                 <th>Grupo</th>
-                                <th>Fecha Inicio</th>
-                                <th>Fecha Fin</th>
+                                <th>Fecha Inicio <i>(año/mes/dia hora)</i></th>
+                                <th>Fecha Fin <i>(año/mes/dia hora)</i></th>
                                 <th>Activo</th>
                                 <th>Eliminar</th>
                             </tr>
@@ -139,23 +141,23 @@
                             <c:forEach  items="${listadoAsignaciones}" var="asignacion">
                                 <tr>
                                     <td>
-                                        <a href="edicionIndicador.run?idIndicador=">
+                                        <a href="asignacionCuestionario.run?idAsignacionCuestionario=${asignacion.idAsignacionCuestionario}">
                                             ${asignacion.cuestionario}
                                         </a>
 
                                     </td>
                                     <td>
-                                        <a href="edicionIndicador.run?idIndicador=">
+                                        <a href="asignacionCuestionario.run?idAsignacionCuestionario=${asignacion.idAsignacionCuestionario}">
                                             ${asignacion.grupoAlumno}
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="edicionIndicador.run?idIndicador=">
+                                        <a href="asignacionCuestionario.run?idAsignacionCuestionario=${asignacion.idAsignacionCuestionario}">
                                             ${asignacion.fechaInicio}
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="edicionIndicador.run?idIndicador=">
+                                        <a href="asignacionCuestionario.run?idAsignacionCuestionario=${asignacion.idAsignacionCuestionario}">
                                             ${asignacion.fechaFin}
                                         </a>
                                     </td>

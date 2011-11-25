@@ -44,6 +44,19 @@
             //SELECT date_format( curdate( ) , '%d/%m/%Y' ) FROM dual
             //http://www.w3schools.com/sql/func_date_format.asp
             //http://dev.mysql.com/doc/refman/5.0/es/date-calculations.html
+            
+         /*   
+            select
+case 
+when
+ PERIOD_DIFF (STR_TO_DATE( '2011/11/09 03:21 PM', '%Y/%m/%d %I:%i %p' ),
+STR_TO_DATE( '2011/11/09 03:20 PM', '%Y/%m/%d %I:%i %p' )) < 0
+then "S"
+else "N"
+end
+from dual
+            */
+            
     }
     out.print(salida);
 %>

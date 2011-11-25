@@ -24,8 +24,8 @@ public class ListadoAsignacionCuestionariosService {
         ArrayList<AsignacionCuestionario> listado = new ArrayList<AsignacionCuestionario>();        
         execute.limpiaParameros();
         String query =  "select idasignacioncuestionario,idcuestionario, cuestionario, idgrupoalumno, grupoalumno, " +
-                        "date_format( fechainicio , '%d/%m/%Y %H:%i hrs' )," +
-                        "date_format( fechafin , '%d/%m/%Y %H:%i hrs' ), " +
+                        "date_format( fechainicio , '%Y/%m/%d %I:%i %p' )," +
+                        "date_format( fechafin , '%Y/%m/%d %I:%i %p' ), " +
                         "tblasignacioncuestionario.activo "+
                         "from tblasignacioncuestionario "+
                         "inner join diccuestionario using (idcuestionario) "+
@@ -40,6 +40,12 @@ public class ListadoAsignacionCuestionariosService {
         }
         
         return listado;
+    }
+
+    void eliminarAsignacion(Integer idAsignacionAEliminar) throws SQLException{
+        execute.addParametro(1, idAsignacionAEliminar);        
+        execute.executeUpdate("delete from tblasignacioncuestionario where idasignacioncuestionario=?");
+        execute.commit();
     }
     
 }

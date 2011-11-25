@@ -12,7 +12,7 @@ public class AsignacionCuestionario {
     private Integer idAsignacionCuestionario;
     private Integer idCuestionario;
     private String cuestionario;
-    private Integer idGrupoAlumno;
+    private Integer idGrupoAlumnos;
     private String grupoAlumno;
     private String fechaInicio;
     private String fechaFin;
@@ -22,11 +22,11 @@ public class AsignacionCuestionario {
         
     }
 
-    public AsignacionCuestionario(Integer idAsignacionCuestionario, Integer idCuestionario, String cuestionario, Integer idGrupoAlumno, String grupoAlumno, String fechaInicio, String fechaFin, String activo) {
+    public AsignacionCuestionario(Integer idAsignacionCuestionario, Integer idCuestionario, String cuestionario, Integer idGrupoAlumnos, String grupoAlumno, String fechaInicio, String fechaFin, String activo) {
         this.idAsignacionCuestionario = idAsignacionCuestionario;
         this.idCuestionario = idCuestionario;
         this.cuestionario = cuestionario;
-        this.idGrupoAlumno = idGrupoAlumno;
+        this.idGrupoAlumnos = idGrupoAlumnos;
         this.grupoAlumno = grupoAlumno;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -75,12 +75,12 @@ public class AsignacionCuestionario {
         this.idCuestionario = idCuestionario;
     }
 
-    public Integer getIdGrupoAlumno() {
-        return idGrupoAlumno;
+    public Integer getIdGrupoAlumnos() {
+        return idGrupoAlumnos;
     }
 
-    public void setIdGrupoAlumno(Integer idGrupoAlumno) {
-        this.idGrupoAlumno = idGrupoAlumno;
+    public void setIdGrupoAlumnos(Integer idGrupoAlumnos) {
+        this.idGrupoAlumnos = idGrupoAlumnos;
     }
 
     public String getCuestionario() {

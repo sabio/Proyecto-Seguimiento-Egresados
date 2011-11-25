@@ -16,12 +16,12 @@ import org.springframework.web.servlet.mvc.AbstractController;
 public class ListadoAsignacionCuestionariosController extends AbstractController {
     private String successView;
     @Override
-    protected ModelAndView handleRequestInternal(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+    protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
          ModelAndView mv = new ModelAndView(this.successView);
-         ListadoAsignacionCuestionariosService service = new ListadoAsignacionCuestionariosService();
+         ListadoAsignacionCuestionariosService service = new ListadoAsignacionCuestionariosService();         
+         if(req.getParameter("hdnElimina")!=null && !req.getParameter("hdnElimina").equals(""))
+            service.eliminarAsignacion(new Integer(req.getParameter("hdnElimina")));
          mv.addObject("listadoAsignaciones", service.getListadoAsignaciones());
-         
-         
          return mv;
     }
     
