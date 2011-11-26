@@ -21,6 +21,8 @@
 
         <script type="text/javascript">
             function fechasValidas(idAsignacionCuestionario,idCuestionario,idGrupoAlumno,txtFechaInicio,txtFechaFin){
+                 if(Trim(idAsignacionCuestionario)=='')
+                     idAsignacionCuestionario=0;
                  var respuesta = $.ajax({
                                       type: "GET",
                                       url: "/SSE/ajax/consultasAjax1.jsp",
@@ -28,34 +30,42 @@
                                       async:false
                                   }).responseText;
                 
-                if(parseInt(respuesta)>0)                
-                    return true;
-                else 
-                    return false;
+                
+                return Trim(respuesta);
             }
             
             function setPageStatus(){    
             }
 
             function hacerSubmit(){
-                var idAsignacionCuestionario = document.getElementById("idAsignacionCuestionario");
-                var idCuestionario = document.getElementById("slcCuestionario");
-                var idGrupoAlumno = document.getElementById("slcGrupo");
-                var txtFechaInicio = document.getElementById("txtFechaInicio");
-                var txtFechaFin = document.getElementById("txtFechaFin");
-                var activo = document.getElementById("slcActivo");
+                var idAsignacionCuestionario = document.getElementById("idAsignacionCuestionario").value;
+                var idCuestionario = document.getElementById("slcCuestionario").value;
+                var idGrupoAlumno = document.getElementById("slcGrupo").value;
+                var txtFechaInicio = document.getElementById("txtFechaInicio").value;
+                var txtFechaFin = document.getElementById("txtFechaFin").value;
+                var activo = document.getElementById("slcActivo").value;
                 
                 
-                if(activo.value=="-1"){
+                if(activo=="-1"){
                     jAlert('Seleccione un estado', 'Error');                    
                     return false;
                 }
-                
-               /* if(fechasValidas(idAsignacionCuestionario,idCuestionario,idGrupoAlumno,txtFechaInicio,txtFechaFin)){
-                    
-                    
+                var validacionFechas = fechasValidas(idAsignacionCuestionario,idCuestionario,idGrupoAlumno,txtFechaInicio,txtFechaFin);
+                if(validacionFechas=='iguales'){
+                    jAlert('Las fechas proporcionadas son iguales. Favor de corregir', 'Error');                    
+                    return false;
                 }
-                */
+                
+                if(validacionFechas=='fechainicialsuperiorafinal'){
+                    jAlert('La fecha inicial es superior a la fecha final. Favor de corregir', 'Error');                    
+                    return false;
+                }
+                
+                if(validacionFechas=='fechatraslapada'){
+                    jAlert('Ya existe una asignacion de cuestionario que contiene el mismo grupo, el mismo cuestionario y las fechas de asignacion se traslapan. Favor de corregir', 'Error');
+                    return false;
+                }
+                
                 return true;
             }
         </script>

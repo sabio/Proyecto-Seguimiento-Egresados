@@ -31,7 +31,14 @@ public class LoginService {
 
     Usuario generaObjetoUsuario(Integer idUsuario) throws SQLException {
         Usuario usuario = new Usuario();
-        String query = "select idpermiso,idperfil from tblpermisosperfil where idperfil=(select idperfil from dicadministrativo where idusuario=?)";
+        String query;
+        
+        if(this.esAlumno(idUsuario))
+            usuario.setEsAlumno(true);
+        else
+            usuario.setEsAlumno(false);
+        
+        query = "select idpermiso,idperfil from tblpermisosperfil where idperfil=(select idperfil from dicadministrativo where idusuario=?)";
         ResultSet res;
         ArrayList<Integer> permisosAsignados = new ArrayList<Integer>();        
         
@@ -55,6 +62,20 @@ public class LoginService {
     @Override
     protected void finalize() throws Throwable {
         execute.cerrarConexion();
+    }
+
+    private boolean esAlumno(Integer idUsuario) throws SQLException{
+        String query = "select count(1) from dicusuario "+
+                       "inner join dicalumno using(idusuario) "+
+                       "where idusuario = "+idUsuario;
+        execute.limpiaParameros();
+        ResultSet res = execute.executeQuery(query);
+        res.next();
+        if(res.getInt(1)>0)
+            return true;
+        else
+            return false;
+                 
     }
     
     

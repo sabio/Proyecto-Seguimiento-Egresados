@@ -23,7 +23,8 @@ body{
         border-radius: 10px;
         width:1000px;
         height:90px;	
-        background-color:#03325C;
+        /* background-color:#03325C; */
+        background-color: #14325c;
         color:white;
         
 }

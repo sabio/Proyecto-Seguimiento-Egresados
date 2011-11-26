@@ -17,6 +17,7 @@ public class Usuario implements Serializable{
     private String amaterno;
     private String email;
     private String activo;
+    private Boolean esAlumno;
     
     private Integer idPerfil;
     private ArrayList<Integer> permisosAsignados;
@@ -131,6 +132,14 @@ public class Usuario implements Serializable{
         }
         
         return salida;
+    }
+
+    public Boolean getEsAlumno() {
+        return esAlumno;
+    }
+
+    public void setEsAlumno(Boolean esAlumno) {
+        this.esAlumno = esAlumno;
     }
     
     

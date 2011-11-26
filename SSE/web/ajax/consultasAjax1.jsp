@@ -50,14 +50,47 @@
             String txtFechaFin5 = request.getParameter("txtFechaFin");
             
             query = "select case when "+
-                    "PERIOD_DIFF (STR_TO_DATE( '2011/11/09 03:21 PM', '%Y/%m/%d %I:%i %p' ), "+
-                    "STR_TO_DATE( '2011/11/09 03:20 PM', '%Y/%m/%d %I:%i %p' )) < 0 "+
-                    "then 'S' else 'N' "+
+                    "STR_TO_DATE( '"+txtFechaInicio5+"', '%Y/%m/%d %I:%i %p' ) = "+
+                    "STR_TO_DATE( '"+txtFechaFin5+"', '%Y/%m/%d %I:%i %p' ) "+
+                    "then 'iguales' "+
+                    "when "+
+                    "TIME_TO_SEC(TIMEDIFF(STR_TO_DATE( '"+txtFechaFin5+"', '%Y/%m/%d %I:%i %p' ), "+
+                    "STR_TO_DATE( '"+txtFechaInicio5+"', '%Y/%m/%d %I:%i %p' ))) < 0 "+
+                    "then 'fechainicialsuperiorafinal' "+
+                    "when (select count(1) from tblasignacioncuestionario "+
+                    "where idAsignacionCuestionario != "+idAsignacionCuestionario5+" and idcuestionario="+idCuestionario5+" and idgrupoalumno="+idGrupoAlumno5+" and "+
+                    "(( "+
+                    "STR_TO_DATE( '"+txtFechaInicio5+"', '%Y/%m/%d %I:%i %p' ) >= fechainicio and "+
+                    "STR_TO_DATE( '"+txtFechaInicio5+"', '%Y/%m/%d %I:%i %p' ) <= fechafin "+
+                    ") "+
+                    "or "+
+                    "( "+
+                    "STR_TO_DATE( '"+txtFechaFin5+"', '%Y/%m/%d %I:%i %p' ) >= fechainicio and "+
+                    "STR_TO_DATE( '"+txtFechaFin5+"', '%Y/%m/%d %I:%i %p' ) <= fechafin "+
+                    ") "+
+                    "or "+
+                    "( "+
+                    "STR_TO_DATE( '"+txtFechaInicio5+"', '%Y/%m/%d %I:%i %p' ) <= fechainicio and "+
+                    "STR_TO_DATE( '"+txtFechaFin5+"', '%Y/%m/%d %I:%i %p' ) >= fechafin "+
+                    ") "+
+                    ") "+
+                    ")>0 "+
+                    "then "+
+                    "'fechatraslapada' "+
+                    "else 'todobien' "+
                     "end from dual";
-            
+            //System.out.println("queryVal = "+query);
             res = execute.executeQuery(query);
+            res.next();
+            salida = res.getString(1);
+            
             break;
-            //SELECT date_format( curdate( ) , '%d/%m/%Y' ) FROM dual
+    }
+    out.print(salida);
+    
+    
+    
+    //SELECT date_format( curdate( ) , '%d/%m/%Y' ) FROM dual
             //http://www.w3schools.com/sql/func_date_format.asp
             //http://dev.mysql.com/doc/refman/5.0/es/date-calculations.html
             
@@ -108,7 +141,4 @@ end from dual;
   
  
             */
-            
-    }
-    out.print(salida);
 %>

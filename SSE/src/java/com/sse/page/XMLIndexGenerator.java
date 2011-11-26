@@ -41,7 +41,11 @@ public class XMLIndexGenerator extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         try{
-        out.print(getXMLMenu(request));
+            Usuario usuario = (Usuario)request.getSession(false).getAttribute("usuario");
+            if(usuario.getEsAlumno())
+                out.print(getXMLMenuDeAlumno(request));
+            else
+                out.print(getXMLMenuDeUsuario(request));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -49,7 +53,85 @@ public class XMLIndexGenerator extends HttpServlet {
     }
     
     
-    private String getXMLMenu(HttpServletRequest request) throws Exception{
+    private String getXMLMenuDeAlumno(HttpServletRequest request) throws Exception{
+        String path = request.getContextPath();
+        
+        SAXTransformerFactory tf = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
+        handler = tf.newTransformerHandler();
+        Transformer serializer = handler.getTransformer();
+        serializer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        serializer.setOutputProperty(OutputKeys.INDENT, "yes");
+        serializer.setOutputProperty(OutputKeys.VERSION, "1.0");
+        Writer writer = new StringWriter();
+        BufferedWriter bw = new BufferedWriter(writer);
+        StreamResult result = new StreamResult(bw);
+        handler.setResult(result);
+                        
+        handler.startDocument();   
+        handler.processingInstruction("xml-stylesheet","type=\"text/xsl\" href=\"" + path + "/xsl/menu.xsl\"");
+        
+        handler.startElement("", "MenuXML", "MenuXML", new AttributesImpl());           
+        
+        handler.startElement("", "path", "path", new AttributesImpl());
+        handler.characters(path.toCharArray(), 0, path.length());
+        handler.endElement("", "path", "path");
+    
+        ArrayList<Menu> MenusOrdenados = this.getMenusOrdenados(request);
+        int nivel=0,nivelAnterior=0;
+        String menu, url;
+        for(Menu menuObject : MenusOrdenados){
+            nivel = menuObject.getNivel();
+            menu = menuObject.getMenu();
+            url = menuObject.getUrl();
+            url = url == null ? "":url;
+            
+            if(nivel>nivelAnterior){
+                handler.startElement("", "Nivel"+nivel, "Nivel"+nivel, new AttributesImpl());
+                handler.startElement("", "menu", "menu", new AttributesImpl());
+                handler.characters(menu.toCharArray(), 0, menu.length());
+                handler.endElement("", "menu", "menu");
+                handler.startElement("", "url", "url", new AttributesImpl());
+                handler.characters(url.toCharArray(), 0, url.length());
+                handler.endElement("", "url", "url");
+                nivelAnterior = nivel;
+                
+            }else if(nivel==nivelAnterior){
+                handler.endElement("", "Nivel"+nivel, "Nivel"+nivel);
+                
+                handler.startElement("", "Nivel"+nivel, "Nivel"+nivel, new AttributesImpl());
+                handler.startElement("", "menu", "menu", new AttributesImpl());
+                handler.characters(menu.toCharArray(), 0, menu.length());
+                handler.endElement("", "menu", "menu");
+                handler.startElement("", "url", "url", new AttributesImpl());
+                handler.characters(url.toCharArray(), 0, url.length());
+                handler.endElement("", "url", "url");
+            }else if(nivel<nivelAnterior){                
+                for(int i=nivelAnterior; i>=nivel; i--){
+                    handler.endElement("", "Nivel"+i, "Nivel"+i);
+                }                
+                handler.startElement("", "Nivel"+nivel, "Nivel"+nivel, new AttributesImpl());
+                handler.startElement("", "menu", "menu", new AttributesImpl());
+                handler.characters(menu.toCharArray(), 0, menu.length());
+                handler.endElement("", "menu", "menu");
+                handler.startElement("", "url", "url", new AttributesImpl());
+                handler.characters(url.toCharArray(), 0, url.length());
+                handler.endElement("", "url", "url");
+                nivelAnterior = nivel;
+            }
+        }
+        for(; nivel>=1; nivel--){
+            handler.endElement("", "Nivel"+nivel, "Nivel"+nivel);
+        }   
+        //handler.endElement("", "Nivel1", "Nivel1");
+        
+        
+        handler.endElement("", "MenuXML", "MenuXML");
+        handler.endDocument();
+        execute.cerrarConexion();
+        return writer.toString();
+    }
+    
+    private String getXMLMenuDeUsuario(HttpServletRequest request) throws Exception{
         String path = request.getContextPath();
         
         SAXTransformerFactory tf = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
