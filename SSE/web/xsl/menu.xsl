@@ -97,7 +97,16 @@
                     </div>
                     
                     <div class="contenido">
-                         <iframe width="100%" height="100%" name="idIframe" id="idIframe" src="jsp/index.jsp"></iframe>
+                         <!--<iframe width="100%" height="100%" name="idIframe" id="idIframe" src="jsp/index.jsp"></iframe>-->
+                         <iframe>
+                            <xsl:attribute name="width">100%</xsl:attribute>
+                            <xsl:attribute name="height">100%</xsl:attribute>
+                            <xsl:attribute name="name">idIframe</xsl:attribute>
+                            <xsl:attribute name="id">idIframe</xsl:attribute>
+                            <xsl:attribute name="src"><xsl:value-of select="MenuXML/urlFrame"/></xsl:attribute>
+                         </iframe>
+                         
+                             
                     </div>                        
 
                     

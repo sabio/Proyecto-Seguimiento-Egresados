@@ -76,52 +76,26 @@ public class XMLIndexGenerator extends HttpServlet {
         handler.characters(path.toCharArray(), 0, path.length());
         handler.endElement("", "path", "path");
     
-        ArrayList<Menu> MenusOrdenados = this.getMenusOrdenados(request);
-        int nivel=0,nivelAnterior=0;
-        String menu, url;
-        for(Menu menuObject : MenusOrdenados){
-            nivel = menuObject.getNivel();
-            menu = menuObject.getMenu();
-            url = menuObject.getUrl();
-            url = url == null ? "":url;
+        Usuario usuario = (Usuario)request.getSession(false).getAttribute("usuario");               
             
-            if(nivel>nivelAnterior){
-                handler.startElement("", "Nivel"+nivel, "Nivel"+nivel, new AttributesImpl());
-                handler.startElement("", "menu", "menu", new AttributesImpl());
-                handler.characters(menu.toCharArray(), 0, menu.length());
-                handler.endElement("", "menu", "menu");
-                handler.startElement("", "url", "url", new AttributesImpl());
-                handler.characters(url.toCharArray(), 0, url.length());
-                handler.endElement("", "url", "url");
-                nivelAnterior = nivel;
-                
-            }else if(nivel==nivelAnterior){
-                handler.endElement("", "Nivel"+nivel, "Nivel"+nivel);
-                
-                handler.startElement("", "Nivel"+nivel, "Nivel"+nivel, new AttributesImpl());
-                handler.startElement("", "menu", "menu", new AttributesImpl());
-                handler.characters(menu.toCharArray(), 0, menu.length());
-                handler.endElement("", "menu", "menu");
-                handler.startElement("", "url", "url", new AttributesImpl());
-                handler.characters(url.toCharArray(), 0, url.length());
-                handler.endElement("", "url", "url");
-            }else if(nivel<nivelAnterior){                
-                for(int i=nivelAnterior; i>=nivel; i--){
-                    handler.endElement("", "Nivel"+i, "Nivel"+i);
-                }                
-                handler.startElement("", "Nivel"+nivel, "Nivel"+nivel, new AttributesImpl());
-                handler.startElement("", "menu", "menu", new AttributesImpl());
-                handler.characters(menu.toCharArray(), 0, menu.length());
-                handler.endElement("", "menu", "menu");
-                handler.startElement("", "url", "url", new AttributesImpl());
-                handler.characters(url.toCharArray(), 0, url.length());
-                handler.endElement("", "url", "url");
-                nivelAnterior = nivel;
-            }
-        }
-        for(; nivel>=1; nivel--){
-            handler.endElement("", "Nivel"+nivel, "Nivel"+nivel);
-        }   
+        handler.startElement("", "Nivel1", "Nivel1", new AttributesImpl());
+        handler.startElement("", "menu", "menu", new AttributesImpl());
+        handler.characters("Inicio".toCharArray(), 0, "Inicio".length());
+        handler.endElement("", "menu", "menu");
+        handler.startElement("", "url", "url", new AttributesImpl());
+        handler.characters("principalAlumnos.run".toCharArray(), 0, "principalAlumnos.run".length());
+        handler.endElement("", "url", "url");
+        
+        handler.endElement("", "Nivel1", "Nivel1");
+        
+               
+        handler.startElement("", "urlFrame", "urlFrame", new AttributesImpl());
+        handler.characters("principalAlumnos.run".toCharArray(), 0, "principalAlumnos.run".length());
+        handler.endElement("", "urlFrame", "urlFrame");
+        
+        
+       
+         
         //handler.endElement("", "Nivel1", "Nivel1");
         
         
@@ -202,6 +176,9 @@ public class XMLIndexGenerator extends HttpServlet {
         }   
         //handler.endElement("", "Nivel1", "Nivel1");
         
+        handler.startElement("", "urlFrame", "urlFrame", new AttributesImpl());
+        handler.characters("jsp/index.jsp".toCharArray(), 0, "jsp/index.jsp".length());
+        handler.endElement("", "urlFrame", "urlFrame");
         
         handler.endElement("", "MenuXML", "MenuXML");
         handler.endDocument();
@@ -267,7 +244,7 @@ public class XMLIndexGenerator extends HttpServlet {
                         "inner join tblmenupermiso mp on (m.idmenu=mp.idmenu) "+
                         "where mp.idpermiso in ("+((Usuario)request.getSession(false).getAttribute("usuario")).getPermisosAsignadosString(",") +") "+
                         "order by m.nivel,m.orden";
-        System.out.println(query);
+        //System.out.println(query);
         ResultSet res = execute.executeQuery(query);
         
         while(res.next()){
@@ -282,6 +259,7 @@ public class XMLIndexGenerator extends HttpServlet {
         
         //Agregamos el menu de Inicio que siempre debe ir
         menusOrdenados.add(new Menu(0,null,"Inicio",1,1,"jsp/index.jsp"));
+        
         
         
         for(Menu menuNivel1 : menusNivel1 ){
@@ -299,6 +277,9 @@ public class XMLIndexGenerator extends HttpServlet {
             
             
         }
+        
+        
+        
         /*
         System.out.println(menusNivel1);
         System.out.println(menusNivel2);

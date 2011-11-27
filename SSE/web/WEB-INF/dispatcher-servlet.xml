@@ -44,6 +44,9 @@
                 <entry key="asignacionCuestionario.run">
                         <ref bean="asignacionCuestionario"/>
                 </entry>
+                <entry key="principalAlumnos.run">
+                        <ref bean="principalAlumnos"/>
+                </entry>
                                 
             </map>
         </property>
@@ -83,5 +86,8 @@
     <bean id="asignacionCuestionario" class="com.sse.cuestionarios.asignacion.AsignacionCuestionarioController">
             <property name="successView" value="jsp/cuestionarios/asignacion/asignacionCuestionario.jsp"/>
     </bean>
-        
+    <bean id="principalAlumnos" class="com.sse.alumnos.operacion.PrincipalAlumnosController">
+            <property name="successView" value="jsp/alumnos/operacion/principalAlumnos.jsp"/>
+    </bean>
+    
 </beans>
