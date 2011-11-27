@@ -20,22 +20,40 @@
         
 
         <script type="text/javascript">
-            function setPageStatus(){
+            function fechasValidas(idAsignacionCuestionario,idCuestionario,idGrupoAlumno,txtFechaInicio,txtFechaFin){
+                 var respuesta = $.ajax({
+                                      type: "GET",
+                                      url: "/SSE/ajax/consultasAjax1.jsp",
+                                      data: "consulta=5&idAsignacionCuestionario="+idAsignacionCuestionario+"&idCuestionario="+idCuestionario+"&idGrupoAlumno="+idGrupoAlumno+"&txtFechaInicio="+txtFechaInicio+"&txtFechaFin="+txtFechaFin,
+                                      async:false
+                                  }).responseText;
                 
-                
+                if(parseInt(respuesta)>0)                
+                    return true;
+                else 
+                    return false;
+            }
+            
+            function setPageStatus(){    
             }
 
             function hacerSubmit(){
-                /*var indicador = document.getElementById("txtIndicador");
-                var activo = document.getElementById("slcActivo");                                
-                if(Trim(indicador.value)==''){
-                    jAlert('Ingrese un indicador válido', 'Error');                    
-                    return false;
-                }
+                var idAsignacionCuestionario = document.getElementById("idAsignacionCuestionario");
+                var idCuestionario = document.getElementById("slcCuestionario");
+                var idGrupoAlumno = document.getElementById("slcGrupo");
+                var txtFechaInicio = document.getElementById("txtFechaInicio");
+                var txtFechaFin = document.getElementById("txtFechaFin");
+                var activo = document.getElementById("slcActivo");
+                
                 
                 if(activo.value=="-1"){
                     jAlert('Seleccione un estado', 'Error');                    
                     return false;
+                }
+                
+               /* if(fechasValidas(idAsignacionCuestionario,idCuestionario,idGrupoAlumno,txtFechaInicio,txtFechaFin)){
+                    
+                    
                 }
                 */
                 return true;

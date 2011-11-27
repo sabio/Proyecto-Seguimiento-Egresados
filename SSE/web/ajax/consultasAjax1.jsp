@@ -41,6 +41,22 @@
             res.next();
             salida = res.getInt(1)+"";            
             break;
+        case 5:
+            execute = new SQLExecutor();
+            String idAsignacionCuestionario5 = request.getParameter("idAsignacionCuestionario");
+            String idCuestionario5 = request.getParameter("idCuestionario");
+            String idGrupoAlumno5 = request.getParameter("idGrupoAlumno");
+            String txtFechaInicio5 = request.getParameter("txtFechaInicio");
+            String txtFechaFin5 = request.getParameter("txtFechaFin");
+            
+            query = "select case when "+
+                    "PERIOD_DIFF (STR_TO_DATE( '2011/11/09 03:21 PM', '%Y/%m/%d %I:%i %p' ), "+
+                    "STR_TO_DATE( '2011/11/09 03:20 PM', '%Y/%m/%d %I:%i %p' )) < 0 "+
+                    "then 'S' else 'N' "+
+                    "end from dual";
+            
+            res = execute.executeQuery(query);
+            break;
             //SELECT date_format( curdate( ) , '%d/%m/%Y' ) FROM dual
             //http://www.w3schools.com/sql/func_date_format.asp
             //http://dev.mysql.com/doc/refman/5.0/es/date-calculations.html
@@ -55,6 +71,42 @@ then "S"
 else "N"
 end
 from dual
+
+
+select case when
+STR_TO_DATE( '2011/11/09 03:20 PM', '%Y/%m/%d %I:%i %p' ) =
+STR_TO_DATE( '2011/11/09 03:19 PM', '%Y/%m/%d %I:%i %p' )
+then 'iguales'
+when
+TIME_TO_SEC(TIMEDIFF(STR_TO_DATE( '2011/11/09 03:21 PM', '%Y/%m/%d %I:%i %p' ),
+STR_TO_DATE( '2011/11/09 03:20 PM', '%Y/%m/%d %I:%i %p' ))) < 0
+then 'fechainicialsuperiorafinal'
+
+when (select count(1) from tblasignacioncuestionario
+      where idcuestionario=1 and idgrupoalumno=1 and
+      ((
+        STR_TO_DATE( '2011/11/11 03:00 PM', '%Y/%m/%d %I:%i %p' ) >= fechainicio and
+        STR_TO_DATE( '2011/11/11 03:00 PM', '%Y/%m/%d %I:%i %p' ) <= fechafin
+      )
+      or
+      (
+        STR_TO_DATE( '2011/11/11 03:21 PM', '%Y/%m/%d %I:%i %p' ) >= fechainicio and
+        STR_TO_DATE( '2011/11/11 03:21 PM', '%Y/%m/%d %I:%i %p' ) <= fechafin
+      )
+      or
+      (
+        STR_TO_DATE( '2011/11/11 03:00 PM', '%Y/%m/%d %I:%i %p' ) <= fechainicio and
+        STR_TO_DATE( '2011/11/11 03:21 PM', '%Y/%m/%d %I:%i %p' ) >= fechafin
+      )
+      )
+)>0
+then
+'fechatraslapada'
+else 'todobien'
+end from dual;
+
+  
+ 
             */
             
     }

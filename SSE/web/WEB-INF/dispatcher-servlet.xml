@@ -78,10 +78,10 @@
             <property name="successView" value="jsp/alumnos/grupos/catalogo/edicionGrupoAlumno.jsp"/>
     </bean>
     <bean id="listadoAsignacionCuestionarios" class="com.sse.cuestionarios.asignacion.ListadoAsignacionCuestionariosController">
-            <property name="successView" value="jsp/cuestionarios/listadoAsignacionCuestionarios.jsp"/>
+            <property name="successView" value="jsp/cuestionarios/asignacion/listadoAsignacionCuestionarios.jsp"/>
     </bean>
     <bean id="asignacionCuestionario" class="com.sse.cuestionarios.asignacion.AsignacionCuestionarioController">
-            <property name="successView" value="jsp/cuestionarios/asignacionCuestionario.jsp"/>
+            <property name="successView" value="jsp/cuestionarios/asignacion/asignacionCuestionario.jsp"/>
     </bean>
         
 </beans>
