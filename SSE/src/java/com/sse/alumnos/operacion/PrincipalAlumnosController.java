@@ -19,7 +19,9 @@ public class PrincipalAlumnosController extends AbstractController{
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
         ModelAndView mv = new ModelAndView(this.successView);
-        
+        PrincipalAlumnosService service = new PrincipalAlumnosService();
+        service.establecerDatos(req);
+        mv.addObject("cuestionariosPendientes",service.getCuestionariosPendientes() );
         
         return mv;
     }

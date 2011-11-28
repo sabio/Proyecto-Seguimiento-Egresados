@@ -101,7 +101,7 @@ public class XMLIndexGenerator extends HttpServlet {
         
         handler.endElement("", "MenuXML", "MenuXML");
         handler.endDocument();
-        execute.cerrarConexion();
+        //execute.cerrarConexion();
         return writer.toString();
     }
     

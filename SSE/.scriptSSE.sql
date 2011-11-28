@@ -49,7 +49,7 @@ create table dicalumno(
 
 
 
-
+/***TAL VEZ NO SIRVA ESTA TABLA**/
 create table tblgruposalumno(
 	idusuario INT NOT NULL,
 	idgrupoalumno int not null,
@@ -128,7 +128,7 @@ create table tblcuestionariopreguntas(
 	orden int not null,
 	constraint FK_tblcuestionariopreguntas01 foreign key (idcuestionario) references diccuestionario(idcuestionario) on delete cascade,
 	constraint FK_tblcuestionariopreguntas02 foreign key (idpregunta) references dicpregunta(idpregunta) on delete cascade
-);
+) ENGINE = InnoDB;
 
 
 create table tblasignacioncuestionario(
@@ -140,11 +140,27 @@ create table tblasignacioncuestionario(
     activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N'),
     constraint FK_tblasignacioncuestionario01 foreign key (idcuestionario) references diccuestionario(idcuestionario) on delete cascade,
     constraint FK_tblasignacioncuestionario02 foreign key (idgrupoalumno) references dicgrupoalumnos(idgrupoalumno) on delete cascade
-);
+) ENGINE = InnoDB;
 
 
+create table tblaplicacioncuestionario(
+	idaplicacioncuestionario int not null auto_increment primary key,
+	idasignacioncuestionario int not null,
+	idusuario int not null,
+	fechainicio timestamp not null,
+	fechafin timestamp,
+	constraint FK_tblaplicacioncuestionario01 foreign key (idasignacioncuestionario) references tblasignacioncuestionario(idasignacioncuestionario) on delete cascade,
+	constraint FK_tblaplicacioncuestionario02 foreign key (idusuario) references dicusuario(idusuario) on delete cascade
+) ENGINE = InnoDB;
 
-
+create table tblrespuesta(
+	idaplicacioncuestionario int not null,
+	idpregunta  int not null,
+	respuestaString varchar(120),
+	respuestaInt int,
+	constraint FK_tblrespuesta01 foreign key (idaplicacioncuestionario) references tblaplicacioncuestionario(idaplicacioncuestionario) on delete cascade,
+	constraint FK_tblrespuesta02 foreign key (idpregunta) references dicpregunta(idpregunta) on delete cascade
+) ENGINE = InnoDB;
 
 
 /* ========================================Insertando algo de informacion================================ */
@@ -159,7 +175,7 @@ insert into dicadministrativo values (1,1);
 INSERT INTO dicusuario VALUES (2, 'D0392323', md5('hola'), 'Juan Alberto', 'Gomez', 'Arredondo', 'S', 'abc@gmail.com');
 INSERT INTO dicusuario VALUES (3, 'abcd', md5('hola'), 'Laura Fabiola', 'Vallin', 'Garcia', 'S', 'laura@gmail.com');
 INSERT INTO dicusuario VALUES (4, 'opesdsd', md5('hola'), 'Marta', 'Reyes', 'Sandoval', 'S', 'ms@gmail.com');
-INSERT INTO dicusuario VALUES (5, 'killer', md5('hola'), 'Jorge Alejandro', 'Corona', 'Perez', 'S', 'xxx@gmail.com');
+INSERT INTO dicusuario VALUES (5, 'aa', md5('aa'), 'Jorge Alejandro', 'Corona', 'Perez', 'S', 'xxx@gmail.com');
 
 insert into dicgrupoalumnos values (1,'Grupo 1');
 insert into dicgrupoalumnos values (2,'Grupo 2');
