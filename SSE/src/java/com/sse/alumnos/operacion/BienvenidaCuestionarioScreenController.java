@@ -11,22 +11,17 @@ import org.springframework.web.servlet.mvc.AbstractController;
 
 /**
  *
- * @author armando
+ * @author armando.gomez
  */
-public class PrincipalAlumnosController extends AbstractController{
-    private String successView;
-    
+public class BienvenidaCuestionarioScreenController extends AbstractController{
+    String successView;
     @Override
-    protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
+    protected ModelAndView handleRequestInternal(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         ModelAndView mv = new ModelAndView(this.successView);
-        PrincipalAlumnosService service = new PrincipalAlumnosService();
-        service.establecerDatos(req);
-        mv.addObject("cuestionariosPendientes",service.getCuestionariosPendientes() );
-        mv.addObject("idUsuario",service.usuario.getIdUsuario() );
         
         return mv;
     }
-    
+
     public String getSuccessView() {
         return successView;
     }
@@ -34,4 +29,6 @@ public class PrincipalAlumnosController extends AbstractController{
     public void setSuccessView(String successView) {
         this.successView = successView;
     }
+    
+    
 }

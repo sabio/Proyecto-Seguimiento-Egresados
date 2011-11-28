@@ -42,7 +42,7 @@ public class LoginService {
         ResultSet res;
         ArrayList<Integer> permisosAsignados = new ArrayList<Integer>();        
         
-        usuario.setIdPerfil(idUsuario);        
+        usuario.setIdUsuario(idUsuario);  
         execute.limpiaParameros();
         execute.addParametro(1, idUsuario);
         res = execute.executeQuery(query);        
@@ -54,8 +54,8 @@ public class LoginService {
                 permisosAsignados.add(res.getInt("idpermiso"));
             }
         }        
-        usuario.setPermisosAsignados(permisosAsignados);
-        
+        usuario.setPermisosAsignados(permisosAsignados);        
+        System.out.println("ID del usuario nuevo = "+usuario.getIdUsuario());
         return usuario;
     }
 

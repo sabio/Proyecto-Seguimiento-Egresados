@@ -47,6 +47,9 @@
                 <entry key="principalAlumnos.run">
                         <ref bean="principalAlumnos"/>
                 </entry>
+                <entry key="bienvenida">
+                        <ref bean="bienvenida"/>
+                </entry>
                                 
             </map>
         </property>
@@ -88,6 +91,9 @@
     </bean>
     <bean id="principalAlumnos" class="com.sse.alumnos.operacion.PrincipalAlumnosController">
             <property name="successView" value="jsp/alumnos/operacion/principalAlumnos.jsp"/>
+    </bean>
+    <bean id="bienvenida" class="com.sse.alumnos.operacion.BienvenidaCuestionarioScreenController">
+            <property name="successView" value="jsp/alumnos/operacion/bienvenidaCuestionarioScreen.jsp"/>
     </bean>
     
 </beans>

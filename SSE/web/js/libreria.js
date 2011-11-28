@@ -44,3 +44,14 @@ function diasDiferenciaEntreDosFechas(fechaInicio,fechaFin){
 
    return dias;
 }
+
+
+function windowMax(url,nombre)
+{	     
+    caracteristicas = 'height=screen.availheight,width=screen.availwidth,top=0,left=0,status=0, resizable=0, scrollbars=2, help=0, modal=1, dialog=1';	    
+        //caracteristicas = 'fullscreen=yes';
+        ventana = window.open(url,nombre,caracteristicas);
+        ventana.resizeTo(screen.width,screen.height-30); 
+        ventana.focus();
+
+}

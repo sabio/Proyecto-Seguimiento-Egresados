@@ -10,8 +10,14 @@
 <html>
     <head>
         <jsp:include page="/jsp/includes/cabecera1.jsp" />    
+        <script type="text/javascript">
+            function comienza(idCuestionario,idUsuario){                
+                windowMax('');
+            }
+            
+        </script>
     </head>
-    <body onload="setPageStatus();">
+    <body>
         
          <div class="principal">
             <div class="header">
@@ -46,7 +52,18 @@
                             <td>${cuestionario.cuestionario}</td>
                             <td>${cuestionario.fechaInicio}</td>
                             <td>${cuestionario.fechaFin}</td>
-                            
+                            <td>
+                                <input type="button" id="btnAplicarCuestionario" name="btnAplicarCuestionario" class="boton" 
+                                <c:choose>
+                                    <c:when test="${cuestionario.cuestionarioYaEmpezado}">
+                                        value="Reanudar"
+                                    </c:when>
+                                    <c:otherwise>
+                                        value="Empezar"
+                                    </c:otherwise>
+                                </c:choose>                                
+                                 onclick="comienza(${cuestionario.idCuestionario},${idUsuario})" />
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

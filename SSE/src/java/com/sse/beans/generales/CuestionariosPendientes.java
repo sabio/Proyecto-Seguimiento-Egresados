@@ -13,12 +13,14 @@ public class CuestionariosPendientes {
     String cuestionario;
     String fechaInicio;
     String fechaFin;
+    Boolean cuestionarioYaEmpezado;
 
-    public CuestionariosPendientes(Integer idCuestionario, String cuestionario, String fechaInicio, String fechaFin) {
+    public CuestionariosPendientes(Integer idCuestionario, String cuestionario, String fechaInicio, String fechaFin, Boolean cuestionarioYaEmpezado) {
         this.idCuestionario = idCuestionario;
         this.cuestionario = cuestionario;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.cuestionarioYaEmpezado = cuestionarioYaEmpezado;
     }
 
     public String getCuestionario() {
@@ -51,6 +53,14 @@ public class CuestionariosPendientes {
 
     public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
+    }
+
+    public Boolean getCuestionarioYaEmpezado() {
+        return cuestionarioYaEmpezado;
+    }
+
+    public void setCuestionarioYaEmpezado(Boolean cuestionarioYaEmpezado) {
+        this.cuestionarioYaEmpezado = cuestionarioYaEmpezado;
     }
     
     
