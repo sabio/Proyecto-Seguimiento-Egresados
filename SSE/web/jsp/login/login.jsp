@@ -6,6 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sistema de Seguimiento a Egresados SSE</title>
         <link rel='stylesheet'  href='css/login.css' type='text/css'  /> 
+        <link rel='stylesheet'  href='css/pagina.css' type='text/css'  /> 
     </head>
     <body>
         <div id="contenedor">
@@ -32,7 +33,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <input type="submit" name="wp-submit" id="wp-submit" value="Ingresar" tabindex="100"  class="button" />
+                                        <input type="submit" name="wp-submit" id="wp-submit" value="Ingresar" tabindex="100"  class="boton" />
                                     </td>
                                 </tr>
                                 <tr>

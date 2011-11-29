@@ -81,8 +81,10 @@ a:hover {text-decoration:blink; color:darkred}
         width:70px;    
         margin:4px;
         background-position: center;
-        border:none;
+        
         cursor:default;
         background-color:#8080FF;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
 }
 

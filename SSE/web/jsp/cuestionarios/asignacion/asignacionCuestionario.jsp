@@ -127,7 +127,7 @@
                                     Fecha inicio
                                 </td>
                                 <td align="left">
-                                    <input value="${asignacionCuestionario.fechaInicio}" size="20" id="txtFechaInicio" name="txtFechaInicio" readonly="true"  /><button id="btnFechaInicio">...</button><br />
+                                    <input class="textbox" style="background-color: #d5dad5" value="${asignacionCuestionario.fechaInicio}" size="20" id="txtFechaInicio" name="txtFechaInicio" readonly="true"  /><img height="18" width="17" border="0" src="imagenes/cal.gif"id="btnFechaInicio" /><br />
 
                                     <script type="text/javascript">//<![CDATA[
                                       Calendar.setup({
@@ -146,7 +146,7 @@
                                     Fecha fin
                                 </td>
                                 <td align="left">
-                                    <input value="${asignacionCuestionario.fechaFin}" size="20" id="txtFechaFin" name="txtFechaFin" readonly="true"  /><button id="btnFechaFin">...</button><br />
+                                    <input class="textbox" style="background-color: #d5dad5" value="${asignacionCuestionario.fechaFin}" size="20" id="txtFechaFin" name="txtFechaFin" readonly="true"  /><img height="18" width="17" border="0" src="imagenes/cal.gif"id="btnFechaFin" /><br />
 
                                     <script type="text/javascript">//<![CDATA[
                                       Calendar.setup({

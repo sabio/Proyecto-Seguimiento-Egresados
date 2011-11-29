@@ -22,7 +22,6 @@
                        <img>
                            <xsl:attribute name="src"><xsl:value-of select="MenuXML/path"/>/imagenes/logo.png</xsl:attribute>
                            <xsl:attribute name="class">imagencucea</xsl:attribute>
-                           
                        </img>  
                        <br /><br /><br />
                         <div class="menu">                           
@@ -103,17 +102,34 @@
                             <xsl:attribute name="height">100%</xsl:attribute>
                             <xsl:attribute name="name">idIframe</xsl:attribute>
                             <xsl:attribute name="id">idIframe</xsl:attribute>
+                            <xsl:attribute name="style">border:none</xsl:attribute>
                             <xsl:attribute name="src"><xsl:value-of select="MenuXML/urlFrame"/></xsl:attribute>
                          </iframe>
                          
                              
                     </div>                        
 
-                    
                     <div class="footer">
-                            footer
+                        <div style="padding-left:30px; text-align:left;">
+                            <img>
+                                   <xsl:attribute name="src"><xsl:value-of select="MenuXML/path"/>/imagenes/bg_firm.gif</xsl:attribute>                               
+                            </img>
+                        </div>
+                        <div style="padding-left:77px; text-align:left;">
+                            <strong>©2010 - 2013 Centro Universitario de Ciencias Económico Administrativas.</strong>
+                            <span style="color:gray">
+                                <br />
+                                Coordinación de la Maestría en Tecnologías de Información.
+                                <br />
+                                Periférico Norte N° 799, Núcleo Universitario Los Belenes, C.P. 45100, Zapopan, Jalisco, México.
+                                <br />
+                            </span>
+                            <strong>Teléfonos: (0133) 3770- 3440, conmutador 3770 3300 Extensiones 25326 y 25327.</strong>
+                        </div>
                     </div>
+                    
                 </div>
+                
             </body>
         </html>
     </xsl:template>
