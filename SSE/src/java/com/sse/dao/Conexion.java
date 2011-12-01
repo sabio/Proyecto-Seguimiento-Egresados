@@ -52,7 +52,12 @@ public class Conexion {
             if(url != null){
                     String urlProperties = url.getPath();
                     urlProperties += "sse.properties";
-                    //System.out.println(urlProperties);
+                    
+                    if(System.getProperty("os.name").toString().toLowerCase().contains("windows")){
+                        urlProperties = urlProperties.replace("/", "\\").replace("%20", " ");
+                    }
+                    
+                    System.out.println("urlProperties = "+urlProperties);
                     File fileProp = new File(urlProperties);				
 
                     if(fileProp != null && fileProp.exists()){
