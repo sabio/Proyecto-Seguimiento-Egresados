@@ -13,6 +13,9 @@ public class Cuestionario {
     String Cuestionario;
     String activo;
 
+    public Cuestionario() {     
+    }
+    
     public Cuestionario(Integer idCuestionario, String Cuestionario) {
         this.idCuestionario = idCuestionario;
         this.Cuestionario = Cuestionario;

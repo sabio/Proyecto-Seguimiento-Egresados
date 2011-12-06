@@ -37,6 +37,7 @@
             }                   
             
             function hacerSubmit(){
+                var idCuestionario = document.getElementById("idCuestionario");
                 var cuestionario = document.getElementById("txtCuestionario");
                 var activo = document.getElementById("slcActivo");
                 if(Trim(cuestionario.value)==''){
@@ -49,7 +50,10 @@
                     return false;
                 }
                 
-                if(isCuestionarioRepetido())
+                if(isCuestionarioRepetido(idCuestionario.value,cuestionario.value)){
+                    jAlert('Ya existe un cuestionario con el mismo nombre. Ingrese otro.', 'Error');                    
+                    return false;
+                }
                 
                 return true;
             }

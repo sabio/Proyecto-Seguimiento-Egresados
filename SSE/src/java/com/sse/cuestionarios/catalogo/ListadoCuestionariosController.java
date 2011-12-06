@@ -25,7 +25,7 @@ public class ListadoCuestionariosController  extends AbstractController{
         if(req.getParameter("hdnElimina")!=null && !req.getParameter("hdnElimina").equals(""))
             service.eliminarCuestionario(new Integer(req.getParameter("hdnElimina")));
         
-        mv.addObject("listadoPreguntas", service.getListadoCuestionarios(req));
+        mv.addObject("listadoCuestionarios", service.getListadoCuestionarios(req));
         
         try {
             service.finalize();
