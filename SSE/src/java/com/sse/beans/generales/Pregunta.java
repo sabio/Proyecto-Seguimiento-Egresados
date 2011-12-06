@@ -13,7 +13,9 @@ public class Pregunta {
     private String pregunta;
     private Integer idTipoPregunta;
     private Integer idIndicador;
-    private String activo;
+    private String activo;    
+    private String respuestaString;
+    private Integer respuestaInt;
 
     public Pregunta(Integer idPregunta, String pregunta, Integer idTipoPregunta, Integer idIndicador, String activo) {
         this.idPregunta = idPregunta;
@@ -21,6 +23,16 @@ public class Pregunta {
         this.idTipoPregunta = idTipoPregunta;
         this.idIndicador = idIndicador;
         this.activo = activo;
+    }
+    
+    public Pregunta(Integer idPregunta, String pregunta, Integer idTipoPregunta, Integer idIndicador, String activo, String respuestaString, Integer respuestaInt) {
+        this.idPregunta = idPregunta;
+        this.pregunta = pregunta;
+        this.idTipoPregunta = idTipoPregunta;
+        this.idIndicador = idIndicador;
+        this.activo = activo;
+        this.respuestaString = respuestaString;
+        this.respuestaInt = respuestaInt;
     }
     
     public Pregunta() {        
@@ -65,6 +77,23 @@ public class Pregunta {
     public void setIdTipoPregunta(Integer idTipoPregunta) {
         this.idTipoPregunta = idTipoPregunta;
     }
+
+    public Integer getRespuestaInt() {
+        return respuestaInt;
+    }
+
+    public void setRespuestaInt(Integer respuestaInt) {
+        this.respuestaInt = respuestaInt;
+    }
+
+    public String getRespuestaString() {
+        return respuestaString;
+    }
+
+    public void setRespuestaString(String respuestaString) {
+        this.respuestaString = respuestaString;
+    }
+
     
     
 }

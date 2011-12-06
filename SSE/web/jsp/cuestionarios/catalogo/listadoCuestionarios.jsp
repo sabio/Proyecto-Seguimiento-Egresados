@@ -1,6 +1,6 @@
 <%-- 
-    Document   : preguntasListado
-    Created on : Oct 16, 2011, 10:43:11 AM
+    Document   : listadoCuestionarios
+    Created on : Dec 5, 2011, 6:27:09 PM
     Author     : armando
 --%>
 
@@ -58,7 +58,7 @@
             
             
             function eliminar(id){
-                jConfirm('Desea eliminar la pregunta?', 'Confirmacion', function(r) {
+                jConfirm('Desea eliminar el cuestionario?', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
                         document.getElementById("formaListado").submit();
@@ -75,7 +75,7 @@
             <div class="header">
                 <hr />
                     <span id="titulo"> 
-                        Catalogo de preguntas
+                        Catalogo de cuestionarios
                     </span>
                 <hr />
             </div>
@@ -83,9 +83,9 @@
                 <form name="formaListado" id="formaListado" >
                     <input type="hidden" name="hdnElimina" id="hdnElimina" />
                     <br />
-                        <a style="float:right" class="linker" href="edicionPregunta.run">
+                        <a style="float:right" class="linker" href="edicionCuestionario.run">
                             <img style="border: 0" src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" />
-                            Agregar Pregunta
+                            Agregar Cuestionario
                         </a>
                     <br />
                     <br />
@@ -93,24 +93,24 @@
                     <table id="tablaCatalogo" class="display">
                         <thead>
                             <tr>
-                                <th>Pregunta</th>
+                                <th>Cuestionario</th>
                                 <th>Activo</th>
                                 <th>Eliminar</th>
                             </tr>
 
                         </thead>
                         <tbody>
-                            <c:forEach  items="${listadoPreguntas}" var="pregunta">
+                            <c:forEach  items="${listadoCuestionarios}" var="cuestionario">
                                 <tr>
                                     <td>
-                                        <a href="edicionPregunta.run?idPregunta=${pregunta.idPregunta}">
-                                            ${pregunta.pregunta}
+                                        <a href="edicionPregunta.run?idPregunta=${cuestionario.idCuestionario}">
+                                            ${cuestionario.cuestionario}
                                         </a>
 
                                     </td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${pregunta.activo eq 'S'}">
+                                            <c:when test="${cuestionario.activo eq 'S'}">
                                                 Si
                                             </c:when>
                                             <c:otherwise>
@@ -119,7 +119,7 @@
                                         </c:choose>                                        
                                     </td>
                                     <td>
-                                        <span src="/imagenes/iconos/eliminar.gif" onclick="eliminar(${pregunta.idPregunta})">
+                                        <span src="/imagenes/iconos/eliminar.gif" onclick="eliminar(${cuestionario.idCuestionario})">
                                             <img src="${pageContext.request.contextPath}/imagenes/iconos/eliminar.gif" />
                                         </span>
                                     </td>    

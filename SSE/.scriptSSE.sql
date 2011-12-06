@@ -107,7 +107,7 @@ create table dicindicador(
 
 create table dicpregunta(
 	idpregunta int not null  auto_increment primary key,
-	pregunta varchar(50) not null,
+	pregunta varchar(150) not null,
 	idtipopregunta int not null,
 	idindicador int,
 	activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N'),
@@ -118,7 +118,7 @@ create table dicpregunta(
 
 create table diccuestionario(
 	idcuestionario int not null  auto_increment primary key,
-	cuestionario varchar(50) not null,
+	cuestionario varchar(100) not null,
 	activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N')
 ) ENGINE = InnoDB;
 
@@ -158,6 +158,7 @@ create table tblrespuesta(
 	idpregunta  int not null,
 	respuestaString varchar(120),
 	respuestaInt int,
+    constraint PK_tblrespuesta01 primary key(idaplicacioncuestionario,idpregunta),
 	constraint FK_tblrespuesta01 foreign key (idaplicacioncuestionario) references tblaplicacioncuestionario(idaplicacioncuestionario) on delete cascade,
 	constraint FK_tblrespuesta02 foreign key (idpregunta) references dicpregunta(idpregunta) on delete cascade
 ) ENGINE = InnoDB;
@@ -191,14 +192,80 @@ insert into dicalumno values (5,2);
 /* Insertando los tipos de pregunta */
 insert into dictipopregunta values (1,'Respuesta abierta');
 insert into dictipopregunta values (2,'Opciones del 1 al 5');
+insert into dictipopregunta values (3,'Opciones Si y No');
 
-/* Insertando un cuestionario de prueba */
-insert into diccuestionario values (1,'Cuestionario 1','S');
+/* Insertando cuestionarios y preguntas*/
+insert into diccuestionario values (1,'Cuestionario Sobre la materia de programacion avanzada','S');
 insert into diccuestionario values (2,'Cuestionario 2','S');
 
 
+
+
+insert into dicindicador values
+(1,'Satisfaccion con los profesores','S');
+insert into dicindicador values
+(2,'Satisfaccion con las instalaciones','S');
+insert into dicindicador values
+(3,'Satisfaccion con el programa academico','S');
+
+
+
+insert into dicpregunta values
+(1,'Se cumplio con el programa de clases (Siendo 5 la calificación más alta y 1 la más baja)', 2,1,'S');
+
+insert into dicpregunta values
+(2,'Se le dio conocimiento al inicio de curso acerca del programa de estudios', 3,1,'S');
+
+insert into dicpregunta values
+(3,'Se le dio conocimiento al inicio de curso acerca del metodo de evaluacion', 3,1,'S');
+
+insert into dicpregunta values
+(4,'Se aclararon todas las dudas surgidas en clase (Siendo 5 la calificación más alta y 1 la más baja)', 2,1,'S');
+
+
+insert into dicpregunta values
+(5,'Se contaba con material suficiente de investigacion y referencia (Siendo 5 la calificación más alta y 1 la más baja)', 2,2,'S');
+
+insert into dicpregunta values
+(6,'Se contaba con aluas limpias, ordenadas y bien iluminadas (Siendo 5 la calificación más alta y 1 la más baja)', 2,2,'S');
+
+
+insert into dicpregunta values
+(7,'Indique su nivel de satisfaccion acerca de los temas impartidos (Siendo 5 la calificación más alta y 1 la más baja)', 3,3,'S');
+
+insert into dicpregunta values
+(8,'Consideras que la materia de Programacion Avanzada es indispensable para una formacion academica completa en el Posgrado?', 2,3,'S');
+
+insert into dicpregunta values
+(9,'Exponga abiertamente que cambiaria usted para mejorar, si es el caso, algun aspecto de la clase', 1,null,'S');
+
+insert into tblcuestionariopreguntas values
+(1,1,1);
+insert into tblcuestionariopreguntas values
+(1,2,2);
+insert into tblcuestionariopreguntas values
+(1,3,3);
+insert into tblcuestionariopreguntas values
+(1,4,4);
+insert into tblcuestionariopreguntas values
+(1,5,5);
+insert into tblcuestionariopreguntas values
+(1,6,6);
+insert into tblcuestionariopreguntas values
+(1,7,7);
+insert into tblcuestionariopreguntas values
+(1,8,8);
+insert into tblcuestionariopreguntas values
+(1,9,9);
+
+
+
+
+
+
+
 /* Insertando asignaciones de cuestionario de pruebas */
-insert into tblasignacioncuestionario values (1,1,1,now(), now()+1, 'S');
+insert into tblasignacioncuestionario values (1,1,2,now(), STR_TO_DATE( '2011/12/31 10:00 am', '%Y/%m/%d %I:%i %p' ), 'S');
 
 
 /* insertando los menus */
@@ -213,9 +280,9 @@ values
 (2,'Operacion',2,1);
 
 insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre)
+(idmenu,menu,orden,nivel,idmenupadre,url)
 values
-(3,'Cuestionarios',1,2,1);
+(3,'Cuestionarios',1,2,1,'listadoCuestionarios.run');
 
 insert into dicmenu
 (idmenu,menu,orden,nivel,idmenupadre,url)

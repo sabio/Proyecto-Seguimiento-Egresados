@@ -8,18 +8,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
-
 /**
  *
- * @author armando.gomez
+ * @author armando
  */
-public class BienvenidaCuestionarioScreenController extends AbstractController{
+public class CuestionarioController extends AbstractController{
     String successView;
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
         ModelAndView mv = new ModelAndView(this.successView);
+        CuestionarioService service = new CuestionarioService();
+        service.establecerDatos(req);
+        
+        if(service.opcion==1){//El usuario le dio para guardar y continuar despues el cuestionario
+            service.guardarCuestionarioPaContinuarDespues(req);
+            mv.addObject("cerrarVentana", true);
+        }
+        else if(service.opcion==2){//El usuario le dio para terminar el cuestionario
+            service.guardarYTerminar(req);
+            mv.addObject("cerrarVentana", true);
+        }
+        
         
         mv.addObject("idAsignacion", req.getParameter("idAsignacion"));
+        mv.addObject("preguntas", service.getPreguntas());
         
         return mv;
     }
@@ -31,6 +43,5 @@ public class BienvenidaCuestionarioScreenController extends AbstractController{
     public void setSuccessView(String successView) {
         this.successView = successView;
     }
-    
     
 }

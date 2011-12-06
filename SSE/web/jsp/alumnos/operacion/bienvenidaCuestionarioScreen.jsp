@@ -5,13 +5,34 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+    <head>                
+        <jsp:include page="/jsp/includes/cabecera1.jsp" />
     </head>
-    <body>
-        <h1>Hello World!</h1>
+     <body>
+         <form target="cuestionario" id="forma" action="cuestionario.run" method="post" >
+             <input type="hidden" name="idAsignacion" id="idAsignacion" value="${idAsignacion}" />
+        
+             <div class="principal">
+                <div class="header">
+                    <hr />
+                        <span id="titulo"> 
+                            Bienvenido
+                        </span>
+                    <hr />
+                </div>
+                <div class="contenido">
+                    <div>
+                        Bienvenido al Sistema de Seguimiento a Egresados de la Maestría en Tecnologías de Información.
+                    </div>
+                    <br />
+                    <input type="submit" value="Comenzar" class="boton" />
+
+                </div>
+            </div>    
+        </form>
+           
     </body>
 </html>

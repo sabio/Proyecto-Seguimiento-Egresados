@@ -9,19 +9,29 @@ package com.sse.beans.generales;
  * @author armando
  */
 public class CuestionariosPendientes {
+    Integer idAsignacion;
     Integer idCuestionario;
     String cuestionario;
     String fechaInicio;
     String fechaFin;
     Boolean cuestionarioYaEmpezado;
 
-    public CuestionariosPendientes(Integer idCuestionario, String cuestionario, String fechaInicio, String fechaFin, Boolean cuestionarioYaEmpezado) {
+    public CuestionariosPendientes(Integer idAsignacion,Integer idCuestionario, String cuestionario, String fechaInicio, String fechaFin, Boolean cuestionarioYaEmpezado) {
+        this.idAsignacion = idAsignacion;
         this.idCuestionario = idCuestionario;
         this.cuestionario = cuestionario;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.cuestionarioYaEmpezado = cuestionarioYaEmpezado;
     }
+
+    public Integer getIdAsignacion() {
+        return idAsignacion;
+    }
+
+    public void setIdAsignacion(Integer idAsignacion) {
+        this.idAsignacion = idAsignacion;
+    }    
 
     public String getCuestionario() {
         return cuestionario;

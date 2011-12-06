@@ -47,10 +47,19 @@
                 <entry key="principalAlumnos.run">
                         <ref bean="principalAlumnos"/>
                 </entry>
-                <entry key="bienvenida">
+                <entry key="bienvenida.run">
                         <ref bean="bienvenida"/>
                 </entry>
-                                
+                <entry key="cuestionario.run">
+                        <ref bean="cuestionario"/>
+                </entry>
+                <entry key="listadoCuestionarios.run">
+                        <ref bean="listadoCuestionarios"/>
+                </entry>
+                <entry key="edicionCuestionario.run">
+                        <ref bean="edicionCuestionario"/>
+                </entry>
+     
             </map>
         </property>
     </bean>
@@ -94,6 +103,15 @@
     </bean>
     <bean id="bienvenida" class="com.sse.alumnos.operacion.BienvenidaCuestionarioScreenController">
             <property name="successView" value="jsp/alumnos/operacion/bienvenidaCuestionarioScreen.jsp"/>
+    </bean>
+    <bean id="cuestionario" class="com.sse.alumnos.operacion.CuestionarioController">
+            <property name="successView" value="jsp/alumnos/operacion/cuestionario.jsp"/>
+    </bean>
+    <bean id="listadoCuestionarios" class="com.sse.cuestionarios.catalogo.ListadoCuestionariosController">
+            <property name="successView" value="jsp/cuestionarios/catalogo/listadoCuestionarios.jsp"/>
+    </bean>
+    <bean id="edicionCuestionario" class="com.sse.cuestionarios.catalogo.edicionCuestionarioController">
+            <property name="successView" value="jsp/cuestionarios/catalogo/edicionCuestionario.jsp"/>
     </bean>
     
 </beans>

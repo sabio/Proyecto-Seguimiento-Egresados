@@ -11,12 +11,28 @@ package com.sse.beans.generales;
 public class Cuestionario {
     Integer idCuestionario;
     String Cuestionario;
+    String activo;
 
     public Cuestionario(Integer idCuestionario, String Cuestionario) {
         this.idCuestionario = idCuestionario;
         this.Cuestionario = Cuestionario;
     }
 
+    public Cuestionario(Integer idCuestionario, String Cuestionario, String activo) {
+        this.idCuestionario = idCuestionario;
+        this.Cuestionario = Cuestionario;
+        this.activo = activo;
+    }
+    
+    
+
+    public String getActivo() {
+        return activo;
+    }
+
+    public void setActivo(String activo) {
+        this.activo = activo;
+    }        
     
     public String getCuestionario() {
         return Cuestionario;

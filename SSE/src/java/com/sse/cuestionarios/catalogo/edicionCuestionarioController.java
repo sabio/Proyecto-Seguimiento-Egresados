@@ -2,25 +2,34 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sse.alumnos.operacion;
+package com.sse.cuestionarios.catalogo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
+
 /**
  *
- * @author armando.gomez
+ * @author armando
  */
-public class BienvenidaCuestionarioScreenController extends AbstractController{
-    String successView;
+public class edicionCuestionarioController extends AbstractController{
+    private String successView;
+    
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
         ModelAndView mv = new ModelAndView(this.successView);
-        
-        mv.addObject("idAsignacion", req.getParameter("idAsignacion"));
-        
+        edicionCuestionarioService service = new edicionCuestionarioService();
+        service.establecerDatos(req);
+        if(service.getElUsuarioDioParaGuardar()){
+            service.guardar();
+            mv.addObject("guardadoExitoso", true);
+        }else{
+            mv.addObject("cuestionario", service.cuestionario);
+            mv.addObject("preguntasDisponibles", service.getPreguntasDisponibles());
+            mv.addObject("preguntasAsignadas", service.getPreguntasAsignadas());
+        }
         return mv;
     }
 
@@ -31,6 +40,7 @@ public class BienvenidaCuestionarioScreenController extends AbstractController{
     public void setSuccessView(String successView) {
         this.successView = successView;
     }
+    
     
     
 }

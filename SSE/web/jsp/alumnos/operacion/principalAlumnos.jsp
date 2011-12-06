@@ -11,14 +11,18 @@
     <head>
         <jsp:include page="/jsp/includes/cabecera1.jsp" />    
         <script type="text/javascript">
-            function comienza(idCuestionario,idUsuario){                
-                windowMax('');
+            function comienza(idAsignacion){
+                document.getElementById("idAsignacion").value=idAsignacion;                
+                windowMax("","cuestionario");
+                document.getElementById("forma").submit();
             }
             
         </script>
     </head>
     <body>
-        
+        <form target="cuestionario" id="forma" action="bienvenida.run" method="post" >
+            <input type="hidden" name="idAsignacion" id="idAsignacion" />            
+        </form>
          <div class="principal">
             <div class="header">
                 <hr />
@@ -62,7 +66,7 @@
                                         value="Empezar"
                                     </c:otherwise>
                                 </c:choose>                                
-                                 onclick="comienza(${cuestionario.idCuestionario},${idUsuario})" />
+                                 onclick="comienza(${cuestionario.idAsignacion})" />
                             </td>
                         </tr>
                     </c:forEach>
