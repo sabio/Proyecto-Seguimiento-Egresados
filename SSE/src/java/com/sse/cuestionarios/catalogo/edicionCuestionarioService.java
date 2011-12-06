@@ -36,21 +36,20 @@ public class edicionCuestionarioService {
             this.cuestionario.setActivo(req.getParameter("slcActivo"));
         }
         else{
-            /*
+            
             if(idCuestionario!=null){
                 execute.addParametro(1,idCuestionario);
-                ResultSet res = execute.executeQuery("select idpregunta,pregunta,idtipopregunta,idindicador,activo from dicpregunta where idpregunta = ?");
+                ResultSet res = execute.executeQuery("select idcuestionario,cuestionario,activo from diccuestionario where idcuestionario = ?");
                 res.next();
-                pregunta = new Pregunta(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4),res.getString(5));
+                cuestionario = new Cuestionario(res.getInt(1),res.getString(2),res.getString(3));
             }
             else{
-                pregunta=null;
-            }
-             */
+                cuestionario=null;
+            }             
              
         }
          
-         
+        execute.limpiaParameros(); 
     }
     
     public synchronized void guardar() throws SQLException {
@@ -94,12 +93,95 @@ public class edicionCuestionarioService {
         return this.elUsuarioDioParaGuardar;
     }
 
-    ArrayList<Pregunta> getPreguntasDisponibles() {
-        return null;
+    ArrayList<Pregunta> getPreguntasDisponibles() throws SQLException{
+        if(this.cuestionario==null) return null;
+        
+        ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
+        String query = "select idpregunta,pregunta,idTipoPregunta,tipoPregunta,idindicador,indicador from dicpregunta "+
+                        "inner join dictipopregunta using(idtipopregunta) "+
+                        "inner join dicindicador using (idindicador) "+
+                        "where dicpregunta.activo='S' and idpregunta not in "+
+                        "(select idpregunta from tblcuestionariopreguntas where idcuestionario = "+this.cuestionario.getIdCuestionario()+")"+
+                        "order by pregunta";
+        ResultSet res = execute.executeQuery(query);
+        
+        Pregunta pregunta;
+        while(res.next()){
+            pregunta = new Pregunta(res.getInt(1),res.getString(2),res.getInt(3),res.getString(4),res.getInt(5),res.getString(6),"S");
+            preguntas.add(pregunta);
+        }
+        
+        return preguntas.isEmpty() ? null : preguntas; 
     }
 
-    ArrayList<Pregunta> getPreguntasAsignadas() {
-        return null;
+    
+    ArrayList<Pregunta> getPreguntasAsignadas() throws SQLException{
+        if(this.cuestionario==null) return null;
+        
+        ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
+        String query = "select idpregunta,pregunta,idTipoPregunta,tipoPregunta,idindicador,indicador from tblcuestionariopreguntas "+
+                        "inner join dicpregunta using (idpregunta) "+
+                        "inner join dictipopregunta using(idtipopregunta) "+
+                        "inner join dicindicador using (idindicador) "+
+                        "where dicpregunta.activo='S' and idcuestionario = "+this.cuestionario.getIdCuestionario()+
+                        " order by orden";
+        ResultSet res = execute.executeQuery(query);
+        
+        Pregunta pregunta;
+        while(res.next()){
+            pregunta = new Pregunta(res.getInt(1),res.getString(2),res.getInt(3),res.getString(4),res.getInt(5),res.getString(6),"S");
+            preguntas.add(pregunta);
+        }
+        return preguntas.isEmpty() ? null : preguntas;        
+    }
+
+    void asignarPregunta(Integer idPregunta) throws SQLException{
+        String query = "select max(orden) from tblcuestionariopreguntas where idcuestionario = "+this.cuestionario.getIdCuestionario();
+        ResultSet res = execute.executeQuery(query);
+        res.next();
+        Integer orden = res.getInt(1);
+        if(orden==null) orden = 1;
+        else    orden++;
+        
+        query="insert into tblcuestionariopreguntas values "
+                + "("+this.cuestionario.getIdCuestionario()+","+idPregunta+","
+                + orden+" )";
+        System.out.println(query);
+        execute.executeUpdate(query);
+    }
+
+    void bajarPregunta(Integer idPregunta) throws SQLException{
+        String query = "SELECT idpregunta,orden FROM tblcuestionariopreguntas WHERE "+
+                        "idcuestionario = "+this.cuestionario.getIdCuestionario()+" and "+
+                        "orden > (select orden from tblcuestionariopreguntas where idpregunta="+idPregunta+" and idcuestionario="+this.cuestionario.getIdCuestionario()+") limit 1";
+        ResultSet res = execute.executeQuery(query);
+        res.next();
+        
+        query = "update tblcuestionariopreguntas set orden = "+res.getInt(2)+" where idcuestionario="+this.cuestionario.getIdCuestionario()+
+                " and idpregunta = "+idPregunta;
+        execute.executeUpdate(query);
+        
+        query = "update tblcuestionariopreguntas set orden = "+(res.getInt(2)-1)+" where idcuestionario="+this.cuestionario.getIdCuestionario()+
+                " and idpregunta = "+res.getInt(1);
+        execute.executeUpdate(query);
+        
+    }
+
+    void subirPregunta(Integer idPregunta) throws SQLException{
+        String query = "SELECT idpregunta,orden FROM tblcuestionariopreguntas WHERE "+
+                        "idcuestionario = "+this.cuestionario.getIdCuestionario()+" and "+
+                        "orden < (select orden from tblcuestionariopreguntas where idpregunta="+idPregunta+" and idcuestionario="+this.cuestionario.getIdCuestionario()+") limit 1";
+        ResultSet res = execute.executeQuery(query);
+        res.next();
+        
+        query = "update tblcuestionariopreguntas set orden = "+res.getInt(2)+" where idcuestionario="+this.cuestionario.getIdCuestionario()+
+                " and idpregunta = "+idPregunta;
+        execute.executeUpdate(query);
+        
+        query = "update tblcuestionariopreguntas set orden = "+(res.getInt(2)+1)+" where idcuestionario="+this.cuestionario.getIdCuestionario()+
+                " and idpregunta = "+res.getInt(1);
+        execute.executeUpdate(query);
+        
     }
     
 }

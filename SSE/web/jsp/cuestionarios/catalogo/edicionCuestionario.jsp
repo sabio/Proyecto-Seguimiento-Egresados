@@ -34,7 +34,23 @@
                     return true;
                 else 
                     return false;
-            }                   
+            }             
+            
+            function asignarPregunta(idPregunta){
+                document.getElementById("preguntaAAsignar").value=idPregunta;
+                document.getElementById("formaCatalogo").submit();
+                
+            }
+            
+            function subirPregunta(idPregunta){
+                document.getElementById("preguntaASubir").value=idPregunta;
+                document.getElementById("formaCatalogo").submit();
+            }
+            
+            function bajarPregunta(idPregunta){
+                document.getElementById("preguntaABajar").value=idPregunta;
+                document.getElementById("formaCatalogo").submit();
+            }
             
             function hacerSubmit(){
                 var idCuestionario = document.getElementById("idCuestionario");
@@ -58,6 +74,12 @@
                 return true;
             }
         </script>
+        <style>
+            .divConScroll{
+                height:200px; 
+                overflow:auto;
+            }
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edicion Cuestionario</title>
     </head>
@@ -73,6 +95,10 @@
             <div class="contenido">
                 <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
                     <input type="hidden" name="idCuestionario" id="idCuestionario" value="${cuestionario.idCuestionario}" />
+                    <input type="hidden" name="preguntaAAsignar" id="preguntaAAsignar" />
+                    <input type="hidden" name="preguntaASubir" id="preguntaASubir" />
+                    <input type="hidden" name="preguntaABajar" id="preguntaABajar" />                    
+                    
                     <table align="center">
                         <thead>
                             <tr>
@@ -105,15 +131,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <table border="1">
-                                        
-                                    </table>
-                                    
-                                </td>
-                                
-                            </tr>
+                            
                             <tr>
                                 <td colspan="2" align="center">
                                     <input type="submit" id="guardar" name="guardar" class="boton" value="Aceptar" />
@@ -123,6 +141,81 @@
                         </tbody>
 
                     </table>
+                    <div class="divConScroll">                
+                        <table width="900px" align="center" >
+                            <c:if test="${param.idCuestionario ne null}">
+                                <tr>
+                                    <td colspan="2" >
+                                        Preguntas disponibles
+                                        <table border="1">
+                                            <tr>
+                                                <td width="60%">Pregunta</td>
+                                                <td>Indicador</td>
+                                                <td>Tipo pregunta</td>
+                                                <td>Agregar</td>                                                
+                                            </tr>
+                                            <c:forEach var="pregunta" items="${preguntasDisponibles}" >
+                                                <tr>
+                                                    <td align="left">${pregunta.pregunta}</td>
+                                                    <td align="left">${pregunta.indicador}</td>
+                                                    <td NOWRAP align="left">${pregunta.tipoPregunta}</td>
+                                                    <td>
+                                                        <a class="linker" style="border: 0" >
+                                                            <img src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" onclick="asignarPregunta(${pregunta.idPregunta})" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                        </c:forEach>
+                                        </table>
+
+                                    </td>
+
+                                </tr>
+                            </c:if>
+                        </table>
+                    </div>
+                                   
+                    <div class="divConScroll">                
+                        <table width="900px" align="center" >
+                            <c:if test="${param.idCuestionario ne null}">
+                                <tr>
+                                    <td colspan="2" >
+                                        Preguntas Asignadas
+                                        <table border="1">
+                                            <tr>
+                                                <td width="60%">Pregunta</td>
+                                                <td>Indicador</td>
+                                                <td>Tipo pregunta</td>
+                                                <td>Agregar</td>                                                
+                                            </tr>
+                                            <c:forEach varStatus="status" var="pregunta" items="${preguntasAsignadas}" >
+                                                <tr>
+                                                    <td align="left">${pregunta.pregunta}</td>
+                                                    <td align="left">${pregunta.indicador}</td>
+                                                    <td NOWRAP align="left">${pregunta.tipoPregunta}</td>
+                                                    <td>
+                                                        <c:if test="${!status.first}">
+                                                            <a class="linker" style="border: 0" >
+                                                                <img src="${pageContext.request.contextPath}/imagenes/iconos/arrow_Up.gif" onclick="subirPregunta(${pregunta.idPregunta})" />
+                                                            </a>
+                                                        </c:if>
+                                                        <c:if test="${!status.last}">
+                                                            <a class="linker" style="border: 0" >
+                                                                <img src="${pageContext.request.contextPath}/imagenes/iconos/arrow_Down.gif" onclick="bajarPregunta(${pregunta.idPregunta})" />
+                                                            </a>
+                                                        </c:if>
+                                                    </td>
+                                                </tr>
+                                        </c:forEach>
+                                        </table>
+
+                                    </td>
+
+                                </tr>
+                            </c:if>
+                        </table>
+                    </div>
+                                    
                 </form> 
             </div>
         </div>    
