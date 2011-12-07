@@ -52,6 +52,11 @@
                 document.getElementById("formaCatalogo").submit();
             }
             
+            function eliminarPregunta(idPregunta){
+                document.getElementById("preguntaAEliminar").value=idPregunta;
+                document.getElementById("formaCatalogo").submit();
+            }
+            r
             function hacerSubmit(){
                 var idCuestionario = document.getElementById("idCuestionario");
                 var cuestionario = document.getElementById("txtCuestionario");
@@ -97,7 +102,8 @@
                     <input type="hidden" name="idCuestionario" id="idCuestionario" value="${cuestionario.idCuestionario}" />
                     <input type="hidden" name="preguntaAAsignar" id="preguntaAAsignar" />
                     <input type="hidden" name="preguntaASubir" id="preguntaASubir" />
-                    <input type="hidden" name="preguntaABajar" id="preguntaABajar" />                    
+                    <input type="hidden" name="preguntaABajar" id="preguntaABajar" />
+                    <input type="hidden" name="preguntaAEliminar" id="preguntaAEliminar" />
                     
                     <table align="center">
                         <thead>
@@ -135,7 +141,7 @@
                             <tr>
                                 <td colspan="2" align="center">
                                     <input type="submit" id="guardar" name="guardar" class="boton" value="Aceptar" />
-                                    <input type="button" id="cancelar" name="cancelar" class="boton" value="Cancelar" onclick="history.go(-1)" />
+                                    <input type="button" id="cancelar" name="cancelar" class="boton" value="Cancelar" onclick="window.location = 'listadoCuestionarios.run';" />
                                 </td>
                             </tr>
                         </tbody>
@@ -186,7 +192,8 @@
                                                 <td width="60%">Pregunta</td>
                                                 <td>Indicador</td>
                                                 <td>Tipo pregunta</td>
-                                                <td>Agregar</td>                                                
+                                                <td>Orden</td>
+                                                <td>Eliminar</td>
                                             </tr>
                                             <c:forEach varStatus="status" var="pregunta" items="${preguntasAsignadas}" >
                                                 <tr>
@@ -205,6 +212,11 @@
                                                             </a>
                                                         </c:if>
                                                     </td>
+                                                    <td>
+                                                        <a class="linker" style="border: 0" >
+                                                            <img src="${pageContext.request.contextPath}/imagenes/iconos/eliminar.gif" onclick="eliminarPregunta(${pregunta.idPregunta})" />
+                                                        </a>
+                                                    </td>    
                                                 </tr>
                                         </c:forEach>
                                         </table>

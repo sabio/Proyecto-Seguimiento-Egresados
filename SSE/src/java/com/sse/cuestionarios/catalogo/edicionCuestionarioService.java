@@ -153,7 +153,8 @@ public class edicionCuestionarioService {
     void bajarPregunta(Integer idPregunta) throws SQLException{
         String query = "SELECT idpregunta,orden FROM tblcuestionariopreguntas WHERE "+
                         "idcuestionario = "+this.cuestionario.getIdCuestionario()+" and "+
-                        "orden > (select orden from tblcuestionariopreguntas where idpregunta="+idPregunta+" and idcuestionario="+this.cuestionario.getIdCuestionario()+") limit 1";
+                        "orden > (select orden from tblcuestionariopreguntas where idpregunta="+idPregunta+" and idcuestionario="+this.cuestionario.getIdCuestionario()+") "+
+                        " order by orden limit 1";
         ResultSet res = execute.executeQuery(query);
         res.next();
         
@@ -164,13 +165,14 @@ public class edicionCuestionarioService {
         query = "update tblcuestionariopreguntas set orden = "+(res.getInt(2)-1)+" where idcuestionario="+this.cuestionario.getIdCuestionario()+
                 " and idpregunta = "+res.getInt(1);
         execute.executeUpdate(query);
-        
+        execute.commit();
     }
 
     void subirPregunta(Integer idPregunta) throws SQLException{
         String query = "SELECT idpregunta,orden FROM tblcuestionariopreguntas WHERE "+
                         "idcuestionario = "+this.cuestionario.getIdCuestionario()+" and "+
-                        "orden < (select orden from tblcuestionariopreguntas where idpregunta="+idPregunta+" and idcuestionario="+this.cuestionario.getIdCuestionario()+") limit 1";
+                        "orden < (select orden from tblcuestionariopreguntas where idpregunta="+idPregunta+" and idcuestionario="+this.cuestionario.getIdCuestionario()+")"+
+                        " order by orden desc limit 1";
         ResultSet res = execute.executeQuery(query);
         res.next();
         
@@ -181,7 +183,30 @@ public class edicionCuestionarioService {
         query = "update tblcuestionariopreguntas set orden = "+(res.getInt(2)+1)+" where idcuestionario="+this.cuestionario.getIdCuestionario()+
                 " and idpregunta = "+res.getInt(1);
         execute.executeUpdate(query);
+        execute.commit();
+    }
+
+    void eliminarPregunta(Integer idPregunta) throws SQLException{
+        String query = "delete from tblcuestionariopreguntas where idpregunta="+idPregunta+" and " +
+                       "idcuestionario="+this.cuestionario.getIdCuestionario();
+        execute.executeUpdate(query);
         
+        query="SELECT idpregunta,orden FROM tblcuestionariopreguntas WHERE "+
+                "idcuestionario = "+this.cuestionario.getIdCuestionario()+
+                " order by orden";
+        
+        ResultSet res = execute.executeQuery(query);
+        
+        query="update tblcuestionariopreguntas set orden = ? where idpregunta=? and idcuestionario="+this.cuestionario.getIdCuestionario();
+        int i=1;
+        while(res.next()){
+            execute.addParametro(1, i);
+            execute.addParametro(2, res.getInt(1));
+            execute.executeUpdate(query);
+            i++;
+        }              
+        execute.commit();
+        execute.limpiaParameros();
     }
     
 }
