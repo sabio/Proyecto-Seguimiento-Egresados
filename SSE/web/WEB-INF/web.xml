@@ -4,7 +4,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
-    <filter>        
+    <filter>
         <filter-name>FiltroAutenticado</filter-name>
         <filter-class>com.sse.login.FiltroAutenticado</filter-class>
     </filter>
@@ -25,6 +25,10 @@
         <servlet-name>principal</servlet-name>
         <jsp-file>/jsp/index.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>ImagenIndicadorCreator</servlet-name>
+        <servlet-class>com.sse.resultados.ImagenIndicadorCreator</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>principal</servlet-name>
         <url-pattern>/principal.run</url-pattern>
@@ -33,17 +37,18 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.run</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>invalidate</servlet-name>
-        <jsp-file>/jsp/login/invalidate.jsp</jsp-file>       
+        <jsp-file>/jsp/login/invalidate.jsp</jsp-file>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>invalidate</servlet-name>
         <url-pattern>/invalidate</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ImagenIndicadorCreator</servlet-name>
+        <url-pattern>/ImagenIndicadorCreator</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

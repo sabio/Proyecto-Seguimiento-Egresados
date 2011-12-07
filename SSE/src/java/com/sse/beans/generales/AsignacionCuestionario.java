@@ -33,6 +33,14 @@ public class AsignacionCuestionario {
         this.activo = activo;
     }
     
+    public AsignacionCuestionario(Integer idAsignacionCuestionario, String cuestionario, String grupoAlumno, String fechaInicio, String fechaFin) {
+        this.idAsignacionCuestionario = idAsignacionCuestionario;
+        this.cuestionario = cuestionario;
+        this.grupoAlumno = grupoAlumno;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+    }
+    
     
 
     public Integer getIdAsignacionCuestionario() {

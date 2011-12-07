@@ -59,6 +59,9 @@
                 <entry key="edicionCuestionario.run">
                         <ref bean="edicionCuestionario"/>
                 </entry>
+                <entry key="resultadoDeAsignacion.run">
+                        <ref bean="resultadoDeAsignacion"/>
+                </entry>
      
             </map>
         </property>
@@ -112,6 +115,9 @@
     </bean>
     <bean id="edicionCuestionario" class="com.sse.cuestionarios.catalogo.edicionCuestionarioController">
             <property name="successView" value="jsp/cuestionarios/catalogo/edicionCuestionario.jsp"/>
+    </bean>
+    <bean id="resultadoDeAsignacion" class="com.sse.resultados.ResultadoDeAsignacionController">
+            <property name="successView" value="jsp/resultados/resultadoDeAsignacion.jsp"/>
     </bean>
     
 </beans>
