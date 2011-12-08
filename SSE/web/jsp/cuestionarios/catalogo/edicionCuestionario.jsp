@@ -9,6 +9,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <c:if test="${guardadoNuevo}">
+            <script type="text/javascript">
+                window.location = 'edicionCuestionario.run?idCuestionario=${idNuevoCuestionario}';
+            </script>
+            
+        </c:if>
         <c:if test="${guardadoExitoso}">
             <script type="text/javascript">
                 window.location = 'listadoCuestionarios.run';

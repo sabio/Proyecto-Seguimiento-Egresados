@@ -11,7 +11,7 @@ body{
 }
 
 .principal{ 		
-        border: 5px coral outset;
+        /*border: 5px coral outset;
         /*border-radius: 15px;*/
         /*padding: 5px;*/
         text-align:center;
@@ -76,7 +76,7 @@ body{
         /*border:3px #36C solid;*/
         border:none;
         width:1000px;
-        height:600px;
+        height:500px;
 }
 .menuLateral{
         /*border:3px #F0F solid;*/

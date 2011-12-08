@@ -24,7 +24,11 @@ public class edicionCuestionarioController extends AbstractController{
         service.establecerDatos(req);
         if(service.getElUsuarioDioParaGuardar()){
             service.guardar();
-            mv.addObject("guardadoExitoso", true);
+            if(service.seGuardoUnaConfiguracionNueva){
+                mv.addObject("guardadoNuevo", true);
+                mv.addObject("idNuevoCuestionario", service.cuestionario.getIdCuestionario());
+            }else
+                mv.addObject("guardadoExitoso", true);
         }else{
             if(req.getParameter("preguntaAAsignar")!=null && !req.getParameter("preguntaAAsignar").equals("")){
                 service.asignarPregunta(new Integer(req.getParameter("preguntaAAsignar")));

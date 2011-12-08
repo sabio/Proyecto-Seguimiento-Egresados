@@ -21,6 +21,7 @@ public class edicionCuestionarioService {
     SQLExecutor execute;
     Cuestionario cuestionario;
     boolean elUsuarioDioParaGuardar;   
+    boolean seGuardoUnaConfiguracionNueva;
     
     edicionCuestionarioService(){
         execute = new SQLExecutor();
@@ -32,6 +33,7 @@ public class edicionCuestionarioService {
         
         if(elUsuarioDioParaGuardar){
             this.cuestionario = new Cuestionario();
+            this.cuestionario.setIdCuestionario(idCuestionario);
             this.cuestionario.setCuestionario(req.getParameter("txtCuestionario"));        
             this.cuestionario.setActivo(req.getParameter("slcActivo"));
         }
@@ -58,25 +60,29 @@ public class edicionCuestionarioService {
         
         
         if(cuestionario.getIdCuestionario()==null){//Agregar nuevo cuestionario
-            res = execute.executeQuery("SELECT max(idcuestionario)+1 FROM diccuestionario");
+            seGuardoUnaConfiguracionNueva=true;
+            res = execute.executeQuery("SELECT max(idcuestionario) FROM diccuestionario");
             res.next();
-            cuestionario.setIdCuestionario(res.getInt(1));
+            
+            Integer nextId=res.getInt(1);
+            if(nextId==null || nextId==0) 
+                nextId=1;
+            else
+                nextId++;
+            
+            cuestionario.setIdCuestionario(nextId);
             
             query="insert into diccuestionario (idcuestionario,cuestionario,activo) values (?,?,?)";
             execute.addParametro(1, cuestionario.getIdCuestionario());
             execute.addParametro(2, cuestionario.getCuestionario());
             execute.addParametro(3, cuestionario.getActivo());
         }else{//Edicion de pregunta ya existente
-            /*execute.addParametro(1, pregunta.getPregunta());
-            execute.addParametro(2, pregunta.getIdTipoPregunta());
-            execute.addParametro(3, pregunta.getIdIndicador());
-            execute.addParametro(4, pregunta.getActivo());
-            execute.addParametro(5, pregunta.getIdPregunta());
-            query="update dicpregunta set pregunta = ?, idtipopregunta = ?, idindicador = ?, activo = ? where idpregunta = ?";
-             * 
-             */
-        }
-        
+            seGuardoUnaConfiguracionNueva=false;
+            query="update diccuestionario set cuestionario=?, activo=? where idcuestionario=?";            
+            execute.addParametro(1, cuestionario.getCuestionario());
+            execute.addParametro(2, cuestionario.getActivo());
+            execute.addParametro(3, cuestionario.getIdCuestionario());
+        }        
         execute.executeUpdate(query);
         execute.commit();
         execute.limpiaParameros();
