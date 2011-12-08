@@ -20,6 +20,7 @@
         </script>
     </head>
     <body>
+        <br />
         <form target="cuestionario" id="forma" action="bienvenida.run" method="post" >
             <input type="hidden" name="idAsignacion" id="idAsignacion" />            
         </form>
@@ -40,51 +41,64 @@
                                 </p>                		
                           
                           <div>
-                              <table><caption><b>Encuestas disponibles</b></caption>
-                                    <tr align="center">
-                                        <td>
-                                            <b>Cuestionario</b>
-                                        </td>
-                                        <td>
-                                            <b>Fecha inicio</b>
-                                        </td>
-                                        <td>
-                                            <b>Fecha fin</b>
-                                        </td>
-                                        <td>
+                              <center>
+                                  <table><caption><b>Encuestas disponibles</b></caption>
+                                      <c:choose>
+                                          <c:when test="${cuestionariosPendientes eq null}">
+                                              <tr style="background-color: #e0e0d3;">
+                                                  <td>
+                                                      No hay encuestas pendientes
+                                                  </td>
+                                              </tr>
+                                          </c:when>
+                                          <c:when test="${cuestionariosPendientes ne null}">
+                                                <tr align="center">
+                                                    <td>
+                                                        <b>Cuestionario</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Fecha inicio</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Fecha fin</b>
+                                                    </td>
+                                                    <td>
 
-                                        </td>
-                                    </tr>
-                                    <c:set var="fondoRow" value="#e0e0d3" scope="page" />                                    
-                                    <c:forEach var="cuestionario" items="${cuestionariosPendientes}" >
-                                        <c:choose>
-                                            <c:when test="${fondoRow eq '#e0e0d3'}">
-                                               <c:set var="fondoRow" value="#e2e4ff" scope="page" /> 
-                                            </c:when>
-                                            <c:when test="${fondoRow eq '#e2e4ff'}">
-                                               <c:set var="fondoRow" value="#e0e0d3" scope="page" /> 
-                                            </c:when>
-                                        </c:choose>
-                                        
-                                        <tr style="background-color: ${fondoRow}" />
-                                            <td>${cuestionario.cuestionario}</td>
-                                            <td>${cuestionario.fechaInicio}</td>
-                                            <td>${cuestionario.fechaFin}</td>
-                                            <td>
-                                                <input type="button" id="btnAplicarCuestionario" name="btnAplicarCuestionario" class="boton" 
-                                                <c:choose>
-                                                    <c:when test="${cuestionario.cuestionarioYaEmpezado}">
-                                                        value="Reanudar"
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        value="Empezar"
-                                                    </c:otherwise>
-                                                </c:choose>                                
-                                                 onclick="comienza(${cuestionario.idAsignacion})" />
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                              </table>
+                                                    </td>
+                                                </tr>
+                                                <c:set var="fondoRow" value="#e0e0d3" scope="page" />                                    
+                                                <c:forEach var="cuestionario" items="${cuestionariosPendientes}" >
+                                                    <c:choose>
+                                                        <c:when test="${fondoRow eq '#e0e0d3'}">
+                                                           <c:set var="fondoRow" value="#e2e4ff" scope="page" /> 
+                                                        </c:when>
+                                                        <c:when test="${fondoRow eq '#e2e4ff'}">
+                                                           <c:set var="fondoRow" value="#e0e0d3" scope="page" /> 
+                                                        </c:when>
+                                                    </c:choose>
+
+                                                    <tr style="background-color: ${fondoRow}" />
+                                                        <td>${cuestionario.cuestionario}</td>
+                                                        <td>${cuestionario.fechaInicio}</td>
+                                                        <td>${cuestionario.fechaFin}</td>
+                                                        <td>
+                                                            <input type="button" id="btnAplicarCuestionario" name="btnAplicarCuestionario" class="boton" 
+                                                            <c:choose>
+                                                                <c:when test="${cuestionario.cuestionarioYaEmpezado}">
+                                                                    value="Reanudar"
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    value="Empezar"
+                                                                </c:otherwise>
+                                                            </c:choose>                                
+                                                             onclick="comienza(${cuestionario.idAsignacion})" />
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                           </c:when>
+                                      </c:choose>
+                                  </table>
+                             </center>
                           </div>
                           
                     				 
@@ -103,8 +117,6 @@
                     </div>
                 </div>
             </div>
-        </div>    
-        
-           
+        </div>       
     </body>
 </html>

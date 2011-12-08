@@ -23,6 +23,8 @@ public class ResultadoDeAsignacionController extends AbstractController{
         
         mv.addObject("listadoAsignaciones", service.getListadoAsignaciones());      
         
+        mv.addObject("numeroDeAlumnosQueHanContestadoLaAsignacion", service.getNumeroDeAlumnosQueHanContestadoLaAsignacion());
+        
         mv.addObject("listadoIdsIndicadores", service.getListadoIdsIndicadoresUsadasEnLaAsignacion());
         return mv;
     }

@@ -29,7 +29,7 @@ public class CuestionarioController extends AbstractController{
             mv.addObject("cerrarVentana", true);
         }
         
-        
+        mv.addObject("nombreCuestionario", service.getNombreCuestionario());
         mv.addObject("idAsignacion", req.getParameter("idAsignacion"));
         mv.addObject("preguntas", service.getPreguntas());
         

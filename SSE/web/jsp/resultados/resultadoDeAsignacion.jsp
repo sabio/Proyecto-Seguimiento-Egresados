@@ -33,13 +33,15 @@ response.setHeader("Content-disposition","inline; filename=ExpenseAson.xls");
             <div class="header">
                 <hr />
                     <span id="titulo"> 
-                        Asignaciones
+                        Resultados 
                     </span>
                 <hr />
             </div>
             <div class="contenido">
+                <br />
                 <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
                     <input type="hidden" name="hdnIdIndicador" id="hdnIdIndicador" value="${indicador.idIndicador}" />
+                    
                     <table align="center">
                         <thead>
                             <tr>
@@ -58,8 +60,18 @@ response.setHeader("Content-disposition","inline; filename=ExpenseAson.xls");
                             </tr>
                         </thead>
                         <tbody>
+                            <c:set var="fondoRow" value="#e0e0d3" scope="page" />                                                                
+                            
                             <c:forEach var="asignacion" items="${listadoAsignaciones}">
-                                <tr style=" cursor:pointer;" onclick="window.location = 'resultadoDeAsignacion.run?idAsignacion=${asignacion.idAsignacionCuestionario}'">
+                                <c:choose>
+                                    <c:when test="${fondoRow eq '#e0e0d3'}">
+                                       <c:set var="fondoRow" value="#e2e4ff" scope="page" /> 
+                                    </c:when>
+                                    <c:when test="${fondoRow eq '#e2e4ff'}">
+                                       <c:set var="fondoRow" value="#e0e0d3" scope="page" /> 
+                                    </c:when>
+                                </c:choose>
+                                <tr style="cursor:pointer; background-color: ${fondoRow};" onclick="window.location = 'resultadoDeAsignacion.run?idAsignacion=${asignacion.idAsignacionCuestionario}'">
                                     <td>${asignacion.cuestionario}</td>
                                     <td>${asignacion.grupoAlumno}</td>
                                     <td>${asignacion.fechaInicio}</td>
@@ -70,11 +82,26 @@ response.setHeader("Content-disposition","inline; filename=ExpenseAson.xls");
 
                     </table>
                 </form>
-                    
+                <br />
+                <c:if test="${param.idAsignacion ne null}">
+                    <br />
+                    Total de alumnos que han contestado la encuesta: <b>${numeroDeAlumnosQueHanContestadoLaAsignacion}</b>
+                    <br />
+
+                    <input type="button" class="boton" value="imprimir" onclick="window.print();" />
+                </c:if>
+                
+                <br />
                 <c:forEach var="id" items="${listadoIdsIndicadores}">
-                    <img src="${pageContext.request.contextPath}/ImagenIndicadorCreator?idAsignacion=${param.idAsignacion}&idIndicador=${id}" />
+                    <img height="260px" width="450px" src="${pageContext.request.contextPath}/ImagenIndicadorCreator?idAsignacion=${param.idAsignacion}&idIndicador=${id}" />
                     <br /><br />
-                </c:forEach>    
+                </c:forEach>
+                
+                <br />
+                <c:if test="${param.idAsignacion ne null}">
+                    <input type="button" class="boton" value="imprimir" onclick="window.print();" />
+                </c:if>
+                
             </div>
         </div>    
         

@@ -36,10 +36,11 @@ public class PrincipalAlumnosService {
                         "inner join dicalumno using (idgrupoalumno) "+
                         "inner join diccuestionario using (idcuestionario) "+
                         "where dicalumno.idusuario = "+this.usuario.getIdUsuario()+" and "+
-                        "fechainicio <= now() and fechafin>=now()";        
+                        "fechainicio <= now() and fechafin>=now() and tblasignacioncuestionario.activo='S'";        
         ResultSet res = execute.executeQuery(query);
         
         ResultSet res2;
+        int i=0;
         while(res.next()){
             //query = "select count(1) from tblaplicacioncuestionario where idasignacioncuestionario = "+res.getInt(1) +" and fechafin is null";
             query = "select date_format( fechainicio , '%Y/%m/%d %I:%i %p' ),date_format( fechafin , '%Y/%m/%d %I:%i %p' )"
@@ -48,13 +49,17 @@ public class PrincipalAlumnosService {
             
             
             if(res2.next()){   
-                if(res2.getString(2)==null || res2.getString(2).contains("0000"))
+                if(res2.getString(2)==null || res2.getString(2).contains("0000")){
                     cuestionarios.add(new CuestionariosPendientes(res.getInt(1),res.getInt(2),res.getString(3),res.getString(4),res.getString(5), true));
+                    i++;
+                }
             }else{
                 cuestionarios.add(new CuestionariosPendientes(res.getInt(1),res.getInt(2),res.getString(3),res.getString(4),res.getString(5), false));
+                i++;
             }
             
         }
+        if(i==0) cuestionarios = null;
         
         return cuestionarios;
     }

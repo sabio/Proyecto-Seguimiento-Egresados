@@ -105,7 +105,7 @@ public class edicionCuestionarioService {
         ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
         String query = "select idpregunta,pregunta,idTipoPregunta,tipoPregunta,idindicador,indicador from dicpregunta "+
                         "inner join dictipopregunta using(idtipopregunta) "+
-                        "inner join dicindicador using (idindicador) "+
+                        "left join dicindicador using (idindicador) "+
                         "where dicpregunta.activo='S' and idpregunta not in "+
                         "(select idpregunta from tblcuestionariopreguntas where idcuestionario = "+this.cuestionario.getIdCuestionario()+")"+
                         "order by pregunta";
@@ -128,7 +128,7 @@ public class edicionCuestionarioService {
         String query = "select idpregunta,pregunta,idTipoPregunta,tipoPregunta,idindicador,indicador from tblcuestionariopreguntas "+
                         "inner join dicpregunta using (idpregunta) "+
                         "inner join dictipopregunta using(idtipopregunta) "+
-                        "inner join dicindicador using (idindicador) "+
+                        "left join dicindicador using (idindicador) "+
                         "where dicpregunta.activo='S' and idcuestionario = "+this.cuestionario.getIdCuestionario()+
                         " order by orden";
         ResultSet res = execute.executeQuery(query);

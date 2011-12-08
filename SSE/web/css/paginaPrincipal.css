@@ -73,8 +73,9 @@ body{
 }    
 
 .contenido{
-        /*border:3px #36C solid;*/
-        border:none;
+        border:1px #D0D0D0 solid;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
         width:1000px;
         height:500px;
 }

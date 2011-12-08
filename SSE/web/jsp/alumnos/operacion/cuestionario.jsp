@@ -99,17 +99,13 @@
                 <div class="header">
                     <hr />
                         <span id="titulo"> 
-                            Bienvenido
+                            ${nombreCuestionario}
                         </span>
                     <hr />
                 </div>
-                <div class="contenido">
-                    <div>
-                        Bienvenido al Sistema de Seguimiento a Egresados de la Maestría en Tecnologías de Información.
-                    </div>
-                    <br />
-                    <br />
-                    
+                <div class="contenido">                    
+                    <center>
+                    <br /><br />
                     <table>
                         
                         <c:forEach varStatus="status" var="pregunta" items="${preguntas}" >
@@ -158,18 +154,19 @@
                             
                             <tr>
                                 <td>
-                                    <br /><br />
+                                    <br />
                                 </td>
                             </tr>    
-                            <tr>
+                            <tr align="center">
                                 <td>
                                     <input type="button" class="boton" name="boton1" value="Terminar" onclick="hacerSubmit(2)" />
                                     <input type="button" class="boton" name="boton2" value="Guardar y continuar despues" onclick="hacerSubmit(1)" />
                                 </td>
                             </tr>    
                     </table>
-                    
+                    </center>
                 </div>
+                <br />
             </div>    
         </form>
            

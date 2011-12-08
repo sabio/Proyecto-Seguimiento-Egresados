@@ -135,5 +135,15 @@ public class CuestionarioService {
         execute.executeUpdate(query);
         execute.commit();
     }
+
+    String getNombreCuestionario() throws SQLException{
+        String query = "select cuestionario from diccuestionario "+
+                        "inner join tblasignacioncuestionario using (idcuestionario) "+
+                        "where idasignacioncuestionario="+this.idAsignacion;
+       
+        ResultSet res = execute.executeQuery(query);
+        res.next();
+        return res.getString(1);        
+    }
     
 }

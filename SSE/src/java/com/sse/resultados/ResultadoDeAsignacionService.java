@@ -53,7 +53,10 @@ public class ResultadoDeAsignacionService {
                         "date_format( fechafin , '%Y/%m/%d %I:%i %p' ) " +
                         "from tblasignacioncuestionario "+
                         "inner join diccuestionario using (idcuestionario) "+
-                        "inner join dicgrupoalumnos using (idgrupoalumno) ";        
+                        "inner join dicgrupoalumnos using (idgrupoalumno) ";      
+        
+        if(this.idAsignacion!=null)
+            query += " where idasignacioncuestionario="+this.idAsignacion;
         ResultSet res = execute.executeQuery(query);
         AsignacionCuestionario asignacionCuestionario;
         while(res.next()){
@@ -61,5 +64,17 @@ public class ResultadoDeAsignacionService {
             asignaciones.add(asignacionCuestionario);
         }
         return asignaciones;
+    }
+
+    Integer getNumeroDeAlumnosQueHanContestadoLaAsignacion() throws SQLException{
+        if(this.idAsignacion==null) return null;
+        String query = "SELECT count(1) FROM tblasignacioncuestionario "+
+                       "inner join tblaplicacioncuestionario using (idasignacioncuestionario) "+
+           "where (tblaplicacioncuestionario.fechafin is not null and tblaplicacioncuestionario.fechafin!='0000-00-00 00:00:00') "+
+           "and idasignacioncuestionario="+this.idAsignacion;
+        
+        ResultSet res = execute.executeQuery(query);
+        res.next();
+        return res.getInt(1);
     }
 }

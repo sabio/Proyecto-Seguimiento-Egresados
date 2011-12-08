@@ -18,9 +18,11 @@ public class BienvenidaCuestionarioScreenController extends AbstractController{
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
         ModelAndView mv = new ModelAndView(this.successView);
+        BienvenidaCuestionarioScreenService service = new BienvenidaCuestionarioScreenService();
+        service.establecerDatos(req);
         
         mv.addObject("idAsignacion", req.getParameter("idAsignacion"));
-        
+        mv.addObject("nombreCuestionario", service.getNombreCuestionario());
         return mv;
     }
 

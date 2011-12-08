@@ -87,15 +87,17 @@
         </script>
         <style>
             .divConScroll{
-                height:200px; 
+                height:200px;
+                width:900px;
                 overflow:auto;
+                
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edicion Cuestionario</title>
     </head>
     <body onload="setPageStatus();">
-         <div class="principal">
+         <div class="principal"  style="width:900px;">
             <div class="header">
                 <hr />
                     <span id="titulo"> 
@@ -103,7 +105,7 @@
                     </span>
                 <hr />
             </div>
-            <div class="contenido">
+            <div class="contenido" style="width:900px;">
                 <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
                     <input type="hidden" name="idCuestionario" id="idCuestionario" value="${cuestionario.idCuestionario}" />
                     <input type="hidden" name="preguntaAAsignar" id="preguntaAAsignar" />
@@ -154,32 +156,48 @@
 
                     </table>
                     <div class="divConScroll">                
-                        <table width="900px" align="center" >
+                        <table width="800px" align="center" >
                             <c:if test="${param.idCuestionario ne null}">
                                 <tr>
                                     <td colspan="2" >
-                                        Preguntas disponibles
-                                        <table border="1">
-                                            <tr>
-                                                <td width="60%">Pregunta</td>
-                                                <td>Indicador</td>
-                                                <td>Tipo pregunta</td>
-                                                <td>Agregar</td>                                                
-                                            </tr>
-                                            <c:forEach var="pregunta" items="${preguntasDisponibles}" >
-                                                <tr>
-                                                    <td align="left">${pregunta.pregunta}</td>
-                                                    <td align="left">${pregunta.indicador}</td>
-                                                    <td NOWRAP align="left">${pregunta.tipoPregunta}</td>
-                                                    <td>
-                                                        <a class="linker" style="border: 0" >
-                                                            <img src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" onclick="asignarPregunta(${pregunta.idPregunta})" />
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                        </c:forEach>
-                                        </table>
-
+                                        <br />
+                                        <c:choose>
+                                            <c:when test="${preguntasDisponibles eq null}">
+                                                <b>No hay Preguntas Disponibles</b>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <b>Preguntas disponibles</b>
+                                                <table >
+                                                    <tr>
+                                                        <td width="50%"><b>Pregunta</b></td>
+                                                        <td width="20%"><b>Indicador</b></td>
+                                                        <td width="20%"><b>Tipo pregunta</b></td>
+                                                        <td width="10%"><b>Agregar</b></td>                                                
+                                                    </tr>
+                                                    <c:set var="fondoRow" value="#e0e0d3" scope="page" />
+                                                    <c:forEach var="pregunta" items="${preguntasDisponibles}" >
+                                                        <c:choose>
+                                                            <c:when test="${fondoRow eq '#e0e0d3'}">
+                                                               <c:set var="fondoRow" value="#e2e4ff" scope="page" /> 
+                                                            </c:when>
+                                                            <c:when test="${fondoRow eq '#e2e4ff'}">
+                                                               <c:set var="fondoRow" value="#e0e0d3" scope="page" /> 
+                                                            </c:when>
+                                                        </c:choose>
+                                                        <tr style="background-color: ${fondoRow}">
+                                                            <td align="left">${pregunta.pregunta}</td>
+                                                            <td align="left">${pregunta.indicador}</td>
+                                                            <td NOWRAP align="left">${pregunta.tipoPregunta}</td>
+                                                            <td>
+                                                                <a class="linker" style="border: 0" >
+                                                                    <img src="${pageContext.request.contextPath}/imagenes/iconos/agregar.gif" onclick="asignarPregunta(${pregunta.idPregunta})" />
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                </c:forEach>
+                                                </table>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
 
                                 </tr>
@@ -188,45 +206,61 @@
                     </div>
                                    
                     <div class="divConScroll">                
-                        <table width="900px" align="center" >
+                        <table width="800px" align="center" >
                             <c:if test="${param.idCuestionario ne null}">
                                 <tr>
                                     <td colspan="2" >
-                                        Preguntas Asignadas
-                                        <table border="1">
-                                            <tr>
-                                                <td width="60%">Pregunta</td>
-                                                <td>Indicador</td>
-                                                <td>Tipo pregunta</td>
-                                                <td>Orden</td>
-                                                <td>Eliminar</td>
-                                            </tr>
-                                            <c:forEach varStatus="status" var="pregunta" items="${preguntasAsignadas}" >
-                                                <tr>
-                                                    <td align="left">${pregunta.pregunta}</td>
-                                                    <td align="left">${pregunta.indicador}</td>
-                                                    <td NOWRAP align="left">${pregunta.tipoPregunta}</td>
-                                                    <td>
-                                                        <c:if test="${!status.first}">
-                                                            <a class="linker" style="border: 0" >
-                                                                <img src="${pageContext.request.contextPath}/imagenes/iconos/arrow_Up.gif" onclick="subirPregunta(${pregunta.idPregunta})" />
-                                                            </a>
-                                                        </c:if>
-                                                        <c:if test="${!status.last}">
-                                                            <a class="linker" style="border: 0" >
-                                                                <img src="${pageContext.request.contextPath}/imagenes/iconos/arrow_Down.gif" onclick="bajarPregunta(${pregunta.idPregunta})" />
-                                                            </a>
-                                                        </c:if>
-                                                    </td>
-                                                    <td>
-                                                        <a class="linker" style="border: 0" >
-                                                            <img src="${pageContext.request.contextPath}/imagenes/iconos/eliminar.gif" onclick="eliminarPregunta(${pregunta.idPregunta})" />
-                                                        </a>
-                                                    </td>    
-                                                </tr>
-                                        </c:forEach>
-                                        </table>
-
+                                        <br />
+                                        <c:choose>
+                                            <c:when test="${preguntasAsignadas eq null}">
+                                                <b>No hay Preguntas Asignadas</b>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <b>Preguntas Asignadas</b>
+                                                <table>
+                                                    <tr>
+                                                        <td width="60%"><b>Pregunta</b></td>
+                                                        <td><b>Indicador</b></td>
+                                                        <td><b>Tipo pregunta</b></td>
+                                                        <td><b>Orden</b></td>
+                                                        <td><b>Eliminar</b></td>
+                                                    </tr>
+                                                    <c:set var="fondoRow" value="#e0e0d3" scope="page" />
+                                                    <c:forEach varStatus="status" var="pregunta" items="${preguntasAsignadas}" >
+                                                        <c:choose>
+                                                            <c:when test="${fondoRow eq '#e0e0d3'}">
+                                                               <c:set var="fondoRow" value="#e2e4ff" scope="page" /> 
+                                                            </c:when>
+                                                            <c:when test="${fondoRow eq '#e2e4ff'}">
+                                                               <c:set var="fondoRow" value="#e0e0d3" scope="page" /> 
+                                                            </c:when>
+                                                        </c:choose>
+                                                        <tr style="background-color: ${fondoRow}">
+                                                            <td align="left">${pregunta.pregunta}</td>
+                                                            <td align="left">${pregunta.indicador}</td>
+                                                            <td NOWRAP align="left">${pregunta.tipoPregunta}</td>
+                                                            <td>
+                                                                <c:if test="${!status.first}">
+                                                                    <a class="linker" style="border: 0" >
+                                                                        <img src="${pageContext.request.contextPath}/imagenes/iconos/arrow_Up.gif" onclick="subirPregunta(${pregunta.idPregunta})" />
+                                                                    </a>
+                                                                </c:if>
+                                                                <c:if test="${!status.last}">
+                                                                    <a class="linker" style="border: 0" >
+                                                                        <img src="${pageContext.request.contextPath}/imagenes/iconos/arrow_Down.gif" onclick="bajarPregunta(${pregunta.idPregunta})" />
+                                                                    </a>
+                                                                </c:if>
+                                                            </td>
+                                                            <td>
+                                                                <a class="linker" style="border: 0" >
+                                                                    <img src="${pageContext.request.contextPath}/imagenes/iconos/eliminar.gif" onclick="eliminarPregunta(${pregunta.idPregunta})" />
+                                                                </a>
+                                                            </td>    
+                                                        </tr>
+                                                </c:forEach>
+                                                </table>
+                                             </c:otherwise>
+                                        </c:choose>
                                     </td>
 
                                 </tr>

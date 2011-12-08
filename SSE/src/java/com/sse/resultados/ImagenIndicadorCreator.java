@@ -59,7 +59,7 @@ public class ImagenIndicadorCreator extends HttpServlet {
             
              PiePlot pp = (PiePlot) jfc.getPlot();
              pp.setSectionOutlinesVisible(false);
-             pp.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+             pp.setLabelFont(new Font("SansSerif", Font.PLAIN, 9));
              pp.setNoDataMessage("No hay informacion disponible");
              pp.setCircular(false);
              pp.setLabelGap(0.02);

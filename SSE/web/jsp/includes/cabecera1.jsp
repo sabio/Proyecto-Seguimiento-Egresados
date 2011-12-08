@@ -1,14 +1,14 @@
 <style type="text/css" title="currentStyle">                
-                @import "css/datatable/demo_table.css";
-                @import "css/pagina.css";
-                @import "css/alertas/jquery.alerts.css";
-                @import "css/calendario/jscal2.css";
-                @import "css/calendario/border-radius.css";
-                @import "css/calendario/steel/steel.css";
+                @import "${pageContext.request.contextPath}/css/datatable/demo_table.css";
+                @import "${pageContext.request.contextPath}/css/pagina.css";
+                @import "${pageContext.request.contextPath}/css/alertas/jquery.alerts.css";
+                @import "${pageContext.request.contextPath}/css/calendario/jscal2.css";
+                @import "${pageContext.request.contextPath}/css/calendario/border-radius.css";
+                @import "${pageContext.request.contextPath}/css/calendario/steel/steel.css";
 </style>
-<script type="text/javascript" language="javascript" src="js/libreria.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.alerts.js"></script>
-<script type="text/javascript" language="javascript" src="js/jscal2.js"></script>
-<script type="text/javascript" language="javascript" src="js/langCalendario/en.js"></script>
+<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/js/libreria.js"></script>
+<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/js/jquery.alerts.js"></script>
+<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/js/jscal2.js"></script>
+<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/js/langCalendario/en.js"></script>
