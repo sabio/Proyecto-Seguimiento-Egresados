@@ -9,8 +9,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:if test="${cerrarVentana eq true}">
+        <c:if test="${cerrarVentanaseSuspendio eq true}">
             <script type="text/javascript">
+                window.opener.location.reload(true);
+                window.close();
+            </script>
+        </c:if>
+            
+        <c:if test="${cerrarVentanaseTermino eq true}">
+            <script type="text/javascript">
+                alert('Gracias por contestar la encuesta');
                 window.opener.location.reload(true);
                 window.close();
             </script>

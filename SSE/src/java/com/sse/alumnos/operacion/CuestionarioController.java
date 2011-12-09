@@ -22,11 +22,11 @@ public class CuestionarioController extends AbstractController{
         
         if(service.opcion==1){//El usuario le dio para guardar y continuar despues el cuestionario
             service.guardarCuestionarioPaContinuarDespues(req);
-            mv.addObject("cerrarVentana", true);
+            mv.addObject("cerrarVentanaseSuspendio", true);
         }
         else if(service.opcion==2){//El usuario le dio para terminar el cuestionario
             service.guardarYTerminar(req);
-            mv.addObject("cerrarVentana", true);
+            mv.addObject("cerrarVentanaseTermino", true);
         }
         
         mv.addObject("nombreCuestionario", service.getNombreCuestionario());

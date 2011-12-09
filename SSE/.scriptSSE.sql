@@ -156,7 +156,7 @@ create table tblaplicacioncuestionario(
 create table tblrespuesta(
 	idaplicacioncuestionario int not null,
 	idpregunta  int not null,
-	respuestaString varchar(120),
+	respuestaString varchar(500),
 	respuestaInt int,
     constraint PK_tblrespuesta01 primary key(idaplicacioncuestionario,idpregunta),
 	constraint FK_tblrespuesta01 foreign key (idaplicacioncuestionario) references tblaplicacioncuestionario(idaplicacioncuestionario) on delete cascade,
@@ -192,7 +192,7 @@ insert into dicgrupoalumnos values (2,'Grupo 2');
 
 insert into dicalumno values (2,1);
 insert into dicalumno values (3,1);
-insert into dicalumno values (4,2);
+insert into dicalumno values (4,1);
 insert into dicalumno values (5,2);
 insert into dicalumno values (6,2);
 insert into dicalumno values (7,2);
@@ -212,9 +212,6 @@ insert into dictipopregunta values (3,'Opciones Si y No');
 
 /* Insertando cuestionarios y preguntas*/
 insert into diccuestionario values (1,'Cuestionario Sobre la materia de programacion avanzada','S');
-insert into diccuestionario values (2,'Cuestionario 2','S');
-
-
 
 
 insert into dicindicador values
@@ -223,7 +220,6 @@ insert into dicindicador values
 (2,'Satisfaccion con las instalaciones','S');
 insert into dicindicador values
 (3,'Satisfaccion con el programa academico','S');
-
 
 
 insert into dicpregunta values
@@ -317,12 +313,12 @@ values
 	insert into dicmenu
 	(idmenu,menu,orden,nivel,idmenupadre,url)
 	values
-	(7,'Alumnos',1,2,2,'listadoAlumnos.run');
+	(7,'Alumnos',2,2,2,'listadoAlumnos.run');
 	
 	insert into dicmenu
 	(idmenu,menu,orden,nivel,idmenupadre,url)
 	values
-	(8,'Grupos de alumnos',2,2,2,'listadoGruposAlumnos.run');
+	(8,'Grupos de alumnos',1,2,2,'listadoGruposAlumnos.run');
 
 insert into dicmenu
 (idmenu,menu,orden,nivel)
