@@ -211,7 +211,7 @@ insert into dictipopregunta values (2,'Opciones del 0 al 5');
 insert into dictipopregunta values (3,'Opciones Si y No');
 
 /* Insertando cuestionarios y preguntas*/
-insert into diccuestionario values (1,'Cuestionario Sobre la materia de programación avanzada','S');
+insert into diccuestionario values (1,'Cuestionario Sobre la materia de programacion avanzada','S');
 
 
 insert into dicindicador values

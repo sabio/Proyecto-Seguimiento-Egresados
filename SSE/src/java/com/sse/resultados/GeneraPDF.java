@@ -117,7 +117,7 @@ public class GeneraPDF extends HttpServlet {
                 String preguntaAnterior=null;
                 Font font2 = new Font(Font.FontFamily.HELVETICA  , 9, Font.BOLD);
                 Font font3 = new Font(Font.FontFamily.HELVETICA  , 8, Font.NORMAL);
-                Font font4 = new Font(Font.FontFamily.HELVETICA  , 8, Font.ITALIC);
+                Font font4 = new Font(Font.FontFamily.HELVETICA  , 8, Font.BOLDITALIC);
                 boolean aux=true;
                 int i=0,j=1;
                 while(res.next()){                    
