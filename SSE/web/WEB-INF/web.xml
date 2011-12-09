@@ -29,6 +29,10 @@
         <servlet-name>ImagenIndicadorCreator</servlet-name>
         <servlet-class>com.sse.resultados.ImagenIndicadorCreator</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GeneraPDF</servlet-name>
+        <servlet-class>com.sse.resultados.GeneraPDF</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>principal</servlet-name>
         <url-pattern>/principal.run</url-pattern>
@@ -48,6 +52,10 @@
     <servlet-mapping>
         <servlet-name>ImagenIndicadorCreator</servlet-name>
         <url-pattern>/ImagenIndicadorCreator</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GeneraPDF</servlet-name>
+        <url-pattern>/GeneraPDF</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

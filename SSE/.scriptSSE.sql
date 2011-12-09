@@ -107,7 +107,7 @@ create table dicindicador(
 
 create table dicpregunta(
 	idpregunta int not null  auto_increment primary key,
-	pregunta varchar(150) not null,
+	pregunta varchar(300) not null,
 	idtipopregunta int not null,
 	idindicador int,
 	activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N'),
@@ -118,7 +118,7 @@ create table dicpregunta(
 
 create table diccuestionario(
 	idcuestionario int not null  auto_increment primary key,
-	cuestionario varchar(100) not null,
+	cuestionario varchar(300) not null,
 	activo varchar(1) not null default 'S' CHECK (activo = 'S' or activo = 'N')
 ) ENGINE = InnoDB;
 
@@ -168,15 +168,23 @@ create table tblrespuesta(
 
 /* Insertando el perfil administrador y un usuario llamado Armando */
 INSERT INTO dicperfil VALUES (1, 'Administrador', 'S');
-INSERT INTO dicusuario VALUES (1, 'armando', md5('hola'), 'Armando Jesus', 'Gomez', 'Parra', 'S', 'armandojpr@yahoo.com');
+INSERT INTO dicusuario VALUES (1, 'admin', md5('hola'), 'Armando Jesus', 'Gomez', 'Parra', 'S', 'armandojpr@yahoo.com');
 insert into dicadministrativo values (1,1);
 
 
 /* Insertando algunos alumnos */
 INSERT INTO dicusuario VALUES (2, 'D0392323', md5('hola'), 'Juan Alberto', 'Gomez', 'Arredondo', 'S', 'abc@gmail.com');
 INSERT INTO dicusuario VALUES (3, 'abcd', md5('hola'), 'Laura Fabiola', 'Vallin', 'Garcia', 'S', 'laura@gmail.com');
-INSERT INTO dicusuario VALUES (4, 'opesdsd', md5('hola'), 'Marta', 'Reyes', 'Sandoval', 'S', 'ms@gmail.com');
-INSERT INTO dicusuario VALUES (5, 'aa', md5('aa'), 'Jorge Alejandro', 'Corona', 'Perez', 'S', 'xxx@gmail.com');
+INSERT INTO dicusuario VALUES (4, 'marta', md5('hola'), 'Marta', 'Reyes', 'Sandoval', 'S', 'ms@gmail.com');
+INSERT INTO dicusuario VALUES (5, 'jorge', md5('hola'), 'Jorge Alejandro', 'Corona', 'Perez', 'S', 'xxx@gmail.com');
+INSERT INTO dicusuario VALUES (6, 'Patricia', md5('hola'), 'Patricia Alejandra', 'Corona', 'Perez', 'S', 'patri@gmail.com');
+INSERT INTO dicusuario VALUES (7, 'Damian', md5('hola'), 'Damian', 'Sena', 'Garcua', 'S', 'dami_123@yahoo.com');
+INSERT INTO dicusuario VALUES (8, 'D049036529', md5('hola'), 'Jose', 'Carmona', 'Parra', 'S', 'buger@hotmail.com');
+INSERT INTO dicusuario VALUES (9, 'Samu', md5('hola'), 'Samule', 'Pedrosa', 'Quintero', 'S', 'samu@gmail.com');
+INSERT INTO dicusuario VALUES (10, '129878923', md5('hola'), 'Daniela', 'Garcia', 'Reyes', 'S', 'kuteme@gmail.com');
+INSERT INTO dicusuario VALUES (11, 'otruga', md5('hola'), 'Maciel', 'Gomez', 'Pinto', 'S', 'otruga@msn.com');
+INSERT INTO dicusuario VALUES (12, '12122342', md5('hola'), 'Quetzal', 'Esparza', 'Quines', 'S', 'quet_abc@msn.com');
+INSERT INTO dicusuario VALUES (13, 'arthur', md5('hola'), 'Arthur', 'Parker', '', 'S', 'pp_spider@yahoo.com');
 
 insert into dicgrupoalumnos values (1,'Grupo 1');
 insert into dicgrupoalumnos values (2,'Grupo 2');
@@ -186,6 +194,14 @@ insert into dicalumno values (2,1);
 insert into dicalumno values (3,1);
 insert into dicalumno values (4,2);
 insert into dicalumno values (5,2);
+insert into dicalumno values (6,2);
+insert into dicalumno values (7,2);
+insert into dicalumno values (8,2);
+insert into dicalumno values (9,1);
+insert into dicalumno values (10,1);
+insert into dicalumno values (11,1);
+insert into dicalumno values (12,1);
+insert into dicalumno values (13,2);
 
 
 

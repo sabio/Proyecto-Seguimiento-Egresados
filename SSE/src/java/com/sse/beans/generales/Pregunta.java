@@ -46,6 +46,13 @@ public class Pregunta {
         this.indicador = indicador;
         this.activo = activo;
     }
+
+    public Pregunta(Integer idPregunta, String pregunta, String respuestaString) {
+        this.idPregunta = idPregunta;
+        this.pregunta = pregunta;
+        this.respuestaString = respuestaString;
+    }
+    
     
     
     

@@ -97,7 +97,8 @@
                                     Pregunta
                                 </td>
                                 <td align="left">
-                                    <input type="text" name="txtPregunta" id="txtPregunta" value="${pregunta.pregunta}" class="textbox" size="40" />
+                                    <!--<input type="text" name="txtPregunta" id="txtPregunta" value="${pregunta.pregunta}" class="textbox" size="40" />-->
+                                    <textarea cols="60" name="txtPregunta" id="txtPregunta" class="textbox" size="40">${pregunta.pregunta}</textarea>
                                 </td>
                             </tr>                            
                             <tr>

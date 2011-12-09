@@ -6,6 +6,7 @@ package com.sse.resultados;
 
 import com.sse.beans.generales.AsignacionCuestionario;
 import com.sse.beans.generales.Indicador;
+import com.sse.beans.generales.Pregunta;
 import com.sse.dao.SQLExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -83,5 +84,22 @@ public class ResultadoDeAsignacionService {
         ResultSet res = execute.executeQuery(query);
         res.next();
         return res.getInt(1);
+    }
+
+    ArrayList<Pregunta> getListadoResupuestaDePreguntasAbiertas() throws SQLException{
+        if(this.idAsignacion==null) return null;
+        ArrayList<Pregunta> preguntasAbiertas = new ArrayList<Pregunta>();
+        String query = "select idpregunta,pregunta,respuestaString from tblrespuesta "+
+            "inner join tblaplicacioncuestionario using (idaplicacioncuestionario) "+
+            "inner join tblasignacioncuestionario using (idasignacioncuestionario) "+
+            "inner join dicpregunta using (idpregunta) "+
+            "where respuestaString is not null "+
+            "and idasignacioncuestionario="+this.idAsignacion+
+            " order by pregunta";
+        ResultSet res = execute.executeQuery(query);
+        while(res.next()){
+            preguntasAbiertas.add(new Pregunta(res.getInt(1),res.getString(2),res.getString(3)));
+        }        
+        return preguntasAbiertas.isEmpty() ? null : preguntasAbiertas;
     }
 }

@@ -94,8 +94,8 @@ response.setHeader("Content-disposition","inline; filename=ExpenseAson.xls");
                     <br />
                     Total de alumnos que han contestado la encuesta: <b>${numeroDeAlumnosQueHanContestadoLaAsignacion}</b>
                     <br />
-
-                    <input type="button" class="boton" value="imprimir" onclick="window.print();" />
+                    <br />
+                    
                 </c:if>
                 
                 <br />
@@ -104,9 +104,36 @@ response.setHeader("Content-disposition","inline; filename=ExpenseAson.xls");
                     <br /><br />
                 </c:forEach>
                 
+                <c:if test="${listadoRespuestasDePreguntasAbiertas ne null}">
+                    <table align="center">
+                        <caption><b>Respuestas de Preguntas Abiertas</b></caption>
+                        <tbody>
+                            <c:set var="fondoRow" value="#e0e0d3" scope="page" />                                                                
+
+                            <c:forEach var="pregunta" items="${listadoRespuestasDePreguntasAbiertas}">
+                                <c:choose>
+                                    <c:when test="${preguntaAnterior ne pregunta.pregunta or preguntaAnterior eq null}">                                       
+                                       <tr style="cursor:pointer; background-color: #e2e4ff">
+                                            <td><b>${pregunta.pregunta}</b></td>
+                                       </tr>
+                                    </c:when>                                    
+                                </c:choose>
+
+                                <c:set var="preguntaAnterior" value="${pregunta.pregunta}" scope="page" />
+                                                                
+                                <tr style="cursor:pointer; background-color: #e0e0d3">
+                                    <td>${pregunta.respuestaString}</td>                                    
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+
+                    </table>
+                </c:if>
+                    
                 <br />
                 <c:if test="${param.idAsignacion ne null}">
                     <input type="button" class="boton" value="imprimir" onclick="window.print();" />
+                    <input type="button" class="boton" value="Generar pdf" onclick="window.location = 'GeneraPDF?idAsignacion=${param.idAsignacion}';" />
                 </c:if>
                 
             </div>
