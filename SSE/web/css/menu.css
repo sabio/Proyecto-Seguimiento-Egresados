@@ -19,7 +19,7 @@
  	display: none; 
  	position: absolute;
  	top: 100%; 
- 	left: 0px; 
+ 	left: -40px; 
  } 
  ul#menu ul ul,ul#menu ul ul ul { 
  	top: 0; 
@@ -30,9 +30,10 @@
  	display: inline; 
  	position: relative; 
  } 
- ul#menu ul li { 
+ ul#menu ul li {       
  	width: 100%; 
  	display: block; 
+        /*border: 3px coral solid;*/
  } 
  /* Root Menu */ 
  ul#menu a { 

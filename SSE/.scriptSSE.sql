@@ -191,7 +191,7 @@ insert into dicalumno values (5,2);
 
 /* Insertando los tipos de pregunta */
 insert into dictipopregunta values (1,'Respuesta abierta');
-insert into dictipopregunta values (2,'Opciones del 1 al 5');
+insert into dictipopregunta values (2,'Opciones del 0 al 5');
 insert into dictipopregunta values (3,'Opciones Si y No');
 
 /* Insertando cuestionarios y preguntas*/
@@ -268,46 +268,61 @@ insert into tblcuestionariopreguntas values
 insert into tblasignacioncuestionario values (1,1,2,now(), STR_TO_DATE( '2011/12/31 10:00 am', '%Y/%m/%d %I:%i %p' ), 'S');
 
 
+
+
+
+
 /* insertando los menus */
 insert into dicmenu
 (idmenu,menu,orden,nivel)
 values
-(1,'Configuracion',1,1);
+(1,'Encuestas',1,1);
+
+	insert into dicmenu
+	(idmenu,menu,orden,nivel,idmenupadre,url)
+	values
+	(4,'Indicadores',1,2,1,'listadoIndicadores.run');
+	
+	insert into dicmenu
+	(idmenu,menu,orden,nivel,idmenupadre,url)
+	values
+	(5,'Preguntas',2,2,1,'listadoPreguntas.run');
+	
+	insert into dicmenu
+	(idmenu,menu,orden,nivel,idmenupadre,url)
+	values
+	(6,'Cuestionarios',3,2,1,'listadoCuestionarios.run');
 
 insert into dicmenu
 (idmenu,menu,orden,nivel)
 values
-(2,'Operacion',2,1);
+(2,'Alumnos',2,1);
+
+	insert into dicmenu
+	(idmenu,menu,orden,nivel,idmenupadre,url)
+	values
+	(7,'Alumnos',1,2,2,'listadoAlumnos.run');
+	
+	insert into dicmenu
+	(idmenu,menu,orden,nivel,idmenupadre,url)
+	values
+	(8,'Grupos de alumnos',2,2,2,'listadoGruposAlumnos.run');
 
 insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre,url)
+(idmenu,menu,orden,nivel)
 values
-(3,'Cuestionarios',1,2,1,'listadoCuestionarios.run');
+(3,'Operacion',3,1);
 
-insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre,url)
-values
-(4,'Preguntas',2,2,1,'listadoPreguntas.run');
+	insert into dicmenu
+	(idmenu,menu,orden,nivel,idmenupadre,url)
+	values
+	(9,'Asignacion de Cuestionarios',1,2,3,'listadoAsignacionCuestionarios.run');
+	
+	insert into dicmenu
+	(idmenu,menu,orden,nivel,idmenupadre,url)
+	values
+	(10,'Consulta de Resultados',2,2,3,'resultadoDeAsignacion.run');
 
-insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre,url)
-values
-(5,'Indicadores',3,2,1,'listadoIndicadores.run');
-
-insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre,url)
-values
-(6,'Alumnos',4,2,1,'listadoAlumnos.run');
-
-insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre,url)
-values
-(7,'Grupos de alumnos',5,2,1,'listadoGruposAlumnos.run');
-
-insert into dicmenu
-(idmenu,menu,orden,nivel,idmenupadre,url)
-values
-(8,'Listado de asignacion de Cuestionarios',6,2,1,'listadoAsignacionCuestionarios.run');
 
 
 
@@ -315,99 +330,92 @@ values
 insert into dicpermiso
 (idpermiso,permiso,description)
 values
-(1,'Listado de cuestionarios','Permiso para poder visualizar el listado de cuestionarios');
-
+(1,'Listado de indicadores','Permiso para poder visualizar el listado de indicadores');
 insert into dicpermiso
 (idpermiso,permiso,description)
 values
 (2,'Listado de preguntas','Permiso para poder visualizar el listado de preguntas');
-
 insert into dicpermiso
 (idpermiso,permiso,description)
 values
-(3,'Listado de indicadores','Permiso para poder visualizar el listado de indicadores');
-
+(3,'Listado de cuestionarios','Permiso para poder visualizar el listado de cuestionarios');
 insert into dicpermiso
 (idpermiso,permiso,description)
 values
 (4,'Listado de alumnos','Permiso para poder visualizar el listado de alumnos');
-
 insert into dicpermiso
 (idpermiso,permiso,description)
 values
 (5,'Listado de grupos de alumnos','Permiso para poder visualizar el listado de grupos de alumnos');
-
 insert into dicpermiso
 (idpermiso,permiso,description)
 values
 (6,'Asignacion de Cuestionarios','Permiso para poder visualizar la asignacion de cuestionarios');
+insert into dicpermiso
+(idpermiso,permiso,description)
+values
+(7,'Resultados','Permiso para poder consultar resultados de las encuestas');
 
 
 /* Insertando las relaciones entre los menus y los permisos */
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(1,3);
-
+(1,4);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
 (1,1);
-
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(2,2);
-
+(2,5);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(1,2);
-
+(2,1);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(1,4);
-
+(3,6);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
 (3,1);
-
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(3,5);
-
+(4,7);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(4,1);
-
+(4,2);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(4,6);
-
+(5,8);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(5,1);
-
+(5,2);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(5,7);
-
+(6,9);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(6,1);
-
+(6,3);
 insert into tblmenupermiso
 (idpermiso,idmenu)
 values
-(6,8);
+(7,10);
+insert into tblmenupermiso
+(idpermiso,idmenu)
+values
+(7,3);
+
+
 
 /* insertando los permisos que tiene el perfil de administrados*/
 insert into tblpermisosperfil
@@ -439,4 +447,9 @@ insert into tblpermisosperfil
 (idperfil,idpermiso)
 values
 (1,6);
+
+insert into tblpermisosperfil
+(idperfil,idpermiso)
+values
+(1,7);
 

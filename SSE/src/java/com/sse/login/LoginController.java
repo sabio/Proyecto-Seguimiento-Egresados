@@ -28,6 +28,7 @@ public class LoginController extends AbstractController{
                 //Creamos la sesion
                 HttpSession sesion = request.getSession(true);
                 sesion.setAttribute("usuario", service.generaObjetoUsuario(idUsuario));
+                sesion.setMaxInactiveInterval(3000);
                 ServletContext context = getServletContext();
                 RequestDispatcher dispatcher = context.getRequestDispatcher("/inicio");
                 dispatcher.forward(request,response);

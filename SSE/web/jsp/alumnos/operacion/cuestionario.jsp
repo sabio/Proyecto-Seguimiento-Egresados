@@ -124,27 +124,30 @@
                                         <c:when test="${pregunta.idTipoPregunta eq 2}">
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             5
-                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-5" value="5" <c:if test="${pregunta.respuestaInt eq 5}">checked</c:if> >
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-5" value="5" <c:if test="${pregunta.respuestaInt eq 5}">checked</c:if> />
                                             &nbsp;&nbsp;
                                             4
-                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-4" value="4" <c:if test="${pregunta.respuestaInt eq 4}">checked</c:if> >
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-4" value="4" <c:if test="${pregunta.respuestaInt eq 4}">checked</c:if> />
                                             &nbsp;&nbsp;
                                             3
-                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-3" value="3" <c:if test="${pregunta.respuestaInt eq 3}">checked</c:if> >
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-3" value="3" <c:if test="${pregunta.respuestaInt eq 3}">checked</c:if> />
                                             &nbsp;&nbsp;
                                             2
-                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-2" value="2" <c:if test="${pregunta.respuestaInt eq 2}">checked</c:if> >
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-2" value="2" <c:if test="${pregunta.respuestaInt eq 2}">checked</c:if> />
                                             &nbsp;&nbsp;
                                             1
-                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-1" value="1" <c:if test="${pregunta.respuestaInt eq 1}">checked</c:if> >
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-1" value="1" <c:if test="${pregunta.respuestaInt eq 1}">checked</c:if> />
+                                            &nbsp;&nbsp;
+                                            0
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-1" value="0" <c:if test="${pregunta.respuestaInt eq 0}">checked</c:if> />
                                         </c:when>
                                         <c:when test="${pregunta.idTipoPregunta eq 3}">
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             Si
-                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-Si" value="1" <c:if test="${pregunta.respuestaInt eq 1}">checked</c:if> >
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-Si" value="1" <c:if test="${pregunta.respuestaInt eq 1}">checked</c:if> />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             No
-                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-No" value="2" <c:if test="${pregunta.respuestaInt eq 2}">checked</c:if> >
+                                            <input type="radio" name="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}" id="pregunta-${pregunta.idTipoPregunta}-${pregunta.idPregunta}-No" value="2" <c:if test="${pregunta.respuestaInt eq 2}">checked</c:if> />
                                         </c:when>                                        
                                     </c:choose>
                                     <br /><br />

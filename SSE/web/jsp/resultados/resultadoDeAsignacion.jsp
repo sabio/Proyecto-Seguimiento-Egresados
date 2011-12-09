@@ -33,7 +33,7 @@ response.setHeader("Content-disposition","inline; filename=ExpenseAson.xls");
             <div class="header">
                 <hr />
                     <span id="titulo"> 
-                        Resultados 
+                        Consulta de Resultados 
                     </span>
                 <hr />
             </div>
@@ -41,46 +41,53 @@ response.setHeader("Content-disposition","inline; filename=ExpenseAson.xls");
                 <br />
                 <form id="formaCatalogo" name="formaCatalogo" onsubmit="return hacerSubmit()">
                     <input type="hidden" name="hdnIdIndicador" id="hdnIdIndicador" value="${indicador.idIndicador}" />
-                    
-                    <table align="center">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Cuestionario
-                                </th>
-                                <th>
-                                    Grupo
-                                </th>
-                                <th>
-                                    Fecha Inicio <i>(año/mes/dia hora)</i>
-                                </th>
-                                <th>
-                                    Fecha Fin <i>(año/mes/dia hora)</i>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:set var="fondoRow" value="#e0e0d3" scope="page" />                                                                
-                            
-                            <c:forEach var="asignacion" items="${listadoAsignaciones}">
-                                <c:choose>
-                                    <c:when test="${fondoRow eq '#e0e0d3'}">
-                                       <c:set var="fondoRow" value="#e2e4ff" scope="page" /> 
-                                    </c:when>
-                                    <c:when test="${fondoRow eq '#e2e4ff'}">
-                                       <c:set var="fondoRow" value="#e0e0d3" scope="page" /> 
-                                    </c:when>
-                                </c:choose>
-                                <tr style="cursor:pointer; background-color: ${fondoRow};" onclick="window.location = 'resultadoDeAsignacion.run?idAsignacion=${asignacion.idAsignacionCuestionario}'">
-                                    <td>${asignacion.cuestionario}</td>
-                                    <td>${asignacion.grupoAlumno}</td>
-                                    <td>${asignacion.fechaInicio}</td>
-                                    <td>${asignacion.fechaFin}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
+                    <c:choose>
+                        <c:when test="${listadoAsignaciones eq null}">
+                            <b>No hay resultados para consultar</b>
+                        </c:when>
+                        <c:otherwise>
+                            <table align="center">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Cuestionario
+                                        </th>
+                                        <th>
+                                            Grupo
+                                        </th>
+                                        <th>
+                                            Fecha Inicio <i>(año/mes/dia hora)</i>
+                                        </th>
+                                        <th>
+                                            Fecha Fin <i>(año/mes/dia hora)</i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:set var="fondoRow" value="#e0e0d3" scope="page" />                                                                
 
-                    </table>
+                                    <c:forEach var="asignacion" items="${listadoAsignaciones}">
+                                        <c:choose>
+                                            <c:when test="${fondoRow eq '#e0e0d3'}">
+                                               <c:set var="fondoRow" value="#e2e4ff" scope="page" /> 
+                                            </c:when>
+                                            <c:when test="${fondoRow eq '#e2e4ff'}">
+                                               <c:set var="fondoRow" value="#e0e0d3" scope="page" /> 
+                                            </c:when>
+                                        </c:choose>
+                                        <tr style="cursor:pointer; background-color: ${fondoRow};" onclick="window.location = 'resultadoDeAsignacion.run?idAsignacion=${asignacion.idAsignacionCuestionario}'">
+                                            <td>${asignacion.cuestionario}</td>
+                                            <td>${asignacion.grupoAlumno}</td>
+                                            <td>${asignacion.fechaInicio}</td>
+                                            <td>${asignacion.fechaFin}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+
+                            </table>
+                        </c:otherwise>    
+                    </c:choose>
+                            
                 </form>
                 <br />
                 <c:if test="${param.idAsignacion ne null}">

@@ -60,10 +60,17 @@ public class ResultadoDeAsignacionService {
         ResultSet res = execute.executeQuery(query);
         AsignacionCuestionario asignacionCuestionario;
         while(res.next()){
-            asignacionCuestionario = new AsignacionCuestionario(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5));
-            asignaciones.add(asignacionCuestionario);
+            query="select count(1) from tblaplicacioncuestionario "
+                    + "where (fechafin is not null and fechafin!='0000-00-00 00:00:00') and "
+                    + "idasignacioncuestionario="+res.getInt(1);
+            ResultSet res2 = execute.executeQuery(query);
+            res2.next();
+            if(res2.getInt(1)>0){
+                asignacionCuestionario = new AsignacionCuestionario(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5));
+                asignaciones.add(asignacionCuestionario);
+            }
         }
-        return asignaciones;
+        return asignaciones.isEmpty() ? null : asignaciones;
     }
 
     Integer getNumeroDeAlumnosQueHanContestadoLaAsignacion() throws SQLException{

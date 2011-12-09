@@ -36,7 +36,8 @@ public class PrincipalAlumnosService {
                         "inner join dicalumno using (idgrupoalumno) "+
                         "inner join diccuestionario using (idcuestionario) "+
                         "where dicalumno.idusuario = "+this.usuario.getIdUsuario()+" and "+
-                        "fechainicio <= now() and fechafin>=now() and tblasignacioncuestionario.activo='S'";        
+                        "fechainicio <= now() and fechafin>=now() and tblasignacioncuestionario.activo='S' "+
+                        "and idcuestionario in (select idcuestionario from tblcuestionariopreguntas)";        
         ResultSet res = execute.executeQuery(query);
         
         ResultSet res2;

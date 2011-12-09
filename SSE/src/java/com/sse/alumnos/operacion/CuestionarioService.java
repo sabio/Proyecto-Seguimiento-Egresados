@@ -70,16 +70,17 @@ public class CuestionarioService {
     ArrayList<Pregunta> getPreguntas() throws SQLException{
         ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
         String query = "select dicpregunta.idpregunta,dicpregunta.pregunta, dicpregunta.idtipopregunta, "+
-                        "dicpregunta.idindicador, respuestaString,respuestaInt "+
+                        "dicpregunta.idindicador, respuestaString, IFNULL(respuestaInt,-1)  "+
                         "from tblasignacioncuestionario "+
         "inner join tblcuestionariopreguntas on (tblcuestionariopreguntas.idcuestionario=tblasignacioncuestionario.idcuestionario) "+
         "inner join dicpregunta on (dicpregunta.idpregunta=tblcuestionariopreguntas.idpregunta) "+
-        "left join tblaplicacioncuestionario on (tblaplicacioncuestionario.idasignacioncuestionario=tblasignacioncuestionario.idasignacioncuestionario) "+
+        "left join tblaplicacioncuestionario on (tblaplicacioncuestionario.idasignacioncuestionario=tblasignacioncuestionario.idasignacioncuestionario and tblaplicacioncuestionario.idusuario="+this.idUsuario+") "+
         "left join tblrespuesta on (tblrespuesta.idpregunta=dicpregunta.idpregunta and tblrespuesta.idaplicacioncuestionario=tblaplicacioncuestionario.idaplicacioncuestionario) "+
         "where tblasignacioncuestionario.idasignacioncuestionario="+this.idAsignacion+
         " and dicpregunta.activo='S' "+
         "order by tblcuestionariopreguntas.orden";
         ResultSet res = execute.executeQuery(query);
+        System.out.println("query! = "+query);
         
 //public Pregunta(Integer idPregunta, String pregunta, Integer idTipoPregunta, Integer idIndicador, String activo) {        
         while(res.next()){
