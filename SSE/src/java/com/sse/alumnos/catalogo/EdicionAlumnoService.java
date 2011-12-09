@@ -37,7 +37,7 @@ public class EdicionAlumnoService {
             usuario.setPassword(req.getParameter("txtPWD").trim().equals("") ? null : req.getParameter("txtPWD"));
             usuario.setNombre(req.getParameter("txtNombre").trim());
             usuario.setApaterno(req.getParameter("txtPaterno").trim());
-            usuario.setAmaterno(req.getParameter("txtPaterno").trim());
+            usuario.setAmaterno(req.getParameter("txtMaterno").trim());
             usuario.setEmail(req.getParameter("txtEmail").trim());
             usuario.setActivo(req.getParameter("slcActivo"));
             System.out.println("Le di guardar y el idusuario objeto = "+usuario.getIdUsuario());
@@ -75,8 +75,8 @@ public class EdicionAlumnoService {
             query="update dicusuario set usuario = '"+alumno.getUsuario().getUsuario()+"', ";
             if(alumno.getUsuario().getPassword()!=null)
                 query += "password = md5('"+alumno.getUsuario().getPassword()+"'), ";            
-            query += "nombre = '"+alumno.getUsuario().getNombre()+"', apaterno = '"+alumno.getUsuario().getNombre()+"', ";            
-            query += "apaterno = '"+alumno.getUsuario().getApaterno()+"', activo = '"+alumno.getUsuario().getActivo()+"', "
+            query += "nombre = '"+alumno.getUsuario().getNombre()+"', apaterno = '"+alumno.getUsuario().getApaterno()+"', ";            
+            query += "amaterno = '"+alumno.getUsuario().getAmaterno()+"', activo = '"+alumno.getUsuario().getActivo()+"', "
                     + "email = '"+alumno.getUsuario().getEmail()+"' where idusuario = "+alumno.getUsuario().getIdUsuario();
             
             execute.executeUpdate(query);

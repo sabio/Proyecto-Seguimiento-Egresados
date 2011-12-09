@@ -72,10 +72,12 @@
                     jAlert('Ingrese un apellido paterno válido', 'Error');                    
                     return false;
                 }
+                /*
                 if(Trim(materno.value)==''){
                     jAlert('Ingrese un apellido materno válido', 'Error');                    
                     return false;
                 }
+                */
                 if(! /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email.value) ){
                     jAlert('Ingrese un correo electronico válido', 'Error');
                     return false;

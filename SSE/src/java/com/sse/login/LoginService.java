@@ -19,7 +19,7 @@ public class LoginService {
         execute.addParametro(1, login);
         execute.addParametro(2, password);
         
-        ResultSet res = execute.executeQuery("select idusuario from dicusuario where usuario = ? and password = md5(?)");
+        ResultSet res = execute.executeQuery("select idusuario from dicusuario where usuario = ? and password = md5(?) and activo='S'");
         
         if(res.next()){
             return res.getInt("idusuario");

@@ -72,7 +72,7 @@
                                     Indicador
                                 </td>
                                 <td align="left">
-                                    <input type="text" name="txtIndicador" id="txtIndicador" value="${indicador.indicador}" class="textbox" size="40" />
+                                    <input autocomplete="off" type="text" name="txtIndicador" id="txtIndicador" value="${indicador.indicador}" class="textbox" size="40" />
                                 </td>
                             </tr>
                             <tr>
