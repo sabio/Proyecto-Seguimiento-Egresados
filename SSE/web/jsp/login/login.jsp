@@ -8,10 +8,13 @@
         <link rel='stylesheet'  href='css/login.css' type='text/css'  /> 
         <link rel='stylesheet'  href='css/pagina.css' type='text/css'  /> 
     </head>
-    <body>
-        <div id="contenedor">
+    <body style="background-color: #b0b0b0">
+        <div id="contenedor">            
             <div id="login">
-                    <h2>Sistema de Seguimiento a Egresados</h2>
+                    <div id="headerLogin">
+                        <img src="imagenes/bg_firm.gif" />
+                    </div>
+                    <h3>Sistema de Seguimiento a Egresados</h3>
                     <form name="loginform" id="loginform" method="post" target="login.run">
                             <table align="center">
                                 <tr>
@@ -45,6 +48,7 @@
                                 </tr>
                             </table>
                     </form>
+                    
             </div>
         </div> 
     </body>

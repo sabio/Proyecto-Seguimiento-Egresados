@@ -71,6 +71,15 @@ public class GeneraPDF extends HttpServlet {
                 document.add(new Paragraph("Fecha inicio: "+res.getString(3),font1));
                 document.add(new Paragraph("Fecha fin: "+res.getString(4),font1));
                 
+                query = "SELECT count(1) FROM tblasignacioncuestionario "+
+                       "inner join tblaplicacioncuestionario using (idasignacioncuestionario) "+
+                       "where (tblaplicacioncuestionario.fechafin is not null and tblaplicacioncuestionario.fechafin!='0000-00-00 00:00:00') "+
+                       "and idasignacioncuestionario="+idAsignacion;
+                res = execute.executeQuery(query);
+                res.next();
+                document.add(new Paragraph("Total de alumnos que han contestado la encuesta: "+res.getString(1),font1));
+                
+                
                 String imageUrl;
                 Image image;                                    
 

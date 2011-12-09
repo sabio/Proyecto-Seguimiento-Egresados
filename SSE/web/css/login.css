@@ -1,16 +1,26 @@
 #contenedor {
-    bottom: 50%;
-    right: 50%;
+    top:20%;
+    right: 31%;
     position: absolute;
+    /*border:3px #30F solid;*/
+    width: 500px;
+    height: 270px;
 }
 
 #login {
+    width: 450px;
+    height: 220px;
+    
     background-color:beige;
-    left: 40%;
-    padding: 10px;
-    position: relative;
-    top: 20%;
-    height: 250px;
-    width: 300px;
+    position: relative;            
     text-align: center;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#headerLogin{
+    background-color:#dbdcdd;
+    width:100%;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }

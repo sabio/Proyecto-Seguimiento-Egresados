@@ -5,7 +5,6 @@
 package com.sse.resultados;
 
 import com.sse.beans.generales.AsignacionCuestionario;
-import com.sse.beans.generales.Indicador;
 import com.sse.beans.generales.Pregunta;
 import com.sse.dao.SQLExecutor;
 import java.sql.ResultSet;
