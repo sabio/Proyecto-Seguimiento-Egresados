@@ -75,11 +75,11 @@
             
             
             function eliminar(id){
-                jConfirm('Desea eliminar el indicador?', 'Confirmacion', function(r) {
+                jConfirm('¿Desea eliminar el indicador?', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
                         if(isIndicadorUsadoEnUnaOMasPreguntas(id)){
-                            jConfirm('Existe una o mas preguntas asociadas a este indicador. Si lo elimina tambien seran eliminadas las preguntas asociadas. Desea continuar?', 'Confirmacion', function(s) {
+                            jConfirm('Existe una o mas preguntas asociadas a este indicador. Si lo elimina tambien serán eliminadas las preguntas asociadas. ¿Desea continuar?', 'Confirmación', function(s) {
                                 if(s){
                                     document.getElementById("formaListado").submit();
                                     //alert("submit");

@@ -60,7 +60,7 @@
             
             
             function eliminar(id){
-                jConfirm('Desea eliminar el grupo?', 'Confirmacion', function(r) {
+                jConfirm('¿Desea eliminar el grupo? Serán tambien eliminados todos los usuarios asociados a éste grupo', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
                         document.getElementById("formaListado").submit();

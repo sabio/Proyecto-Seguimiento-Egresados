@@ -77,7 +77,7 @@
             
             
             function eliminar(id){
-                jConfirm('¿Desea eliminar la asignación?', 'Confirmacion', function(r) {
+                jConfirm('¿Desea eliminar la asignación? Serán eliminados todos los resultados asociados a ésta asignación', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
                         document.getElementById("formaListado").submit();

@@ -58,7 +58,7 @@
             
             
             function eliminar(id){
-                jConfirm('Desea eliminar la pregunta?', 'Confirmacion', function(r) {
+                jConfirm('¿Desea eliminar la pregunta? Será eliminado cualquier resultado asociado a ésta pregunta', 'Confirmacion', function(r) {
                     if(r){
                         document.getElementById("hdnElimina").value=id;
                         document.getElementById("formaListado").submit();

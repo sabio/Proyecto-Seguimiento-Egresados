@@ -211,7 +211,7 @@ insert into dictipopregunta values (2,'Opciones del 0 al 5');
 insert into dictipopregunta values (3,'Opciones Si y No');
 
 /* Insertando cuestionarios y preguntas*/
-insert into diccuestionario values (1,'Cuestionario Sobre la materia de programacion avanzada','S');
+insert into diccuestionario values (1,'Cuestionario Sobre la materia de programación avanzada','S');
 
 
 insert into dicindicador values
@@ -223,13 +223,13 @@ insert into dicindicador values
 
 
 insert into dicpregunta values
-(1,'Se cumplio con el programa de clases (Siendo 5 la calificación más alta y 1 la más baja)', 2,1,'S');
+(1,'Se cumplió con el programa de clases? (Siendo 5 la calificación más alta y 1 la más baja)', 2,1,'S');
 
 insert into dicpregunta values
-(2,'Se le dio conocimiento al inicio de curso acerca del programa de estudios', 3,1,'S');
+(2,'Se le dió conocimiento al inicio de curso acerca del programa de estudios', 3,1,'S');
 
 insert into dicpregunta values
-(3,'Se le dio conocimiento al inicio de curso acerca del metodo de evaluacion', 3,1,'S');
+(3,'Se le dió conocimiento al inicio de curso acerca del metodo de evaluación', 3,1,'S');
 
 insert into dicpregunta values
 (4,'Se aclararon todas las dudas surgidas en clase (Siendo 5 la calificación más alta y 1 la más baja)', 2,1,'S');
@@ -239,14 +239,14 @@ insert into dicpregunta values
 (5,'Se contaba con material suficiente de investigacion y referencia (Siendo 5 la calificación más alta y 1 la más baja)', 2,2,'S');
 
 insert into dicpregunta values
-(6,'Se contaba con aluas limpias, ordenadas y bien iluminadas (Siendo 5 la calificación más alta y 1 la más baja)', 2,2,'S');
+(6,'Se contaba con aulas limpias, ordenadas y bien iluminadas (Siendo 5 la calificación más alta y 1 la más baja)', 2,2,'S');
 
 
 insert into dicpregunta values
-(7,'Indique su nivel de satisfaccion acerca de los temas impartidos (Siendo 5 la calificación más alta y 1 la más baja)', 3,3,'S');
+(7,'Indique su nivel de satisfacción acerca de los temas impartidos (Siendo 5 la calificación más alta y 1 la más baja)', 3,3,'S');
 
 insert into dicpregunta values
-(8,'Consideras que la materia de Programacion Avanzada es indispensable para una formacion academica completa en el Posgrado?', 2,3,'S');
+(8,'¿Consideras que la materia de Programacion Avanzada es indispensable para una formacion academica completa en el Posgrado?', 2,3,'S');
 
 insert into dicpregunta values
 (9,'Exponga abiertamente que cambiaria usted para mejorar, si es el caso, algun aspecto de la clase', 1,null,'S');
