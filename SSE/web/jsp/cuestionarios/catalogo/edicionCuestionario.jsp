@@ -130,7 +130,7 @@
                                     Cuestionario
                                 </td>
                                 <td align="left">
-                                    <input maxlength="300" type="text" name="txtCuestionario" id="txtCuestionario" value="${cuestionario.cuestionario}" class="textbox" size="50" />
+                                    <input autocomplete="off" maxlength="300" type="text" name="txtCuestionario" id="txtCuestionario" value="${cuestionario.cuestionario}" class="textbox" size="50" />
                                 </td>
                             </tr>                            
                             <tr>
